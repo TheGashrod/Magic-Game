@@ -1,7 +1,8 @@
 // #include <iomanip>
 
 
- #include "Player.h"
+#include "tools/Color.hpp"
+#include "headers/Player.hpp"
 #include <iostream>
 
 using namespace std;
@@ -9,10 +10,15 @@ using namespace std;
 int main(int argc, char *argv[]) {
 	UNUSED(argc);
 	UNUSED(argv);
+	
+	Color f = Blue;
+
+	if (f == Blue){
+		cout << "hello Gael et Simo" << endl;
+	}
 
 	
-    
-	cout << "hello" << endl;
 
 	return 0;
 }
+
