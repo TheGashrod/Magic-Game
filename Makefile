@@ -1,19 +1,32 @@
-CXX=g++
-CXXFLAGS=-Wall -Wextra -Werror
+CC=g++
+CFLAGS=-Wall -Wextra -std=c++2a -g
+LDFLAGS=-lncurses
 
-build/%.o: %.cpp
-	$(CXX) $(CXXFLAGS) $< -c -o $@
+SRCS=\
+src/Duel.cpp \
+src/Card.cpp \
+src/CardsSet.cpp \
+src/Land.cpp \
+src/Creature.cpp \
+src/Contender.cpp \
+src/Player.cpp
 
-main: build/main.o build/Player.o
-	$(CXX) $^ -o $@
-	./$@
+OBJS=$(subst .cpp,.o,$(subst src/,build/,$(SRCS)))
 
+.PHONY: clean
 
-.PHONY: run clean
+all: build/magic run
 
-run: main
+build/%.o: src/%.cpp headers/%.hpp
+	$(CC) $(CFLAGS) -c $< -o $(subst .cpp,.o,$(subst src/,build/,$<))
+
+build/magic: $(OBJS) src/main.cpp
+	g++ $(CFLAGS) $(OBJS) src/main.cpp -o build/magic $(LDFLAGS)
+
+run: build/magic
 	./$<
 
-clean:
-	rm -f *.o *~ *.core 
 
+clean:
+	rm -f build/*.o
+	rm -f build/magic
