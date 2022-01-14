@@ -11,4 +11,4 @@ public:
     unsigned char getRemainingTurns();
     void setRemainingTurns(unsigned char nb);
 
-}
+};

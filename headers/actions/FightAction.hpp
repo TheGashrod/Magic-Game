@@ -1,3 +1,5 @@
-#include "Action.hpp"
+#include "../Action.hpp"
 
-class FightAction : public Action {};
+class FightAction : public Action {
+    virtual void nothing() = 0;
+};

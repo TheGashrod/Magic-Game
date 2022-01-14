@@ -1,4 +1,4 @@
-CC=clang++
+CC=g++
 CFLAGS=-Wall -Wextra -std=c++2a -g
 LDFLAGS=-lncurses
 
@@ -9,9 +9,20 @@ src/CardsSet.cpp \
 src/Land.cpp \
 src/Creature.cpp \
 src/Contender.cpp \
-src/Player.cpp
+src/Player.cpp \
+src/Action.cpp \
+src/actions/FightAction.cpp \
+src/actions/FightBlock.cpp \
+src/actions/FightContenderHit.cpp \
+src/actions/FightCreatureHit.cpp \
+src/actions/FightDamageCount.cpp \
+src/actions/FightDamageCount.cpp \
+src/actions/FightDeath.cpp \
+src/actions/FightEngageAttack.cpp \
+src/actions/FightEngageBlock.cpp \
+src/actions/FightHit.cpp
 
-OBJS=$(subst .cpp,.o,$(subst src/,build/,$(SRCS)))
+OBJS=$(subst .cpp,.o,$(subst src/,build/, $(SRCS)))
 
 .PHONY: clean
 
