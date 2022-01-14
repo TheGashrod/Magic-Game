@@ -39,5 +39,6 @@ run: build/magic
 
 
 clean:
-	rm -f build/*.o
 	rm -f build/magic
+	rm -f build/*.o
+	rm -f build/actions/*.o
