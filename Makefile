@@ -1,4 +1,4 @@
-CC=clang++
+CC=g++
 CFLAGS=-Wall -Wextra -std=c++2a -g
 LDFLAGS=-lncurses
 

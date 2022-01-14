@@ -12,7 +12,7 @@ using namespace std;
 
         virtual void AbstractMemberFunction() = 0; 
 
-    	// Card (string);
+    	Card (string);
     	// // Card();
      //    ~Card();
 

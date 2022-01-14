@@ -1,4 +1,4 @@
-#include "Card.hpp" 
+#include "../headers/Card.hpp" 
 
 using namespace std;
 
@@ -10,4 +10,4 @@ Card::Card (string name){
 
 // Card::Card (){}
 
-~Card(){};
+// ~Card(){};

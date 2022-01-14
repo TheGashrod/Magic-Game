@@ -1,8 +1,8 @@
 // #include <iomanip>
 
 
-#include "tools/Color.hpp"
-#include "headers/Player.hpp"
+#include "../tools/Color.hpp"
+#include "../headers/Player.hpp"
 #include <iostream>
 
 using namespace std;
