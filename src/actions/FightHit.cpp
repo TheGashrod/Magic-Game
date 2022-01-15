@@ -1,3 +1,7 @@
-#include "../headers/FightHit.hpp"
+#include "../../headers/actions/FightHit.hpp"
 
-void FightHit::damage();
+/**
+void FightHit::damage() {
+	// TODO
+}
+**/

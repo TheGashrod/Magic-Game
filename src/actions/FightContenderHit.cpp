@@ -1,5 +1,11 @@
-#include "../headers/FightContenderHit.hpp"
+#include "../../headers/actions/FightContenderHit.hpp"
 
 
-Creature FightContenderHit::getAttacker();
-Contender FightContenderHit::getVictim();
+/**
+Creature FightContenderHit::getAttacker() {
+	// TODO
+}
+Contender FightContenderHit::getVictim() {
+	// TODO
+}
+**/

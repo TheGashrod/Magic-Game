@@ -1,5 +1,5 @@
 #include "FightHit.hpp"
-#include "Creature.hpp"
+#include "../Creature.hpp"
 
 class FightCreatureHit : public FightHit {
 

@@ -1,7 +1,7 @@
 // #include <iomanip>
 
 
-#include "../tools/Color.hpp"
+#include "../headers/enums/Color.cpp"
 #include "../headers/Player.hpp"
 #include <iostream>
 

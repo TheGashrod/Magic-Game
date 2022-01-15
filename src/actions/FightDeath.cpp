@@ -1,3 +1,7 @@
-#include "../headers/FightDeath.hpp"
+#include "../../headers/actions/FightDeath.hpp"
 
-Creature FightDeath::getCreature();
+/**
+Creature FightDeath::getCreature() {
+	// TODO
+}
+**/

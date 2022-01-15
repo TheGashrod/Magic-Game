@@ -1,4 +1,10 @@
-#include "../headers/FightCreatureHit.hpp"
+#include "../../headers/actions/FightCreatureHit.hpp"
 
-Creature FightCreatureHit::getAttacker();
-Creature FightCreatureHit::getVictim();
+/**
+Creature FightCreatureHit::getAttacker() {
+	// TODO
+}
+Creature FightCreatureHit::getVictim() {
+	// TODO
+}
+**/

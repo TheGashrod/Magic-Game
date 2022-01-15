@@ -1,10 +1,12 @@
 #include "../../headers/actions/FightBlock.hpp"
 
+/**
 Creature* FightBlock::getAttacker() {
-	return &Creature();
+	// TODO
 }
 Creature* FightBlock::getVictim() {
-
+	// TODO
 }
+**/
 
 
