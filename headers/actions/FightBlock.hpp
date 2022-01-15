@@ -4,7 +4,7 @@
 class FightBlock : public FightHit {
 
 public:
-    Creature getAttacker();
-    Creature getVictim();
+    Creature* getAttacker();
+    Creature* getVictim();
 
 };

@@ -1,15 +1,18 @@
+#include <list>
+#include "enums/Color.cpp"
+#include "Card.hpp"
 
-#include "tools/Color.hpp"
 
-class Creature : Card {
+
+class Creature : public Card {
 
 	private :
 
 	public :
-		std::tuple<int, List<Color>> cost;
+		std::tuple<int, std::list<Color>> cost;
 
 		//Constructors :
-		Creature (int, List<Color>);
-    	// Card();
-        ~Card();
-} 
+		Creature (int, std::list<Color>);
+      ~Creature();
+
+};

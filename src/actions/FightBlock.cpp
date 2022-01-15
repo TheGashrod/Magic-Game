@@ -1,6 +1,10 @@
 #include "../../headers/actions/FightBlock.hpp"
 
-Creature FightBlock::getAttacker();
-Creature FightBlock::getVictim();
+Creature* FightBlock::getAttacker() {
+	return &Creature();
+}
+Creature* FightBlock::getVictim() {
+
+}
 
 

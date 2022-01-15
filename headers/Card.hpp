@@ -1,5 +1,8 @@
  
 #include <iostream>
+#include <list>
+
+#include "enums/Color.cpp"
 
 using namespace std;
 
@@ -9,6 +12,7 @@ using namespace std;
     
     public :
         string c_name;
+        std::list<Color> c_colors;
 
         virtual void AbstractMemberFunction() = 0; 
 
