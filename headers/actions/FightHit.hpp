@@ -4,5 +4,5 @@ class FightHit : public FightAction {
 
 
 public:
-    virtual void damage();
+    virtual void damage() = 0;
 };
