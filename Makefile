@@ -12,15 +12,12 @@ src/Contender.cpp \
 src/Player.cpp \
 src/Action.cpp \
 src/actions/FightAction.cpp \
-src/actions/FightBlock.cpp \
-src/actions/FightContenderHit.cpp \
-src/actions/FightCreatureHit.cpp \
 src/actions/FightDamageCount.cpp \
 src/actions/FightDamageCount.cpp \
 src/actions/FightDeath.cpp \
-src/actions/FightEngageAttack.cpp \
-src/actions/FightEngageBlock.cpp \
-src/actions/FightHit.cpp
+src/actions/FightEngage.cpp \
+src/actions/FightHit.cpp \
+src/actions/FightHit_children.cpp
 
 OBJS=$(subst .cpp,.o,$(subst src/,build/, $(SRCS)))
 
