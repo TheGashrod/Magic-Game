@@ -1,3 +1,9 @@
+#ifndef __MTG_CREATURE_INCLUDED__
+#define __MTG_CREATURE_INCLUDED__
+
+
+
+
 #include <list>
 #include <tuple>
 
@@ -64,3 +70,7 @@ class Creature : public Card {
 		int receiveDamageFrom(Creature* c);
 
 };
+
+
+
+#endif

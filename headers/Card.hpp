@@ -1,4 +1,7 @@
- 
+#ifndef __MTG_CARD_INCLUDED__
+#define __MTG_CARD_INCLUDED__
+
+
 #include <iostream>
 #include <list>
 
@@ -40,3 +43,8 @@ using namespace std;
         bool hasSameId(Card* c) const;
         
 };
+
+
+
+
+#endif

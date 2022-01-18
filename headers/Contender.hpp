@@ -1,3 +1,7 @@
+#ifndef __MTG_CONTENDER_INCLUDED__
+#define __MTG_CONTENDER_INCLUDED__
+
+
 
 
 typedef unsigned char stat;
@@ -27,3 +31,7 @@ class Contender {
 
 
  };
+
+
+
+ #endif
