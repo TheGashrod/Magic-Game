@@ -5,10 +5,9 @@
 #include "../Action.hpp"
 
 
-Action a = Action();
+//Action* a = unique_ptr<Action>( Action() );
 
 class FightAction : public Action {
-    virtual void nothing() = 0;
 };
 
 

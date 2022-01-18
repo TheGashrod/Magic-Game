@@ -10,7 +10,7 @@ class Action {
 
 
 public:
-    virtual void execute(Duel d);
+    virtual void execute(Duel d) = 0;
 };
 
 
