@@ -29,8 +29,8 @@ void Creature::setPowerDefault(stat val) { c_powerDef = val; }
 void Creature::setToughnessDefault(stat val) { c_toughnessDef = val; }
 void Creature::setPower(stat val) { c_power = val; }
 void Creature::setToughness(stat val) { c_toughness = val; }
-void Creature::usePower(stat amount) { c_power += amount; }
-void Creature::regainPower(stat amount) { c_power = std::max( (stat)0 , amount ); }
+void Creature::usePower(stat amount) { c_power = std::max( (stat)0 , amount );}
+void Creature::regainPower(stat amount) { c_power += amount; }
 void Creature::healBy(stat hp) { c_toughness += hp; }
 void Creature::damageBy(stat hp) { c_toughness = std::max( (stat)0 , hp ); }
 void Creature::resetStats() {
