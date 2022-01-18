@@ -9,17 +9,18 @@ using namespace std;
 
 
  class Card{
-    
-    public :
-        string c_name;
-        std::list<Color> c_colors;
 
-    	Card (string);
-    	// // Card();
-     //    ~Card();
+    // Members :
+    protected:
+        static unsigned long c_nextId;
+    public:
+        const unsigned long c_id;
+        const string c_name;
+        const std::list<Color> c_colors = std::list<Color>();
 
-    	
-
-        
+    // Constructors :
+    public:
+        Card(string name, std::list<Color> colors);
+        ~Card();
         
 };

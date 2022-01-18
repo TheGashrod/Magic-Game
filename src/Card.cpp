@@ -1,13 +1,15 @@
-#include "../headers/Card.hpp" 
+#include "../headers/Card.hpp"
+
+#include <algorithm>
 
 using namespace std;
 
 
+// Members :
+unsigned long Card::c_nextId = 0;
+
+
 // Constructors :
-Card::Card (string name){
-    this -> c_name = name;
-}
+Card::Card (string name, std::list<Color> colors) : c_id(c_nextId++), c_name(name), c_colors(std::list(colors)) { }
 
-// Card::Card (){}
-
-// ~Card(){};
+Card::~Card() {};
