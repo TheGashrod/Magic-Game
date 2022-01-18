@@ -1,6 +1,5 @@
 #include "FightHit.hpp"
 #include "../Creature.hpp"
-#include "../Contender.hpp"
 
 
 /**

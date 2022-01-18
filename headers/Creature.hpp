@@ -1,7 +1,9 @@
 #include <list>
 #include <tuple>
-#include "Card.hpp"
 
+
+#include "Card.hpp"
+#include "Contender.hpp"
 
 
 typedef unsigned char stat;
@@ -58,6 +60,7 @@ class Creature : public Card {
 	// Methods :
 	public:
 		void dealDamageTo(Creature* c);
+		void dealDamageTo(Contender* c) const;
 		void receiveDamageFrom(Creature* c);
 
 };

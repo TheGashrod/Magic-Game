@@ -43,6 +43,12 @@ void Creature::resetStats() {
 void Creature::dealDamageTo(Creature* c) {
 	c->receiveDamageFrom(this);
 }
+
+void Creature::dealDamageTo(Contender* c) const {
+	c->damageBy( getPower() );
+}
+
+
 void Creature::receiveDamageFrom(Creature* c) {
 	stat damage = c->getPower();
 	this->damageBy( damage );
