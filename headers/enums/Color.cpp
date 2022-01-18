@@ -1,2 +1,2 @@
 
-enum Color { Blue, White, Red, Black, Green, Any }; 
+enum Color { Blue, White, Red, Black, Green}; 
