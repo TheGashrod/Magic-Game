@@ -53,4 +53,5 @@ int Creature::receiveDamageFrom(Creature* c) {
 	stat damage = std::min( c->getPower() , this->getToughness() );
 	this->damageBy( damage );
 	c->usePower( damage );
+	return damage;
 }
