@@ -19,7 +19,7 @@ class Creature : public Card {
 	public:
 		Creature (string name, std::list<Color> colors, bool isEngaged,
 			std::list<Color> colorCost, int anyCost,
-			stat power, stat powerDefault, stat toughness, stat toughnessDefault);
+			stat powerDefault, stat toughness);
 		
 		~Creature();
 

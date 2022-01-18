@@ -8,10 +8,10 @@ using std::tuple;
 //Constructors :
 Creature::Creature (string name, std::list<Color> colors, bool isEngaged,
 std::list<Color> colorCost, int anyCost,
-stat power, stat powerDefault, stat toughness, stat toughnessDefault)
+stat powerDefault, stat toughnessDefault)
 : Card(name, colors, isEngaged),
 	c_cost( {anyCost, std::list<Color>(colorCost)} ),
-	c_power(power), c_powerDef(powerDefault), c_toughness(toughness), c_toughnessDef(toughnessDefault) { }
+	c_power(powerDefault), c_powerDef(powerDefault), c_toughness(toughnessDefault), c_toughnessDef(toughnessDefault) { }
 
 Creature::~Creature() { };
 
