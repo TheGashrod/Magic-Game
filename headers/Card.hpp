@@ -22,5 +22,10 @@ using namespace std;
     public:
         Card(string name, std::list<Color> colors);
         ~Card();
+    
+
+    // Methods
+    public:
+        bool hasSameId(Card* c) const;
         
 };
