@@ -18,7 +18,7 @@ using namespace std;
     public:
         const unsigned long c_id;
         const string c_name;
-        const std::list<Color> c_colors = std::list<Color>();
+        const std::list<Color> c_colors;
 
     // Constructors :
     private:
