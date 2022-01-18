@@ -1,3 +1,9 @@
+#ifndef __MTG_FIGHTHIT_CHILDREN_INCLUDED__
+#define __MTG_FIGHTHIT_CHILDREN_INCLUDED__
+
+
+
+
 #include "FightHit.hpp"
 #include "../Creature.hpp"
 
@@ -54,3 +60,12 @@ public:
     virtual void damage();
 
 };
+
+
+
+
+
+
+
+
+#endif

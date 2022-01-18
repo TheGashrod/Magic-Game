@@ -1,3 +1,8 @@
+#ifndef __MTG_FIGHTENGAGE_INCLUDED__
+#define __MTG_FIGHTENGAGE_INCLUDED__
+
+
+
 #include "FightAction.hpp"
 #include "../Creature.hpp"
 
@@ -28,3 +33,8 @@ class FightEngageBlock : public FightAction {
 public:
     Creature* f_creature;
 };
+
+
+
+
+#endif

@@ -1,4 +1,10 @@
+#ifndef __MTG_FIGHTHIT_INCLUDED__
+#define __MTG_FIGHTHIT_INCLUDED__
+
+
 #include "FightAction.hpp"
+#include "../Duel.hpp"
+
 
 class FightHit : public FightAction {
 
@@ -11,3 +17,12 @@ public:
      */
     virtual void damage() = 0;
 };
+
+
+
+
+
+
+
+
+#endif

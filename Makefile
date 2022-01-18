@@ -17,7 +17,8 @@ src/actions/FightDamageCount.cpp \
 src/actions/FightDeath.cpp \
 src/actions/FightEngage.cpp \
 src/actions/FightHit.cpp \
-src/actions/FightHit_children.cpp
+src/actions/FightHit_children.cpp \
+headers/enums/Color.cpp
 
 OBJS=$(subst .cpp,.o,$(subst src/,build/, $(SRCS)))
 

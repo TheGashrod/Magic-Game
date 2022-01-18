@@ -19,7 +19,7 @@ private:
     char d_remainingTurns;
     Contender* d_currentContender;
     std::vector<Interface_interface*> interfaces;
-    vector<FightHit> fightHitBuffer;
+    vector<FightHit*> fightHitBuffer;
 
 
 
@@ -48,8 +48,8 @@ private:
         const vector<FightHit> getFightHitBuffer() const;
 
         void setRemainingTurns(unsigned char nb);
-        void addInterface(Interface_interface i);
-        void addFightHitToBuffer(FightHit fh);
+        void addInterface(Interface_interface* i);
+        void addFightHitToBuffer(FightHit* fh);
         void clearFightHitBuffer();
 
 
