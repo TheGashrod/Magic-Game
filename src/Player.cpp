@@ -4,7 +4,6 @@
 
 //Constructors :
 Player::Player (string name): p_name(name) { }
-
 Player::~Player() { };
 
 // Getters :

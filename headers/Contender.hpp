@@ -1,21 +1,45 @@
 
 
-typedef unsigned char stat;
+#include <vector>
+#include "CardsSet.hpp"
+#include "Player.hpp"
+
+
+using std::vector;
 
 class Contender {
 
-	 // Members
+	private :
+		Player c_player;
+		int c_vitality;
+		CardsSet c_library;
+		CardsSet c_cemetary;
+		CardsSetc_hand;
+		CardsSet c_inGameCards;
+
+
+	
 	public:
-		// TODO Cards
+
+		// Constructors :
+		Contender (Player p, int vita, vector<CardsSet> deck);
+		~Contender();
 
 
+		// Getters :
+		int getVitality();
+		CardsSet getLibrary();
+		CardsSet getCemetary();
+		CardsSet getHand();
+		CardsSet getInGameCards();
 
-	// Constructors
-	public:
+		// Setters :
+		void setVitality(int vita);
+
+		// Methods :
+		void drawCard();
 
 
-	// Getters/setters
-	public:
 
 		/**
 		 * @brief Damages the player by a number of health points
@@ -23,7 +47,7 @@ class Contender {
 		 * @param hp damage
 		 * @return int how much damage was actually dealt
 		 */
-		int damageBy(stat hp);
+		// int damageBy(stat hp);
 
 
  };

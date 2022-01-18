@@ -4,13 +4,16 @@
 
 class Player {
 
-public:
-	
-	string name;
+	private :
+		string p_name;
 
-    string getName();
+	public:
 
-    unsigned char getRemainingTurns();
-    void setName(string playerName);
+		//Constructors :
+		Player (string name);
+		~Player();
+
+	    string getName();
+	    void setName(string playerName);
 
 };
