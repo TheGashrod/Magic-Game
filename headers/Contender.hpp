@@ -17,7 +17,13 @@ class Contender {
 	// Getters/setters
 	public:
 
-		void damageBy(stat hp);
+		/**
+		 * @brief Damages the player by a number of health points
+		 * 
+		 * @param hp damage
+		 * @return int how much damage was actually dealt
+		 */
+		int damageBy(stat hp);
 
 
  };

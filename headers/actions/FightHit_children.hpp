@@ -9,8 +9,8 @@
 class FightContenderHit : public FightHit {
 
 public:
-    const Creature* f_attacker;
-    const Contender* f_victim;
+    Creature* f_attacker;
+    Contender* f_victim;
 
 public:
     virtual void damage();
@@ -28,8 +28,8 @@ public:
 class FightCreatureHit : public FightHit {
 
 public:
-    const Creature* f_attacker;
-    const Creature* f_victim;
+    Creature* f_attacker;
+    Creature* f_victim;
 
 public:
     virtual void damage();
@@ -46,8 +46,8 @@ public:
 class FightBlock : public FightHit {
 
 public:
-    const Creature* f_attacker;
-    const Creature* f_defender;
+    Creature* f_attacker;
+    Creature* f_defender;
 
     
 public:

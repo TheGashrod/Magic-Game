@@ -4,13 +4,13 @@
 
 
 void FightContenderHit::damage() {
-	// TODO
+	f_attacker->dealDamageTo(f_victim);
 }
 
 void FightCreatureHit::damage() {
-	// TODO
+	f_attacker->dealDamageTo(f_victim);
 }
 
 void FightBlock::damage() {
-	// this->f_victim // TODO : Remove HP from the victim depending on the attacker
+	f_defender->dealDamageTo(f_attacker);
 };

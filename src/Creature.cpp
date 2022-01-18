@@ -40,17 +40,17 @@ void Creature::resetStats() {
 
 
 // Methods :
-void Creature::dealDamageTo(Creature* c) {
-	c->receiveDamageFrom(this);
+int Creature::dealDamageTo(Creature* c) {
+	return c->receiveDamageFrom(this);
 }
 
-void Creature::dealDamageTo(Contender* c) const {
-	c->damageBy( getPower() );
+int Creature::dealDamageTo(Contender* c) const {
+	return c->damageBy( getPower() );
 }
 
 
-void Creature::receiveDamageFrom(Creature* c) {
-	stat damage = c->getPower();
+int Creature::receiveDamageFrom(Creature* c) {
+	stat damage = std::min( c->getPower() , this->getToughness() );
 	this->damageBy( damage );
 	c->usePower( damage );
 }

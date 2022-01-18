@@ -59,8 +59,8 @@ class Creature : public Card {
 
 	// Methods :
 	public:
-		void dealDamageTo(Creature* c);
-		void dealDamageTo(Contender* c) const;
-		void receiveDamageFrom(Creature* c);
+		int dealDamageTo(Creature* c);
+		int dealDamageTo(Contender* c) const;
+		int receiveDamageFrom(Creature* c);
 
 };
