@@ -6,6 +6,7 @@
 #include <list>
 #include <vector>
 
+#include "Interface.hpp"
 #include "Creature.hpp"
 #include "actions/FightHit.hpp"
 
@@ -17,7 +18,7 @@ private:
     char d_currentPhase;
     char d_remainingTurns;
     Contender* d_currentContender;
-    // TODO : Interfaces
+    std::vector<Interface_interface*> interfaces;
     vector<FightHit> fightHitBuffer;
 
 
@@ -38,8 +39,19 @@ private:
     private: void ph6Discard_start();
     public: void ph6_end();
 
-    unsigned char getRemainingTurns();
-    void setRemainingTurns(unsigned char nb);
+
+    // Getters/setters (Turns related members)
+    public:
+        char getPhase() const;
+        unsigned char getRemainingTurns() const;
+        Contender* getCurrentContender() const;
+        const vector<FightHit> getFightHitBuffer() const;
+
+        void setRemainingTurns(unsigned char nb);
+        void addInterface(Interface_interface i);
+        void addFightHitToBuffer(FightHit fh);
+        void clearFightHitBuffer();
+
 
 };
 
