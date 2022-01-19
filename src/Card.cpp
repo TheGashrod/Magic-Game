@@ -46,6 +46,7 @@ ostream& Card::print(ostream& os) const {
 
 
 // Operators :
-ostream& operator<<(ostream& os, const Card* c) {
-    return c->print(os);
+ostream& operator<<(ostream& os, Card c) {
+    Card* cPtr = &c;
+    return cPtr->print(os);
 }
