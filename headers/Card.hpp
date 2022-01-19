@@ -36,7 +36,9 @@ using namespace std;
 
     // Getters/setters :
     public:
+        string getName() const;
         bool isEngaged() const;
+
         void engage();
         void disengage();
 
@@ -45,7 +47,15 @@ using namespace std;
     public:
         bool hasSameId(Card* c) const;
 
+
+    // Print
+    public:
+        ostream& print(ostream& os) const;
 };
+
+
+ostream& operator<<(ostream& os, const Card c);
+
 
 
 
