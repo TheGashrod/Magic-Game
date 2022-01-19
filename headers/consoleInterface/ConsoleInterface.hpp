@@ -1,23 +1,18 @@
-#ifndef __MTG_INTERFACE_INTERFACE_INCLUDED__
-#define __MTG_INTERFACE_INTERFACE_INCLUDED__
+#ifndef __MTG_CONSOLEINTERFACE_INCLUDED__
+#define __MTG_CONSOLEINTERFACE_INCLUDED__
+
+
+
+#include "../Interface.hpp"
 
 
 
 
-#include <string>
-#include <list>
 
 
-class Card;
-class Contender;
+class ConsoleInterface : public Interface_interface {
 
-
-
-class Interface_interface {
-
-public:
-
-	virtual void showText(std::string t) = 0;
+    virtual void showText(std::string t) = 0;
 
 	virtual void ph1DrawnCard(Card c) = 0;
 	virtual void ph2Disgendage(std::list<Card> c) = 0;
