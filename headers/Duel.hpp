@@ -6,9 +6,13 @@
 #include <list>
 #include <vector>
 
-#include "Interface.hpp"
-#include "Creature.hpp"
-#include "actions/FightHit.hpp"
+
+class Interface_interface;
+class Contender;
+class Card;
+class Creature;
+class FightHit;
+
 
 
 class Duel {
@@ -19,7 +23,7 @@ private:
     char d_remainingTurns;
     Contender* d_currentContender;
     std::vector<Interface_interface*> interfaces;
-    vector<FightHit*> fightHitBuffer;
+    std::vector<FightHit*> fightHitBuffer;
 
 
 
@@ -45,7 +49,7 @@ private:
         char getPhase() const;
         unsigned char getRemainingTurns() const;
         Contender* getCurrentContender() const;
-        const vector<FightHit> getFightHitBuffer() const;
+        const std::vector<FightHit> getFightHitBuffer() const;
 
         void setRemainingTurns(unsigned char nb);
         void addInterface(Interface_interface* i);
@@ -57,4 +61,4 @@ private:
 
 
 
-#endif 
+#endif

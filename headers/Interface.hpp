@@ -1,8 +1,9 @@
 #include <string>
 #include <list>
 
-#include "./Card.hpp"
-#include "Contender.hpp"
+
+class Card;
+class Contender;
 
 
 

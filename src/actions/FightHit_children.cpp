@@ -2,6 +2,10 @@
 
 
 
+#include "../../headers/Creature.hpp"
+#include "../../headers/Contender.hpp"
+
+
 
 void FightContenderHit::damage() {
 	f_attacker->dealDamageTo(f_victim);

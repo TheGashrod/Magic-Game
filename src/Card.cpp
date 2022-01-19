@@ -2,6 +2,10 @@
 
 #include <algorithm>
 
+
+#include "../headers/enums/Color.hpp"
+
+
 using namespace std;
 
 

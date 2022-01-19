@@ -2,8 +2,8 @@
 #define __MTG_ACTION_INCLUDED__
 
 
+class Duel;
 
-#include "Duel.hpp"
 
 
 class Action {

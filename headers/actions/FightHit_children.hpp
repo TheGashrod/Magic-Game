@@ -3,9 +3,10 @@
 
 
 
-
 #include "FightHit.hpp"
-#include "../Creature.hpp"
+class Creature;
+class Contender;
+
 
 
 /**
@@ -55,7 +56,7 @@ public:
     Creature* f_attacker;
     Creature* f_defender;
 
-    
+
 public:
     virtual void damage();
 

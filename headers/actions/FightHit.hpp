@@ -3,8 +3,11 @@
 
 
 #include "FightAction.hpp"
-#include "../Duel.hpp"
+class Duel;
 
+
+
+class Duel;
 
 class FightHit : public FightAction {
 

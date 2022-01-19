@@ -2,16 +2,15 @@
 #define __MTG_FIGHTENGAGE_INCLUDED__
 
 
-
 #include "FightAction.hpp"
-#include "../Creature.hpp"
+class Creature;
 
 
 
 
 /**
  * @brief Engages an attacking creature
- * 
+ *
  */
 class FightEngageAttack : public FightAction {
 
@@ -25,7 +24,7 @@ public:
 
 /**
  * @brief Engages a blocking creature
- * 
+ *
  */
 class FightEngageBlock : public FightAction {
 

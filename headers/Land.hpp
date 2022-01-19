@@ -2,7 +2,10 @@
 #define __MTG_LAND_INCLUDED__
 
 
+
 #include "Card.hpp"
+
+
 
 class Land : public Card {
 

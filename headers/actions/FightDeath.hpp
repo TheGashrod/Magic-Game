@@ -3,9 +3,9 @@
 
 
 
-
 #include "FightAction.hpp"
-#include "../Creature.hpp"
+class Creature;
+
 
 class FightDeath : public FightAction {
 

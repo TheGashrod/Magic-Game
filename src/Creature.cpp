@@ -2,6 +2,12 @@
 
 #include <algorithm>
 
+
+#include "../headers/Contender.hpp"
+
+
+
+
 using std::tuple;
 
 

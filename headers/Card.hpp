@@ -5,7 +5,10 @@
 #include <iostream>
 #include <list>
 
-#include "enums/Color.cpp"
+#include "enums/Color.hpp"
+
+
+
 
 using namespace std;
 
@@ -29,7 +32,7 @@ using namespace std;
     public:
         Card(string name, std::list<Color> colors, bool isEngaged);
         ~Card();
-    
+
 
     // Getters/setters :
     public:
@@ -41,7 +44,7 @@ using namespace std;
     // Methods
     public:
         bool hasSameId(Card* c) const;
-        
+
 };
 
 
