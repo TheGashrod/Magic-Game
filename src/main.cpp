@@ -1,15 +1,21 @@
 // #include <iomanip>
 
 
+#include "../headers/consoleInterface/ConsoleInterface.hpp"
+#include "../headers/Duel.hpp"
 #include "../headers/enums/Color.hpp"
-#include "../headers/Player.hpp"
 #include <iostream>
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
-	UNUSED(argc);
-	UNUSED(argv);
+
+
+    Duel duel = Duel();
+    ConsoleInterface interface = ConsoleInterface();
+    duel.addInterface(&interface);
+
+
 
 	Color f = Blue;
 
