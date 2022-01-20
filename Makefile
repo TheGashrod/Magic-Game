@@ -3,6 +3,7 @@ CFLAGS=-Wall -Wextra -std=c++2a -g
 LDFLAGS=-lncurses
 
 SRCS=\
+src/Duel_interface.cpp \
 src/Duel.cpp \
 src/Card.cpp \
 src/CardsSet.cpp \

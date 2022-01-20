@@ -2,6 +2,8 @@
 #define __MTG_DUEL_INCLUDED__
 
 
+#include "Duel_interface.hpp"
+
 
 #include <list>
 #include <vector>
@@ -15,7 +17,7 @@ class FightHit;
 
 
 
-class Duel {
+class Duel : public Duel_interface {
 
 // Members
 private:
@@ -28,20 +30,20 @@ private:
 
 
     // Game phases and exchanges with interfaces
-    public: void start();
-    private: void ph1Draw_start();
-    private: void ph2Disgendage_start();
-    private: void ph3PlayCard_start();
-    public: void chooseCard(Card c);
-    public: void ph3_end();
-    private: void ph4Fight_start();
-    public: void ph4Fight(Creature att, Contender c, std::list<Creature> def);
-    public: void ph4_end();
-    private: void ph5PlayCard_start();
+    public: virtual void start();
+    private: virtual void ph1Draw_start();
+    private: virtual void ph2Disgendage_start();
+    private: virtual void ph3PlayCard_start();
+    public: virtual void chooseCard(Card c);
+    public: virtual void ph3_end();
+    private: virtual void ph4Fight_start();
+    public: virtual void ph4Fight(Creature att, Contender c, std::list<Creature> def);
+    public: virtual void ph4_end();
+    private: virtual void ph5PlayCard_start();
     // chooseCard is called again here
-    public: void ph5_end();
-    private: void ph6Discard_start();
-    public: void ph6_end();
+    public: virtual void ph5_end();
+    private: virtual void ph6Discard_start();
+    public: virtual void ph6_end();
 
 
     // Getters/setters (Turns related members)
