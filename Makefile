@@ -21,7 +21,7 @@ src/actions/FightHit.cpp \
 src/actions/FightHit_children.cpp \
 src/enums/Color.cpp \
 src/consoleInterface/ConsoleInterface.cpp \
-test/testConsoleInterface.cpp
+src/test/testConsoleInterface.cpp
 
 OBJS=$(subst .cpp,.o,$(subst src/,build/, $(SRCS)))
 
