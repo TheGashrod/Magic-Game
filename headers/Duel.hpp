@@ -22,8 +22,8 @@ private:
     char d_currentPhase;
     char d_remainingTurns;
     Contender* d_currentContender;
-    std::vector<Interface_interface*> interfaces;
-    std::vector<FightHit*> fightHitBuffer;
+    std::vector<Interface_interface*>d_interfaces;
+    std::vector<FightHit*> d_fightHitBuffer;
 
 
 
