@@ -19,15 +19,15 @@ void ConsoleInterface::showText(std::string t) {
 }
 
 
-void ConsoleInterface::ph1DrawnCard(Card c) {
+void ConsoleInterface::ph1DrawnCard(Card* c) {
     cout << "Vous piochez une carte : " << c << endl;
 }
 
-void ConsoleInterface::ph2Disgendage(std::list<Card> c) {
+void ConsoleInterface::ph2Disgendage(std::list<Card*> c) {
     // TODO
 }
 
-void ConsoleInterface::ph3PlayCards_wait(std::list<Card> c, std::list<Card> inGameLand) {
+void ConsoleInterface::ph3PlayCards_wait(std::list<Card*> c, std::list<Card*> inGameLand) {
     // TODO
 };
 
@@ -35,10 +35,10 @@ void ConsoleInterface::ph4Fight_wait(Contender att, Contender def) {
     // TODO
 }
 
-void ConsoleInterface::ph5PlayCards_wait(std::list<Card> c, std::list<Card> inGameLand) {
+void ConsoleInterface::ph5PlayCards_wait(std::list<Card*> c, std::list<Card*> inGameLand) {
     // TODO
 }
 
-void ConsoleInterface::ph6Discard_wait(std::list<Card> c, size_t nbToDiscard) {
+void ConsoleInterface::ph6Discard_wait(std::list<Card*> c, size_t nbToDiscard) {
     // TODO
 }
