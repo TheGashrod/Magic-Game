@@ -20,7 +20,8 @@ src/actions/FightEngage.cpp \
 src/actions/FightHit.cpp \
 src/actions/FightHit_children.cpp \
 src/enums/Color.cpp \
-src/consoleInterface/ConsoleInterface.cpp
+src/consoleInterface/ConsoleInterface.cpp \
+test/testConsoleInterface.cpp
 
 OBJS=$(subst .cpp,.o,$(subst src/,build/, $(SRCS)))
 
@@ -30,6 +31,10 @@ all: build/magic run
 
 build/%.o: src/%.cpp headers/%.hpp
 	$(CC) $(CFLAGS) -c $< -o $(subst .cpp,.o,$(subst src/,build/,$<))
+
+build/%.o: test/%.cpp
+	$(CC) $(CFLAGS) -c $< -o $(subst .cpp,.o,$(subst test/,"build/test",$<))
+
 
 build/magic: $(OBJS) src/main.cpp
 	g++ $(CFLAGS) $(OBJS) src/main.cpp -o build/magic $(LDFLAGS)
