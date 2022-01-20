@@ -54,7 +54,8 @@ using namespace std;
 };
 
 
-ostream& operator<<(ostream& os, const Card c);
+ostream& operator<<(ostream& os, const Card* c);
+ostream& operator<<(ostream& os, Card c);
 
 
 

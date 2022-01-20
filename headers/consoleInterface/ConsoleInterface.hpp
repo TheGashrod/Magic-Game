@@ -15,7 +15,7 @@ class ConsoleInterface : public Interface_interface {
     virtual void showText(std::string t);
 
 	virtual void ph1DrawnCard(Card* c);
-	virtual void ph2Disgendage(std::list<Card*> c);
+	virtual void ph2Disengage(std::list<Card*> c);
 	virtual void ph3PlayCards_wait(std::list<Card*> c, std::list<Card*> inGameLand);
 	virtual void ph4Fight_wait(Contender att, Contender def);
 	virtual void ph5PlayCards_wait(std::list<Card*> c, std::list<Card*> inGameLand);

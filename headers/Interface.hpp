@@ -20,7 +20,7 @@ public:
 	virtual void showText(std::string t) = 0;
 
 	virtual void ph1DrawnCard(Card* c) = 0;
-	virtual void ph2Disgendage(std::list<Card*> c) = 0;
+	virtual void ph2Disengage(std::list<Card*> c) = 0;
 	virtual void ph3PlayCards_wait(std::list<Card*> c, std::list<Card*> inGameLand) = 0;
 	virtual void ph4Fight_wait(Contender att, Contender def) = 0;
 	virtual void ph5PlayCards_wait(std::list<Card*> c, std::list<Card*> inGameLand) = 0;
