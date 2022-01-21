@@ -29,7 +29,7 @@ void Duel::ph2Disgendage_start() {
 	// TODO
 }
 
-void Duel::ph3PlayCard_start() {
+void Duel::ph3PlayCard_start() { 
 	// TODO
 }
 
