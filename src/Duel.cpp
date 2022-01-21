@@ -34,6 +34,7 @@ void Duel::ph3PlayCard_start() {
 }
 
 void Duel::chooseCard(Card* c) {
+	cout << "Received card in Duel : " << c << "\n"; //! Beware of the fact c can be nullptr
 	// TODO
 }
 

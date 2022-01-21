@@ -6,10 +6,12 @@
 
 #include "../../headers/consoleInterface/ConsoleInterface.hpp"
 #include "../../headers/Creature.hpp"
+#include "../../headers/Duel.hpp"
 
 
 int testInterface() {
-	ConsoleInterface inter = ConsoleInterface();
+	Duel d = Duel();
+	ConsoleInterface inter = ConsoleInterface(d);
 
 
 	Creature c1 = Creature("Démon de Pagaille", std::list<Color>({Blue, Red}), false, std::list<Color>({Red, Red}), 1, 3, 3);
@@ -29,5 +31,15 @@ int testInterface() {
 
 	inter.ph2Disengage(cList1);
 	cout << "\n";
+	
+	Card* picked1 =  inter.pickACard_option(cList1);
+	if(picked1 != nullptr)
+		cout << picked1<< endl;
+	else
+		cout << "No card picked\n";
+	Card* picked2 = inter.pickACard(cList1);
+
+
+	inter.ph3PlayCards_wait(cList1, cList1);
 
 }

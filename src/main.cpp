@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
 
 
     Duel duel = Duel();
-    ConsoleInterface interface = ConsoleInterface();
+    ConsoleInterface interface = ConsoleInterface(duel);
     duel.addInterface(&interface);
 
 
