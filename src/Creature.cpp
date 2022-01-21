@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <tuple>
 
 #include "../headers/Contender.hpp"
 
@@ -70,6 +71,8 @@ int Creature::receiveDamageFrom(Creature* c) {
 // Print :
 ostream& Creature::print(ostream& os) const {
 	os << "[Creature] " << c_colors << " " << c_name
-			<< " | Power : " << (int)c_power<<"/"<<(int)c_powerDef << " | Toughness : "<<(int)c_toughness<<"/"<<(int)c_toughnessDef;
+			<< " | Power : " << (int)c_power<<"/"<<(int)c_powerDef
+			<< " | Toughness : "<<(int)c_toughness<<"/"<<(int)c_toughnessDef
+			<< " | Cost : "<<getColorCost();
 	return os;
 }
