@@ -70,6 +70,11 @@ class Creature : public Card {
 		int dealDamageTo(Contender* c) const;
 		int receiveDamageFrom(Creature* c);
 
+	
+	// Print :
+	public:
+		virtual ostream& print(ostream& os) const;
+
 };
 
 

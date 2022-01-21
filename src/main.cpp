@@ -4,6 +4,7 @@
 #include "../headers/consoleInterface/ConsoleInterface.hpp"
 #include "../headers/Duel.hpp"
 #include "../headers/enums/Color.hpp"
+#include "../headers/test/testConsoleInterface.hpp"
 #include <iostream>
 
 using namespace std;
@@ -22,6 +23,10 @@ int main(int argc, char *argv[]) {
 	if (f == Blue){
 		cout << "hello Gael et Simo" << endl;
 	}
+
+
+
+	testInterface();
 
 
 

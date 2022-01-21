@@ -1,13 +1,13 @@
 #include "../headers/Creature.hpp"
 
 #include <algorithm>
-
+#include <iostream>
 
 #include "../headers/Contender.hpp"
 
 
 
-
+using std::endl;
 using std::tuple;
 
 
@@ -15,7 +15,7 @@ using std::tuple;
 Creature::Creature (string name, std::list<Color> colors, bool isEngaged,
 std::list<Color> colorCost, int anyCost,
 stat powerDefault, stat toughnessDefault)
-: Card(name, colors, isEngaged),
+: Card(name, std::list<Color>(colors), isEngaged),
 	c_cost( {anyCost, std::list<Color>(colorCost)} ),
 	c_power(powerDefault), c_powerDef(powerDefault), c_toughness(toughnessDefault), c_toughnessDef(toughnessDefault) { }
 
@@ -51,7 +51,9 @@ int Creature::dealDamageTo(Creature* c) {
 }
 
 int Creature::dealDamageTo(Contender* c) const {
-	return c->damageBy( getPower() );
+	//return c->damageBy( getPower() );
+	printf("Creature::dealDamageTo needs comment to be removed");
+	return 0;
 }
 
 
@@ -60,4 +62,14 @@ int Creature::receiveDamageFrom(Creature* c) {
 	this->damageBy( damage );
 	c->usePower( damage );
 	return damage;
+}
+
+
+
+
+// Print :
+ostream& Creature::print(ostream& os) const {
+	os << "[Creature] " << c_colors << " " << c_name
+			<< " | Power : " << (int)c_power<<"/"<<(int)c_powerDef << " | Toughness : "<<(int)c_toughness<<"/"<<(int)c_toughnessDef;
+	return os;
 }

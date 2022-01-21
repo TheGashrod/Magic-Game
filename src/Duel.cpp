@@ -33,7 +33,7 @@ void Duel::ph3PlayCard_start() {
 	// TODO
 }
 
-void Duel::chooseCard(Card c) {
+void Duel::chooseCard(Card* c) {
 	// TODO
 }
 

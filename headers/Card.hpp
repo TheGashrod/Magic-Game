@@ -50,12 +50,11 @@ using namespace std;
 
     // Print
     public:
-        ostream& print(ostream& os) const;
+        virtual ostream& print(ostream& os) const = 0;
 };
 
 
 ostream& operator<<(ostream& os, const Card* c);
-ostream& operator<<(ostream& os, Card c);
 
 
 

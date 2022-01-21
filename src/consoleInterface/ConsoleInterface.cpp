@@ -19,11 +19,11 @@ void ConsoleInterface::showText(std::string t) {
 }
 
 
-void ConsoleInterface::ph1DrawnCard(Card* c) {
-    cout << "Vous piochez une carte : " << endl << c << endl;
+void ConsoleInterface::ph1DrawnCard(const Card* c) {
+    cout << "Vous piochez une carte : \n" << c << "\n";
 }
 
-void ConsoleInterface::ph2Disengage(std::list<Card*> c) {
+void ConsoleInterface::ph2Disengage(const std::list<Card*> c) {
     cout << "Vos cartes ont été désengagées :" << endl;
     for(auto card = c.begin(); card != c.end(); card++) {
         cout << *card << endl;

@@ -19,7 +19,7 @@ Card::Card(unsigned long id, string name, std::list<Color> colors, bool isEngage
 : c_id(id), c_name(name), c_colors(std::list(colors)), c_isEngaged(isEngaged) { }
 
 Card::Card (string name, std::list<Color> colors, bool isEngaged)
-: Card(c_nextId++, name, colors, isEngaged) { }
+: Card(c_nextId++, name, std::list<Color>(colors), isEngaged) { }
 
 Card::~Card() {};
 
@@ -48,8 +48,4 @@ ostream& Card::print(ostream& os) const {
 // Operators :
 ostream& operator<<(ostream& os, const Card* c) {
     return c->print(os);
-}
-ostream& operator<<(ostream& os, Card c) {
-    Card* cPtr = &c;
-    return cPtr->print(os);
 }
