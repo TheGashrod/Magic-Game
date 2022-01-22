@@ -10,6 +10,7 @@
 
 
 class Interface_interface;
+class Player;
 class Contender;
 class Card;
 class Creature;
@@ -19,17 +20,23 @@ class FightHit;
 
 class Duel : public Duel_interface {
 
-// Members
-private:
-    char d_currentPhase;
-    char d_remainingTurns;
-    Contender* d_currentContender;
-    std::vector<Interface_interface*>d_interfaces;
-    std::vector<FightHit*> d_fightHitBuffer;
+    // Members :
+    private:
+        char d_currentPhase;
+        char d_remainingTurns;
+        std::vector<Contender> d_contenders;
+        Contender* d_currentContender;
+        std::vector<Interface_interface*>d_interfaces;
+        std::vector<FightHit*> d_fightHitBuffer;
+    
 
+    // Constructors :
+    public:
+        Duel(Player player1, string player2);
 
+    
 
-    // Game phases and exchanges with interfaces
+    // Game phases and exchanges with interfaces :
     public: virtual void start();
     private: virtual void ph1Draw_start();
     private: virtual void ph2Disgendage_start();
@@ -46,17 +53,23 @@ private:
     public: virtual void ph6_end(std::list<const Card*> discarded);
 
 
-    // Getters/setters (Turns related members)
+    // Getters/setters (Turns related members) :
     public:
         char getPhase() const;
         unsigned char getRemainingTurns() const;
-        Contender* getCurrentContender() const;
+        const Contender* getCurrentContender() const;
         const std::vector<FightHit> getFightHitBuffer() const;
 
         void setRemainingTurns(unsigned char nb);
         void addInterface(Interface_interface* i);
         void addFightHitToBuffer(FightHit* fh);
         void clearFightHitBuffer();
+    
+
+
+    // Other getters/setters :
+    public:
+        std::vector<Contender*> getContenders();
 
 
 };
