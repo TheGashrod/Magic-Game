@@ -4,6 +4,9 @@
 #include "../headers/CardsSet.hpp"
 #include "../headers/Card.hpp"
 
+#include <vector>
+
+using std::vector;
 
 
 Contender::Contender (Player p, int vita, CardsSet deck):
@@ -25,6 +28,6 @@ void Contender::setVitality(int vita) { c_vitality = vita; }
 // Methods :
 	// methode transfer à faire dans CardsSet
 void Contender::drawCard(){
-	CardsSet::transfer(c_library[0], c_hand);
+	CardsSet::transfer(c_library.getCardsSet()[0], c_hand);
 };
 

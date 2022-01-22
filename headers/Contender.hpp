@@ -25,16 +25,16 @@ class Contender {
 	public:
 
 		// Constructors :
-		Contender (Player p, int vita, vector<CardsSet> deck);
+		Contender (Player p, int vita, CardsSet deck);
 		~Contender();
 
 
 		// Getters :
-		int getVitality();
-		CardsSet getLibrary();
-		CardsSet getCemetary();
-		CardsSet getHand();
-		CardsSet getInGameCards();
+		int getVitality() const;
+		CardsSet getLibrary() const;
+		CardsSet getCemetary() const;
+		CardsSet getHand() const;
+		CardsSet getInGameCards() const;
 
 		// Setters :
 		void setVitality(int vita);

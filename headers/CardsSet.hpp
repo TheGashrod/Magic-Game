@@ -18,16 +18,16 @@ class CardsSet {
 	public:
 
 		// Constructors :
-		CardsSet (vector<Card *> cardsSet);
+		CardsSet (vector<Card*> cardsSet);
 		~CardsSet();
 
 		// Getter & Setter :
-		vector<Card *> getCardsSet();
-		void setCardsSet(vector<Card *	> cardsSet);
+		vector<Card *> getCardsSet() const;
+		void setCardsSet(vector<Card* > cardsSet);
 
 
 		// Methods :
-		void transfer(Card * c, CardsSet * cardsSetDestination);
+		void transfer(Card *c, CardsSet  cardsSetDestination);
 
 
 
