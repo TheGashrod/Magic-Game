@@ -33,7 +33,7 @@ void Duel::ph3PlayCard_start() {
 	// TODO
 }
 
-void Duel::chooseCard(Card* c) {
+void Duel::chooseCard(const Card* c) {
 	cout << "Received card in Duel : " << c << "\n"; //! Beware of the fact c can be nullptr
 	// TODO
 }
@@ -67,6 +67,6 @@ void Duel::ph6Discard_start() {
 	// TODO
 }
 
-void Duel::ph6_end() {
+void Duel::ph6_end(std::list<const Card*> discarded) {
 	// TODO
 }

@@ -34,7 +34,7 @@ private:
     private: virtual void ph1Draw_start();
     private: virtual void ph2Disgendage_start();
     private: virtual void ph3PlayCard_start();
-    public: virtual void chooseCard(Card* c);
+    public: virtual void chooseCard(const Card* c);
     public: virtual void ph3_end();
     private: virtual void ph4Fight_start();
     public: virtual void ph4Fight(Creature att, Contender c, std::list<Creature> def);
@@ -43,7 +43,7 @@ private:
     // chooseCard is called again here
     public: virtual void ph5_end();
     private: virtual void ph6Discard_start();
-    public: virtual void ph6_end();
+    public: virtual void ph6_end(std::list<const Card*> discarded);
 
 
     // Getters/setters (Turns related members)

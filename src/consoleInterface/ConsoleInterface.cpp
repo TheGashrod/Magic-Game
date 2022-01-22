@@ -25,31 +25,31 @@ void ConsoleInterface::showText(std::string t) {
 }
 
 
-void ConsoleInterface::ph1DrawnCard(const Card* c) {
-    cout << "Vous piochez une carte : \n" << c << "\n";
+void ConsoleInterface::ph1DrawnCard(const Contender* con, const Card* card) {
+    cout << "Vous piochez une carte : \n" << card << "\n";
 }
 
-void ConsoleInterface::ph2Disengage(const std::list<Card*> c) {
+void ConsoleInterface::ph2Disengage(const Contender* con, const std::list<const Card*> c) {
     cout << "Vos cartes ont été désengagées :" << endl;
     for(auto card = c.begin(); card != c.end(); card++) {
         cout << *card << endl;
     }
 }
 
-void ConsoleInterface::ph3PlayCards_wait(std::list<Card*> c, std::list<Card*> inGameLand) {
+void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
     cout << "You can put cards from your hand into the game." << endl;
-    i_duel.chooseCard( pickACard_option(c) );
+    //i_duel.chooseCard( pickACard_option(c) ); // TODO Decomment when cards can be obtained from Contender
 }
 
-void ConsoleInterface::ph4Fight_wait(Contender att, Contender def) {
+void ConsoleInterface::ph4Fight_wait(const Contender* att, const Contender* def) {
     // TODO
 }
 
-void ConsoleInterface::ph5PlayCards_wait(std::list<Card*> c, std::list<Card*> inGameLand) {
+void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
     // TODO
 }
 
-void ConsoleInterface::ph6Discard_wait(std::list<Card*> c, size_t nbToDiscard) {
+void ConsoleInterface::ph6Discard_wait(const Contender* con, size_t nbToDiscard) {
     // TODO
 }
 
@@ -61,7 +61,7 @@ void ConsoleInterface::ph6Discard_wait(std::list<Card*> c, size_t nbToDiscard) {
  * @param cards The available cards to pick from
  * @return Card* The picked card OR nullptr if the player doesn't want to pick
  */
-Card* ConsoleInterface::pickACard_option(std::list<Card*> cards) const {
+const Card* ConsoleInterface::pickACard_option(std::list<const Card*> cards) const {
     size_t choice;
 
     do {
@@ -88,7 +88,7 @@ Card* ConsoleInterface::pickACard_option(std::list<Card*> cards) const {
 
 
 
-Card* ConsoleInterface::pickACard(std::list<Card*> cards) const {
+const Card* ConsoleInterface::pickACard(std::list<const Card*> cards) const {
     size_t choice;
 
     do {
