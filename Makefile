@@ -3,6 +3,7 @@ CFLAGS=-Wall -Wextra -std=c++2a -g
 LDFLAGS=-lncurses
 
 SRCS=\
+src/tools/random.cpp \
 src/Duel_interface.cpp \
 src/Duel.cpp \
 src/Card.cpp \
@@ -21,7 +22,7 @@ src/actions/FightHit.cpp \
 src/actions/FightHit_children.cpp \
 src/enums/Color.cpp \
 src/consoleInterface/ConsoleInterface.cpp \
-src/test/testConsoleInterface.cpp
+src/test/testConsoleInterface.cpp \
 
 OBJS=$(subst .cpp,.o,$(subst src/,build/, $(SRCS)))
 

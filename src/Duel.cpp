@@ -2,7 +2,7 @@
 
 
 #include <vector>
-
+#include "../headers/tools/random.hpp"
 
 #include "../headers/Interface.hpp"
 #include "../headers/Contender.hpp"
@@ -13,6 +13,7 @@
 
 
 using std::vector;
+using std::size_t;
 
 
 /* --------------------------------------------------------------------------------------------------/
@@ -57,7 +58,24 @@ void Duel::addInterface(Interface_interface* i) {
                  Game phases and exchanges with interfaces
 / --------------------------------------------------------------------------------------------------*/
 void Duel::start() {
-	// TODO
+
+	
+	// Picking the starting player
+	size_t startId = randInt(d_contenders.size());
+	d_currentContender = &(d_contenders.at(startId));
+	
+	for(auto inter=d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
+		Interface_interface* i = *inter;
+		i->showText("The first player has been chosen randomly.");
+	}
+
+
+	// Pick 7 cards randomly
+	
+
+
+	// Starting first turn, skipping the 1st phase as mentioned in the rules
+	ph2Disgendage_start();
 }
 
 void Duel::ph1Draw_start() {

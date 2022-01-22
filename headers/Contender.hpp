@@ -10,6 +10,9 @@
 
 
 
+typedef unsigned char stat;
+
+
 class Contender {
 
 	private :
@@ -51,7 +54,7 @@ class Contender {
 		 * @param hp damage
 		 * @return int how much damage was actually dealt
 		 */
-		// int damageBy(stat hp);
+		int damageBy(stat hp);
 
 
  };
