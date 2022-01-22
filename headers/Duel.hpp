@@ -10,9 +10,9 @@
 #include <string>
 
 
+#include "Contender.hpp"
 class Interface_interface;
 class Player;
-class Contender;
 class Card;
 class Creature;
 class FightHit;
@@ -25,15 +25,15 @@ class Duel : public Duel_interface {
     private:
         char d_currentPhase;
         char d_remainingTurns;
-        std::vector<Contender> d_contenders;
+        std::vector<Contender> d_contenders = std::vector<Contender>();
         Contender* d_currentContender;
         std::vector<Interface_interface*>d_interfaces;
-        std::vector<FightHit*> d_fightHitBuffer;
+        std::vector<FightHit*> d_fightHitBuffer = std::vector<FightHit*>();
     
 
     // Constructors :
     public:
-        Duel(Player player1, std::string player2);
+        Duel(Player player1, Player player2);
 
     
 
@@ -70,7 +70,7 @@ class Duel : public Duel_interface {
 
     // Other getters/setters :
     public:
-        std::vector<Contender*> getContenders();
+        const std::vector<const Contender*> getContenders() const;
 
 
 };

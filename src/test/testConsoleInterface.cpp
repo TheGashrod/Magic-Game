@@ -11,19 +11,26 @@
 
 
 int testInterface() {
-	Duel d = Duel();
+
+	Player p1 = Player("J1", CardsSet(std::vector<Card*>()));
+	Player p2 = Player("J2", CardsSet(std::vector<Card*>()));
+
+	Duel d = Duel(p1, p2);
 	ConsoleInterface inter = ConsoleInterface(d);
 
 
 	Creature c1 = Creature("Démon de Pagaille", std::list<Color>({Blue, Red}), false, std::list<Color>({Red, Red}), 1, 3, 3);
 	Creature c2 = Creature("The purple scare", std::list<Color>({Black}), false, std::list<Color>({Red, Blue}), 0, 2, 3);
 
-	Contender con1 = Contender();
+	const Contender* ah = d.getContenders().at(0);
+
+	const Contender* con1 = d.getContenders().at(0);
+	const Contender* con2 = d.getContenders().at(1);
 
 
 	const Card* c1Ptr = &c1;
 	const Card* c2Ptr = &c2;
-	const Contender* con1Ptr = &con1;
+	const Contender* con1Ptr = con1;
 	
 	const std::list<const Card*> cList1 = std::list<const Card*>({c1Ptr, c2Ptr});
 
@@ -48,4 +55,5 @@ int testInterface() {
 
 	inter.ph3PlayCards_wait(con1Ptr);
 
+	
 }

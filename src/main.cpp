@@ -3,6 +3,8 @@
 
 #include "../headers/consoleInterface/ConsoleInterface.hpp"
 #include "../headers/Duel.hpp"
+#include "../headers/Player.hpp"
+#include "../headers/CardsSet.hpp"
 #include "../headers/enums/Color.hpp"
 #include "../headers/test/testConsoleInterface.hpp"
 #include <iostream>
@@ -11,10 +13,12 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 
-
-    Duel duel = Duel();
-    ConsoleInterface interface = ConsoleInterface(duel);
-    duel.addInterface(&interface);
+	Player p1 = Player("J1", CardsSet(std::vector<Card*>()));
+	Player p2 = Player("J2", CardsSet(std::vector<Card*>()));
+	
+   Duel duel = Duel(p1, p2);
+   ConsoleInterface interface = ConsoleInterface(duel);
+   duel.addInterface(&interface);
 
 
 

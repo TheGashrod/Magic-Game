@@ -1,5 +1,7 @@
- #include "../headers/Duel.hpp"
+#include "../headers/Duel.hpp"
 
+
+#include <vector>
 
 
 #include "../headers/Interface.hpp"
@@ -10,17 +12,50 @@
 
 
 
+using std::vector;
 
-/* --------------------------------------------------------------------------------------------------/*
+
+/* --------------------------------------------------------------------------------------------------/
+                                        Constructeurs
+/ --------------------------------------------------------------------------------------------------*/
+
+
+
+Duel::Duel(Player player1, Player player2) {
+	Contender c1 = Contender(player1, 20, player1.getDeck());
+	Contender c2 = Contender(player2, 20, player2.getDeck());
+	d_contenders.push_back(c1);
+	d_contenders.push_back(c2);
+}
+
+
+/* --------------------------------------------------------------------------------------------------/
                                         Getters/setters
-/* -------------------------------------------------------------------------------------------------*/
+/ --------------------------------------------------------------------------------------------------*/
+
+
+const vector<const Contender*> Duel::getContenders() const {
+	vector<const Contender*> contenders = vector<const Contender*>();
+	
+	for(auto i=d_contenders.begin(); i != d_contenders.end(); i++) {
+		const Contender* c = &(*i);
+		contenders.push_back(c);
+	}
+	return contenders;
+}
+
+
 void Duel::addInterface(Interface_interface* i) {
 	d_interfaces.push_back(i);
 }
 
-/* --------------------------------------------------------------------------------------------------/*
+
+
+
+
+/* --------------------------------------------------------------------------------------------------/
                  Game phases and exchanges with interfaces
-/* -------------------------------------------------------------------------------------------------*/
+/ --------------------------------------------------------------------------------------------------*/
 void Duel::start() {
 	// TODO
 }
