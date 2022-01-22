@@ -4,5 +4,5 @@
 
 
 // Constructors :
-CardsSet (vector<Card> cardsSet);
+CardsSet (vector<Card> cardsSet) : c_cardsSet(cardsSet);
 ~CardsSet();

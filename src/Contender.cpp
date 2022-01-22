@@ -1,6 +1,7 @@
 
 #include "Contender.hpp"
-#include "CardsSet.hpp" 
+#include "CardsSet.hpp"
+#include "Card.hpp" 
 
 
 // Constructors :  {} -> cardSet vide à completer

@@ -1,11 +1,10 @@
 
 
-#include <vector>
+
 #include "CardsSet.hpp"
 #include "Player.hpp"
 
 
-using std::vector;
 
 class Contender {
 
