@@ -1,6 +1,8 @@
 
 
-#include "Player.hpp"
+#include "../headers/Player.hpp"
+
+
 
 //Constructors :
 Player::Player (string name): p_name(name) { }

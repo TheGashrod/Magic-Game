@@ -1,10 +1,11 @@
 
-#include "Contender.hpp"
-#include "CardsSet.hpp"
-#include "Card.hpp" 
+
+#include "../headers/Contender.hpp"
+#include "../headers/CardsSet.hpp"
+#include "../headers/Card.hpp"
 
 
-// Constructors :  {} -> cardSet vide à completer
+
 Contender::Contender (Player p, int vita, CardsSet deck):
 	c_player(p), c_vitality(vita), c_library(deck), c_cemetary({}), c_inGameCards({}), c_hand({}) { }
 Contender::~Contender() { };
