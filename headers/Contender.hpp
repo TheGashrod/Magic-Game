@@ -17,7 +17,7 @@ class Contender {
 		int c_vitality;
 		CardsSet c_library;
 		CardsSet c_cemetary;
-		CardsSetc_hand;
+		CardsSet c_hand;
 		CardsSet c_inGameCards;
 
 

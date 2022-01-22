@@ -6,7 +6,7 @@
 #include <vector>
 
 
-#include "../CardsSet.hpp"
+#include "CardsSet.hpp"
 
 
 class Card;

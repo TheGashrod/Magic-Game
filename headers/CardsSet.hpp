@@ -1,3 +1,7 @@
+#ifndef __MTG_CARDSSET_INCLUDED__
+#define __MTG_CARDSSET_INCLUDED__
+
+
 
 #include "../headers/Card.hpp"
 
@@ -32,3 +36,7 @@ class CardsSet {
 
 
 };
+
+
+
+#endif

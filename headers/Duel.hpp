@@ -7,6 +7,7 @@
 
 #include <list>
 #include <vector>
+#include <string>
 
 
 class Interface_interface;
@@ -32,7 +33,7 @@ class Duel : public Duel_interface {
 
     // Constructors :
     public:
-        Duel(Player player1, string player2);
+        Duel(Player player1, std::string player2);
 
     
 
