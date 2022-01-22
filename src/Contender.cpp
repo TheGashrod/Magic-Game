@@ -28,6 +28,6 @@ void Contender::setVitality(int vita) { c_vitality = vita; }
 // Methods :
 	// methode transfer à faire dans CardsSet
 void Contender::drawCard(){
-	CardsSet::transfer(c_library.getCardsSet()[0], c_hand);
+	c_library.CardsSet::transfer(c_library.getCardsSet()[0], c_hand);
 };
 

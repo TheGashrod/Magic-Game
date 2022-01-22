@@ -5,11 +5,12 @@
 
 
 //Constructors :
-Player::Player (string name): p_name(name) { }
+Player::Player (string name, CardsSet deck): p_username(name), p_deck(deck) { }
 Player::~Player() { };
 
 // Getters :
-string Player::getName() const { return p_name; }
+string Player::getName() const { return p_username; }
+CardsSet Player::getDeck() const { return p_deck; }
 
 // setters :
-void Player::setName(string name) { p_name = name; }
+void Player::setName(string name) { p_username = name; }

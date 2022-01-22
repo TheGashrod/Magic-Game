@@ -7,12 +7,14 @@
 
 
 #include "CardsSet.hpp"
+#include <vector>
+
+using std::vector;
+using std::string;
 
 
 class Card;
 
-
-using std::string;
 
 
 class Player {
@@ -20,19 +22,21 @@ class Player {
 	// Attributes :
 	private:
 		string p_username;
-		CardsSet deck = CardsSet(std::vector<Card*>());
+		CardsSet p_deck;
 
 	
 	// Constructor :
 	public:
-		Player(string username);
+		Player(string username, CardsSet deck);
 		~Player();
 	
 
 	// --------------- Getters/setters ---------------
 	public:
-		const CardsSet getDeck() const;
+		CardsSet getDeck() const;
 		string getName() const;
+
+		void setName(string name);
 
 		
 		

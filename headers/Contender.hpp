@@ -26,6 +26,7 @@ class Contender {
 
 		// Constructors :
 		Contender (Player p, int vita, CardsSet deck);
+		Contender ();
 		~Contender();
 
 
