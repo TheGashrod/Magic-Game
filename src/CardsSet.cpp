@@ -23,7 +23,7 @@ void CardsSet::transfer(Card *c, CardsSet cardsSetDestination){
 		if (c_cardsSet[i] == c ){
 			flag = true;
 			c_cardsSet.erase (c_cardsSet.begin()+i);
-			// cardsSetDestination.push_back(c);
+			cardsSetDestination.getCardsSet().push_back(c);
 			break;
 		}
 		else{ continue;}
