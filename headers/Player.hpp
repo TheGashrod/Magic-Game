@@ -19,13 +19,14 @@ class Player {
 
 	// Attributes :
 	private:
-		string username;
-		CardsSet deck = CardsSet();
+		string p_username;
+		CardsSet deck = CardsSet(std::vector<Card*>());
 
 	
 	// Constructor :
 	public:
 		Player(string username);
+		~Player();
 	
 
 	// --------------- Getters/setters ---------------
