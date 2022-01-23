@@ -29,7 +29,7 @@ class CardsSet {
 		
 
 		// Methods :
-		void transfer(const Card *c, CardsSet cardsSetDestination);
+		void transfer(const Card *c, CardsSet *cardsSetDestination);
 
 
 

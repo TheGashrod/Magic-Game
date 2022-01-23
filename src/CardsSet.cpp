@@ -27,13 +27,13 @@ vector<Card*>* CardsSet::getOriginalCardsSet() { return &c_cardsSet; }
 
 
 // Methods :
-void CardsSet::transfer(const Card *c, CardsSet cardsSetDestination){
+void CardsSet::transfer(const Card *c, CardsSet *cardsSetDestination){
 	bool flag = false;
 	for (int i = 0; i< c_cardsSet.size(); i++){
 		if ((c_cardsSet[i])->hasSameId(c)){
 			flag = true;
 			c_cardsSet.erase (c_cardsSet.begin()+i);
-			cardsSetDestination.getCardsSet().push_back(c);
+			cardsSetDestination->getCardsSet().push_back(c);
 			break;
 		}
 		else{ continue;}
