@@ -13,7 +13,7 @@ using std::vector;
 class CardsSet {
 
 	private:
-		vector<Card *> c_cardsSet;
+		vector<Card* > c_cardsSet;
 
 	public:
 
@@ -25,11 +25,13 @@ class CardsSet {
 		vector<const Card*> getCardsSet() const;
 		void setCardsSet(vector<Card* > cardsSet);
 
-		vector<Card*>* getOriginalCardsSet();
+		vector<Card*> * getOriginalCardsSet();
 		
 
 		// Methods :
-		void transfer(const Card *c, CardsSet *cardsSetDestination);
+		void push(Card *c);
+		void transfer(Card *c, CardsSet *cardsSetDestination);
+
 
 
 
