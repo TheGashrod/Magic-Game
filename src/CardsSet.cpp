@@ -27,7 +27,7 @@ vector<Card*>* CardsSet::getOriginalCardsSet() { return &c_cardsSet; }
 
 
 // Methods :
-void CardsSet::transfer(const Card *c, CardsSet cardsSetDestination){
+void CardsSet::transfer(const Card *c, CardsSet *cardsSetDestination){
 	bool flag = false;
 	for (int i = 0; i< c_cardsSet.size(); i++){
 		if ((c_cardsSet[i])->hasSameId(c)){
@@ -35,9 +35,7 @@ void CardsSet::transfer(const Card *c, CardsSet cardsSetDestination){
     	cout << "Même ID" << "\n";
 			flag = true;
 			c_cardsSet.erase (c_cardsSet.begin()+i);
-			cout << "Cardset actuel's size : " << c_cardsSet.size() << "\n";
-			cardsSetDestination.getCardsSet().push_back(c);
-			cout << "Cardset destination's size : " << cardsSetDestination.getCardsSet().size() << "\n";
+			cardsSetDestination->getCardsSet().push_back(c);
 			break;
 		}
 		else{ continue;}
