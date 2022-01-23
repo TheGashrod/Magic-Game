@@ -14,7 +14,7 @@ class Duel_interface {
 	// Game phases and exchanges with interfaces
    public: virtual void start() = 0;
    protected: virtual void ph1Draw_start() = 0;
-   protected: virtual void ph2Disgendage_start() = 0;
+   protected: virtual void ph2Disengage_start() = 0;
    protected: virtual void ph3PlayCard_start() = 0;
    public: virtual void chooseCard(const Card* c) = 0;
    public: virtual void ph3_end() = 0;

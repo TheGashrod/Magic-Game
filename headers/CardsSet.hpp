@@ -22,9 +22,11 @@ class CardsSet {
 		~CardsSet();
 
 		// Getter & Setter :
-		vector<Card *> getCardsSet() const;
+		const vector<Card*> getCardsSet() const;
 		void setCardsSet(vector<Card* > cardsSet);
 
+		vector<Card*>* getCardsSet();
+		
 
 		// Methods :
 		void transfer(Card *c, CardsSet  cardsSetDestination);

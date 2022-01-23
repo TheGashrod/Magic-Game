@@ -2,6 +2,8 @@
 #define __MTG_LAND_INCLUDED__
 
 
+#include <memory>
+
 
 #include "Card.hpp"
 
@@ -14,6 +16,11 @@ class Land : public Card {
 
 	// Constructors :
 	Land(string name, Color color, bool isEngaged);
+
+	// Getters/setters
+	virtual std::unique_ptr<Card> clone() const;
+
+	virtual ostream& print(ostream& os) const;
 
 };
 

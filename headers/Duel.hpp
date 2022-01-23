@@ -19,6 +19,13 @@ class FightHit;
 
 
 
+
+#define INITIAL_CARDS_AMOUNT 7
+#define MAX_CARDS_AMOUNT 7
+
+
+
+
 class Duel : public Duel_interface {
 
     // Members :
@@ -38,9 +45,10 @@ class Duel : public Duel_interface {
     
 
     // Game phases and exchanges with interfaces :
+    private: void showTextInInterfaces(string t);
     public: virtual void start();
     private: virtual void ph1Draw_start();
-    private: virtual void ph2Disgendage_start();
+    private: virtual void ph2Disengage_start();
     private: virtual void ph3PlayCard_start();
     public: virtual void chooseCard(const Card* c);
     public: virtual void ph3_end();
@@ -52,6 +60,7 @@ class Duel : public Duel_interface {
     public: virtual void ph5_end();
     private: virtual void ph6Discard_start();
     public: virtual void ph6_end(std::list<const Card*> discarded);
+    private: void gameOver(Contender* winner);
 
 
     // Getters/setters (Turns related members) :

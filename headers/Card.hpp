@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <list>
+#include <memory>
 
 #include "enums/Color.hpp"
 
@@ -38,6 +39,7 @@ using namespace std;
     public:
         string getName() const;
         bool isEngaged() const;
+        virtual std::unique_ptr<Card> clone() const = 0;
 
         void engage();
         void disengage();

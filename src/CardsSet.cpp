@@ -13,8 +13,10 @@ CardsSet::CardsSet (vector<Card *> cardsSet) : c_cardsSet(cardsSet){};
 CardsSet::~CardsSet(){};
 
 // Getter & Setter :
-vector<Card*> CardsSet::getCardsSet() const { return c_cardsSet;}
+const vector<Card*> CardsSet::getCardsSet() const { return c_cardsSet;}
 void CardsSet::setCardsSet(vector<Card*> cardsSet){c_cardsSet = cardsSet;}
+
+vector<Card*>* CardsSet::getCardsSet() { return &c_cardsSet; }
 
 // Methods :
 void CardsSet::transfer(Card *c, CardsSet cardsSetDestination){
