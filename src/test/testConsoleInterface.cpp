@@ -10,13 +10,13 @@
 #include "../../headers/Duel.hpp"
 
 
-int testInterface() {
+int mainTest() {
 
 	Player p1 = Player("J1", CardsSet(std::vector<Card*>()));
 	Player p2 = Player("J2", CardsSet(std::vector<Card*>()));
 
 	Duel d = Duel(p1, p2);
-	ConsoleInterface inter = ConsoleInterface(d);
+	ConsoleInterface inter = ConsoleInterface(&d);
 
 
 	Creature c1 = Creature("Démon de Pagaille", std::list<Color>({Blue, Red}), false, std::list<Color>({Red, Red}), 1, 3, 3);
@@ -38,6 +38,7 @@ int testInterface() {
 	inter.showText("showText works !!");
 	
 	
+	/*
 	cout << "\n\n";
 	inter.ph1DrawnCard(con1Ptr, c1Ptr);
 	cout << "\n";
@@ -54,6 +55,10 @@ int testInterface() {
 
 
 	inter.ph3PlayCards_wait(con1Ptr);
+	*/
+
+	d.showTextInInterfaces("showTextInInterfaces works too !\n");
+	d.start();
 
 	
 }

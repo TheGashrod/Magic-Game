@@ -20,6 +20,6 @@ unique_ptr<Card> Land::clone() const {
 }
 
 
-ostream& Card::print(ostream& os) const {
+ostream& Land::print(ostream& os) const {
 	return os << "[Land] " << c_name;
 }

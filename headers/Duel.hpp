@@ -80,7 +80,11 @@ class Duel : public Duel_interface {
     // Other getters/setters :
     public:
         const std::vector<const Contender*> getContenders() const;
-        
+    
+
+
+    // Friends :
+    friend int mainTest();
 
 
 };

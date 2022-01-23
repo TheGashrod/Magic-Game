@@ -73,12 +73,14 @@ void Duel::start() {
 	
 	showTextInInterfaces("The first player has been chosen randomly.");
 
+	cout << "About to pick 7 cards" << endl;
 
 	// Pick 7 cards randomly
 	for(auto con = d_contenders.begin(); con != d_contenders.end(); con++) {
 		Contender c = *con;
-		if(c.getLibrary().getCardsSet()->size() < MAX_CARDS_AMOUNT) {
+		if(c.getLibrary().getCardsSet().size() < MAX_CARDS_AMOUNT) {
 			gameOver(nullptr);
+			return;
 		}
 		
 		for(int i = 0; i < MAX_CARDS_AMOUNT; i++) {
@@ -86,7 +88,7 @@ void Duel::start() {
 		}
 	} 
 
-
+	cout << "About to jump to phase 2" << endl;
 
 	// Starting first turn, skipping the 1st phase as mentioned in the rules
 	ph2Disengage_start();
@@ -98,14 +100,15 @@ void Duel::ph1Draw_start() {
 }
 
 void Duel::ph2Disengage_start() {
-	vector<Card*>* cards = d_currentContender->getInGameCards().getCardsSet();
+	vector<Card*>* cards = d_currentContender->getInGameCards().getOriginalCardsSet();
 	std::list<const Card*> disengaged = std::list<const Card*>();
 
 	for(auto card=(*cards).begin(); card != (*cards).end(); card++) {
 		Card* c = *card;
 		if(c->isEngaged()) {
 			c->disengage();
-			disengaged.push_back( c->clone() );
+			const Card* cc = c;
+			disengaged.push_back( cc );
 		}
 	}
 
@@ -113,7 +116,8 @@ void Duel::ph2Disengage_start() {
 		Interface_interface* i = *inter;
 		i->ph2Disengage(d_currentContender , disengaged);
 	}
-	// TODO
+
+	ph3PlayCard_start();
 }
 
 void Duel::ph3PlayCard_start() { 
@@ -164,6 +168,5 @@ void Duel::gameOver(Contender* winner) { //! winner can be nullptr if the game f
 		showTextInInterfaces("The game has been cancelled.");
 		return;
 	}
-
 	// TODO
 }

@@ -47,8 +47,8 @@ void Creature::resetStats() {
 }
 
 unique_ptr<Card> Creature::clone() const {
-	const Creature l = *this;
-	unique_ptr<Card> ptr = unique_ptr<Card>( &Creature(l) );
+	Creature l = Creature(*this);
+	unique_ptr<Card> ptr = unique_ptr<Card>( &l );
 	return ptr;
 }
 

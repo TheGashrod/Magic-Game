@@ -12,14 +12,22 @@ using std::vector;
 CardsSet::CardsSet (vector<Card *> cardsSet) : c_cardsSet(cardsSet){};
 CardsSet::~CardsSet(){};
 
+
 // Getter & Setter :
-const vector<Card*> CardsSet::getCardsSet() const { return c_cardsSet;}
+vector<const Card*> CardsSet::getCardsSet() const { 
+	vector<const Card*> cards = vector<const Card*>();
+	for(auto c = c_cardsSet.begin(); c != c_cardsSet.end(); c++) {
+		cards.push_back(*c);
+	}
+	return cards;
+}
 void CardsSet::setCardsSet(vector<Card*> cardsSet){c_cardsSet = cardsSet;}
 
-vector<Card*>* CardsSet::getCardsSet() { return &c_cardsSet; }
+vector<Card*>* CardsSet::getOriginalCardsSet() { return &c_cardsSet; }
+
 
 // Methods :
-void CardsSet::transfer(Card *c, CardsSet cardsSetDestination){
+void CardsSet::transfer(const Card *c, CardsSet cardsSetDestination){
 	bool flag = false;
 	for (int i = 0; i< c_cardsSet.size(); i++){
 		if (c_cardsSet[i] == c ){
