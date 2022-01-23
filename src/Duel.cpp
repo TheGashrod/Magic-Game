@@ -73,7 +73,6 @@ void Duel::start() {
 	
 	showTextInInterfaces("The first player has been chosen randomly.");
 
-	cout << "About to pick 7 cards" << endl;
 
 	// Pick 7 cards randomly
 	for(auto con = d_contenders.begin(); con != d_contenders.end(); con++) {
@@ -87,8 +86,6 @@ void Duel::start() {
 			c.drawCard();
 		}
 	} 
-
-	cout << "About to jump to phase 2" << endl;
 
 	// Starting first turn, skipping the 1st phase as mentioned in the rules
 	ph2Disengage_start();

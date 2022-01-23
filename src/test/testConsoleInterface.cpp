@@ -12,27 +12,34 @@
 
 int mainTest() {
 
-	Player p1 = Player("J1", CardsSet(std::vector<Card*>()));
-	Player p2 = Player("J2", CardsSet(std::vector<Card*>()));
-
-	Duel d = Duel(p1, p2);
-	ConsoleInterface inter = ConsoleInterface(&d);
+	
 
 
 	Creature c1 = Creature("Démon de Pagaille", std::list<Color>({Blue, Red}), false, std::list<Color>({Red, Red}), 1, 3, 3);
 	Creature c2 = Creature("The purple scare", std::list<Color>({Black}), false, std::list<Color>({Red, Blue}), 0, 2, 3);
 
-	const Contender* ah = d.getContenders().at(0);
+
+	Card* c1Ptr2 = &c1;
+	const Card* c1Ptr = &c1;
+	Card* c2Ptr2 = &c2;
+	const Card* c2Ptr = &c2;
+	
+	const std::list<const Card*> cList1 = std::list<const Card*>({c1Ptr, c2Ptr, c1Ptr, c1Ptr, c1Ptr, c1Ptr, c1Ptr, c1Ptr, c1Ptr, c1Ptr, c1Ptr});
+
+
+
+	Player p1 = Player("J1", CardsSet(std::vector<Card*>({c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2})));
+	Player p2 = Player("J2", CardsSet(std::vector<Card*>({c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2})));
+
+	Duel d = Duel(p1, p2);
+	ConsoleInterface inter = ConsoleInterface(&d);
+
 
 	const Contender* con1 = d.getContenders().at(0);
 	const Contender* con2 = d.getContenders().at(1);
 
-
-	const Card* c1Ptr = &c1;
-	const Card* c2Ptr = &c2;
-	const Contender* con1Ptr = con1;
 	
-	const std::list<const Card*> cList1 = std::list<const Card*>({c1Ptr, c2Ptr});
+	const Contender* con1Ptr = con1;
 
 
 	inter.showText("showText works !!");

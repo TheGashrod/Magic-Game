@@ -34,8 +34,13 @@ void ConsoleInterface::ph1DrawnCard(const Contender* con, const Card* card) {
 
 void ConsoleInterface::ph2Disengage(const Contender* con, const std::list<const Card*> c) {
     cout << "Vos cartes ont été désengagées :" << endl;
-    for(auto card = c.begin(); card != c.end(); card++) {
+    if(c.size() == 0) {
+        cout << "Aucune" << endl;
+    }
+    else {
+        for(auto card = c.begin(); card != c.end(); card++) {
         cout << *card << endl;
+        }
     }
 }
 
