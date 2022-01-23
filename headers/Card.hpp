@@ -47,7 +47,7 @@ using namespace std;
 
     // Methods
     public:
-        bool hasSameId(Card* c) const;
+        bool hasSameId(const Card* c) const;
 
 
     // Print

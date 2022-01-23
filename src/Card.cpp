@@ -33,7 +33,7 @@ void Card::disengage() { c_isEngaged = false; }
 
 
 // Methods :
-bool Card::hasSameId(Card *c) const {
+bool Card::hasSameId(const Card *c) const {
     return c->c_id == this->c_id;
 }
 
