@@ -83,7 +83,9 @@ void Duel::start() {
 		}
 		
 		for(int i = 0; i < MAX_CARDS_AMOUNT; i++) {
-			c.drawCard();
+			cout << "Drawing a card\n";
+			c.drawCard(); // TODO To check
+			cout << "Current number of cards : " << c.getHand().getCardsSet().size() << endl;
 		}
 	} 
 
@@ -118,6 +120,10 @@ void Duel::ph2Disengage_start() {
 }
 
 void Duel::ph3PlayCard_start() { 
+	for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
+		(*inter)->ph3PlayCards_wait(d_currentContender);
+	}
+	
 	// TODO
 }
 
