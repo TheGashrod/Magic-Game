@@ -46,6 +46,7 @@ void ConsoleInterface::ph2Disengage(const Contender* con, const std::list<const 
 
 void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
     cout << endl << "You can put cards from your hand into the game." << endl;
+    cout << "Nombre de cartes : " << con->getHand().getCardsSet().size() << endl;
     const Card* picked = pickACard_option( con->getHand().getCardsSet() );
     
     if(picked == nullptr) {

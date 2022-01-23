@@ -78,18 +78,17 @@ void Duel::start() {
 
 	// Pick 7 cards randomly
 	for(auto con = d_contenders.begin(); con != d_contenders.end(); con++) {
-		Contender c = *con;
-		if(c.getLibrary().getCardsSet().size() < MAX_CARDS_AMOUNT) {
+		Contender* c = &(*con);
+		if(c->getLibrary().getCardsSet().size() < MAX_CARDS_AMOUNT) {
 			gameOver(nullptr);
 			return;
 		}
 		
 		for(int i = 0; i < MAX_CARDS_AMOUNT; i++) {
 			cout << "Drawing a card\n";
-			c.drawCard(); // TODO To check
-			cout << "Current number of cards : " << c.getHand().getCardsSet().size() << endl;
+			c->drawCard(); // TODO To check
 		}
-	} 
+	}
 
 	// Starting first turn, skipping the 1st phase as mentioned in the rules
 	ph2Disengage_start();

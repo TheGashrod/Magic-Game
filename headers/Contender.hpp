@@ -33,6 +33,7 @@ class Contender {
 
 
 		// Getters :
+		Player getPlayer() const;
 		int getVitality() const;
 		CardsSet getLibrary() const;
 		CardsSet getCemetary() const;

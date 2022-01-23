@@ -17,6 +17,7 @@ Contender::~Contender() { };
 
 
 // Getters :
+Player Contender::getPlayer() const { return c_player; }
 int Contender::getVitality() const { return c_vitality; }
 CardsSet Contender::getLibrary() const { return c_library; }
 CardsSet Contender::getCemetary() const { return c_cemetary; }
