@@ -5,6 +5,7 @@
 #include "../headers/Card.hpp"
 
 #include <vector>
+#include "../headers/tools/random.hpp"
 
 using std::vector;
 
@@ -24,10 +25,11 @@ CardsSet Contender::getInGameCards() const { return c_inGameCards; }
 
 // Setter :
 void Contender::setVitality(int vita) { c_vitality = vita; }
+int Contender::damageBy(stat hp) { c_vitality = std::max(0, c_vitality - hp); }
+
 
 // Methods :
-	// methode transfer à faire dans CardsSet
 void Contender::drawCard(){
-	c_library.CardsSet::transfer(c_library.getCardsSet()[0], c_hand);
+	c_library.transfer( c_library.getCardsSet().at( randInt(c_library.getCardsSet().size() ) ), c_hand);
 };
 

@@ -2,7 +2,7 @@
 
 
 #include <vector>
-
+#include "../headers/tools/random.hpp"
 
 #include "../headers/Interface.hpp"
 #include "../headers/Contender.hpp"
@@ -13,6 +13,7 @@
 
 
 using std::vector;
+using std::size_t;
 
 
 /* --------------------------------------------------------------------------------------------------/
@@ -51,21 +52,69 @@ void Duel::addInterface(Interface_interface* i) {
 
 
 
+void Duel::showTextInInterfaces(string t) {
+	for(auto inter=d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
+		Interface_interface* i = *inter;
+		i->showText(t);
+	}
+}
+
 
 
 /* --------------------------------------------------------------------------------------------------/
                  Game phases and exchanges with interfaces
 / --------------------------------------------------------------------------------------------------*/
 void Duel::start() {
-	// TODO
+
+	
+	// Picking the starting player
+	size_t startId = randInt(d_contenders.size());
+	d_currentContender = &(d_contenders.at(startId));
+	
+	showTextInInterfaces("The first player has been chosen randomly.");
+
+
+	// Pick 7 cards randomly
+	for(auto con = d_contenders.begin(); con != d_contenders.end(); con++) {
+		Contender c = *con;
+		if(c.getLibrary().getCardsSet().size() < MAX_CARDS_AMOUNT) {
+			gameOver(nullptr);
+			return;
+		}
+		
+		for(int i = 0; i < MAX_CARDS_AMOUNT; i++) {
+			c.drawCard();
+		}
+	} 
+
+	// Starting first turn, skipping the 1st phase as mentioned in the rules
+	ph2Disengage_start();
 }
 
 void Duel::ph1Draw_start() {
+	// TODO : Check whether the player has any card
 	// TODO
 }
 
-void Duel::ph2Disgendage_start() {
-	// TODO
+void Duel::ph2Disengage_start() {
+	vector<Card*>* cards = d_currentContender->getInGameCards().getOriginalCardsSet();
+	std::list<const Card*> disengaged = std::list<const Card*>();
+
+	for(auto card=(*cards).begin(); card != (*cards).end(); card++) {
+		Card* c = *card;
+		if(c->isEngaged()) {
+			c->disengage();
+			const Card* cc = c;
+			disengaged.push_back( cc );
+		}
+	}
+
+	for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
+		Interface_interface* i = *inter;
+		i->ph2Disengage(d_currentContender , disengaged);
+	}
+
+	ph3PlayCard_start();
 }
 
 void Duel::ph3PlayCard_start() { 
@@ -108,5 +157,13 @@ void Duel::ph6Discard_start() {
 }
 
 void Duel::ph6_end(std::list<const Card*> discarded) {
+	// TODO
+}
+
+void Duel::gameOver(Contender* winner) { //! winner can be nullptr if the game failed to begin
+	if(winner == nullptr) {
+		showTextInInterfaces("The game has been cancelled.");
+		return;
+	}
 	// TODO
 }

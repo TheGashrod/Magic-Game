@@ -6,7 +6,10 @@
 #include "../Interface.hpp"
 
 
-#include "../Duel.hpp"
+#include <vector>
+
+
+class Duel;
 
 
 
@@ -15,11 +18,11 @@ class ConsoleInterface : public Interface_interface {
 	
 	// Attributes :
 	private:
-		Duel i_duel;
+		Duel* i_duel;
 
 	// Constructors :
 	public:
-		ConsoleInterface(Duel d);
+		ConsoleInterface(Duel* d);
 
 	// Interface_interface :
 	public:
@@ -34,14 +37,14 @@ class ConsoleInterface : public Interface_interface {
 
 	// Methods :
 	private:
-		const Card* pickACard_option(std::list<const Card*> cards) const;
-		const Card* pickACard(std::list<const Card*> cards) const;
+		const Card* pickACard_option(std::vector<const Card*> cards) const;
+		const Card* pickACard(std::vector<const Card*> cards) const;
 
 
 
 
 	// Friends :
-	friend int testInterface();
+	friend int mainTest();
 
 };
 

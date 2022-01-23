@@ -63,6 +63,8 @@ class Creature : public Card {
 		void healBy(stat hp);
 		void resetStats();
 
+		virtual std::unique_ptr<Card> clone() const;
+
 
 	// Methods :
 	public:

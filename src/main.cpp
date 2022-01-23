@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
 	Player p2 = Player("J2", CardsSet(std::vector<Card*>()));
 	
    Duel duel = Duel(p1, p2);
-   ConsoleInterface interface = ConsoleInterface(duel);
+   ConsoleInterface interface = ConsoleInterface(&duel);
    duel.addInterface(&interface);
 
 
@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
 
 
 
-	testInterface();
+	mainTest();
 
 
 

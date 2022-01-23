@@ -10,6 +10,7 @@
 
 using std::endl;
 using std::tuple;
+using std::unique_ptr;
 
 
 //Constructors :
@@ -45,6 +46,12 @@ void Creature::resetStats() {
 	c_toughness = c_toughnessDef;
 }
 
+unique_ptr<Card> Creature::clone() const {
+	Creature l = Creature(*this);
+	unique_ptr<Card> ptr = unique_ptr<Card>( &l );
+	return ptr;
+}
+
 
 // Methods :
 int Creature::dealDamageTo(Creature* c) {
@@ -52,7 +59,7 @@ int Creature::dealDamageTo(Creature* c) {
 }
 
 int Creature::dealDamageTo(Contender* c) const {
-	//return c->damageBy( getPower() );
+	return c->damageBy( getPower() );
 	printf("Creature::dealDamageTo needs comment to be removed");
 	return 0;
 }

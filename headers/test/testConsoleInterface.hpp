@@ -3,7 +3,7 @@
 
 
 
-int testInterface();
+int mainTest();
 
 
 
