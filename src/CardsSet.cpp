@@ -20,7 +20,7 @@ void CardsSet::setCardsSet(vector<Card*> cardsSet){c_cardsSet = cardsSet;}
 void CardsSet::transfer(Card *c, CardsSet cardsSetDestination){
 	bool flag = false;
 	for (int i = 0; i< c_cardsSet.size(); i++){
-		if (c_cardsSet[i] == c ){
+		if ((c_cardsSet[i])->hasSameId(c)){
 			flag = true;
 			c_cardsSet.erase (c_cardsSet.begin()+i);
 			cardsSetDestination.getCardsSet().push_back(c);
