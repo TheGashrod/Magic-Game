@@ -29,11 +29,11 @@ void ConsoleInterface::showText(std::string t) {
 
 
 void ConsoleInterface::ph1DrawnCard(const Contender* con, const Card* card) {
-    cout << "Vous piochez une carte : \n" << card << "\n";
+    cout << endl << "Vous piochez une carte : \n" << card << "\n";
 }
 
 void ConsoleInterface::ph2Disengage(const Contender* con, const std::list<const Card*> c) {
-    cout << "Vos cartes ont été désengagées :" << endl;
+    cout << endl << "Vos cartes ont été désengagées :" << endl;
     if(c.size() == 0) {
         cout << "Aucune" << endl;
     }
@@ -45,8 +45,15 @@ void ConsoleInterface::ph2Disengage(const Contender* con, const std::list<const 
 }
 
 void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
-    cout << "You can put cards from your hand into the game." << endl;
-    i_duel->chooseCard( pickACard_option( con->getHand().getCardsSet() ) ); // TODO Decomment when cards can be obtained from Contender
+    cout << endl << "You can put cards from your hand into the game." << endl;
+    const Card* picked = pickACard_option( con->getHand().getCardsSet() );
+    
+    if(picked == nullptr) {
+        i_duel->ph3_end();
+    }
+    else {
+        i_duel->chooseCard( picked );
+    }
 }
 
 void ConsoleInterface::ph4Fight_wait(const Contender* att, const Contender* def) {
@@ -54,7 +61,15 @@ void ConsoleInterface::ph4Fight_wait(const Contender* att, const Contender* def)
 }
 
 void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
-    // TODO
+    cout << endl << "You can put cards from your hand into the game again." << endl;
+    const Card* picked = pickACard_option( con->getHand().getCardsSet() );
+    
+    if(picked == nullptr) {
+        i_duel->ph3_end();
+    }
+    else {
+        i_duel->chooseCard( picked );
+    }
 }
 
 void ConsoleInterface::ph6Discard_wait(const Contender* con, size_t nbToDiscard) {

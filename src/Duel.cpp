@@ -3,11 +3,13 @@
 
 #include <vector>
 #include "../headers/tools/random.hpp"
+#include "../headers/tools/instanceof.hpp"
 
 #include "../headers/Interface.hpp"
 #include "../headers/Contender.hpp"
 #include "../headers/Card.hpp"
 #include "../headers/Creature.hpp"
+#include "../headers/Land.hpp"
 #include "../headers/actions/FightHit.hpp"
 
 
@@ -93,12 +95,20 @@ void Duel::start() {
 	ph2Disengage_start();
 }
 
+
+
+
 void Duel::ph1Draw_start() {
+	d_currentPhase = 1;
+
 	// TODO : Check whether the player has any card
 	// TODO
 }
 
 void Duel::ph2Disengage_start() {
+	d_currentPhase = 2;
+
+	// Disengaging cards
 	vector<Card*>* cards = d_currentContender->getInGameCards().getOriginalCardsSet();
 	std::list<const Card*> disengaged = std::list<const Card*>();
 
@@ -110,7 +120,11 @@ void Duel::ph2Disengage_start() {
 			disengaged.push_back( cc );
 		}
 	}
+	
+	// Resetting right to set lands
+	d_hasUsedLand = false;
 
+	// Notifying interfaces
 	for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
 		Interface_interface* i = *inter;
 		i->ph2Disengage(d_currentContender , disengaged);
@@ -119,7 +133,12 @@ void Duel::ph2Disengage_start() {
 	ph3PlayCard_start();
 }
 
-void Duel::ph3PlayCard_start() { 
+
+
+
+void Duel::ph3PlayCard_start() {
+	d_currentPhase = 3;
+
 	for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
 		(*inter)->ph3PlayCards_wait(d_currentContender);
 	}
@@ -127,44 +146,95 @@ void Duel::ph3PlayCard_start() {
 	// TODO
 }
 
-void Duel::chooseCard(const Card* c) { //! Beware of the fact c can be nullptr
+
+
+/* Note : c cannot be nullptr, since ph3_end() is supposed to be called in these cases instead */
+void Duel::chooseCard(const Card* c) {
+	if( !(d_currentPhase == 3 || d_currentPhase == 5) ) {
+		throw string("Duel::chooseCard has been called out of phase 3 or 5");
+		return;
+	}
+
+	/*
+	if(instanceof<Land>(c)) {
+		cout << "Un terrain !!" << endl;
+	}
+	else if(instanceof<Creature>(c)) {
+		cout << "Une créature !!" << endl;
+	}
+	*/
+	cout << "almost-instanceof test : " << std::is_base_of<Card, Land>::value << endl;
+
 	cout << "Received card in Duel : " << c << "\n";
 	// TODO
 }
+
+
+
 
 void Duel::ph3_end() {
 	// TODO
 }
 
+
+
+
 void Duel::ph4Fight_start() {
+	d_currentPhase = 4;
 	// TODO
 }
+
+
+
 
 void Duel::ph4Fight(Creature att, Contender c, std::list<Creature> def) {
 	// TODO
 }
 
+
+
+
 void Duel::ph4_end() {
 	// TODO
 }
 
+
+
+
 void Duel::ph5PlayCard_start() {
+	d_currentPhase = 5;
 	// TODO
 }
 
+
+
+
 // chooseCard is called again here
+
+
+
 
 void Duel::ph5_end() {
 	// TODO
 }
 
+
+
+
 void Duel::ph6Discard_start() {
+	d_currentPhase = 6;
 	// TODO
 }
+
+
+
 
 void Duel::ph6_end(std::list<const Card*> discarded) {
 	// TODO
 }
+
+
+
 
 void Duel::gameOver(Contender* winner) { //! winner can be nullptr if the game failed to begin
 	if(winner == nullptr) {

@@ -30,8 +30,9 @@ class Duel : public Duel_interface {
 
     // Members :
     private:
-        char d_currentPhase;
+        char d_currentPhase = 0;
         char d_remainingTurns;
+        bool d_hasUsedLand = false;
         std::vector<Contender> d_contenders = std::vector<Contender>();
         Contender* d_currentContender;
         std::vector<Interface_interface*>d_interfaces;
