@@ -10,7 +10,6 @@
 #include "../headers/Card.hpp"
 #include "../headers/Creature.hpp"
 #include "../headers/Land.hpp"
-#include "../headers/actions/FightHit.hpp"
 
 
 

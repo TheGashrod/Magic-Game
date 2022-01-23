@@ -15,7 +15,6 @@ class Interface_interface;
 class Player;
 class Card;
 class Creature;
-class FightHit;
 
 
 
@@ -36,7 +35,6 @@ class Duel : public Duel_interface {
         std::vector<Contender> d_contenders = std::vector<Contender>();
         Contender* d_currentContender;
         std::vector<Interface_interface*>d_interfaces;
-        std::vector<FightHit*> d_fightHitBuffer = std::vector<FightHit*>();
     
 
     // Constructors :
@@ -69,12 +67,9 @@ class Duel : public Duel_interface {
         char getPhase() const;
         unsigned char getRemainingTurns() const;
         const Contender* getCurrentContender() const;
-        const std::vector<FightHit> getFightHitBuffer() const;
 
         void setRemainingTurns(unsigned char nb);
         void addInterface(Interface_interface* i);
-        void addFightHitToBuffer(FightHit* fh);
-        void clearFightHitBuffer();
     
 
 
