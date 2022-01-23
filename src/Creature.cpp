@@ -46,11 +46,7 @@ void Creature::resetStats() {
 	c_toughness = c_toughnessDef;
 }
 
-unique_ptr<Card> Creature::clone() const {
-	Creature l = Creature(*this);
-	unique_ptr<Card> ptr = unique_ptr<Card>( &l );
-	return ptr;
-}
+bool Creature::isLand() const { return false; }
 
 
 // Methods :

@@ -1,9 +1,9 @@
 #include "../headers/Duel.hpp"
 
 
+#include <typeinfo>
 #include <vector>
 #include "../headers/tools/random.hpp"
-#include "../headers/tools/instanceof.hpp"
 
 #include "../headers/Interface.hpp"
 #include "../headers/Contender.hpp"
@@ -121,7 +121,7 @@ void Duel::ph2Disengage_start() {
 	}
 	
 	// Resetting right to set lands
-	d_hasUsedLand = false;
+	d_remainingLands = 1;
 
 	// Notifying interfaces
 	for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
@@ -154,15 +154,13 @@ void Duel::chooseCard(const Card* c) {
 		return;
 	}
 
-	/*
-	if(instanceof<Land>(c)) {
-		cout << "Un terrain !!" << endl;
+	
+	if(c->isLand()) {
+		if(d_remainingLands > 0)
+			throw string("[Error] Cannot add multiple lands to the game during the same turn");
+		else
+			d_remainingLands--;
 	}
-	else if(instanceof<Creature>(c)) {
-		cout << "Une créature !!" << endl;
-	}
-	*/
-	cout << "almost-instanceof test : " << std::is_base_of<Card, Land>::value << endl;
 
 	cout << "Received card in Duel : " << c << "\n";
 	// TODO

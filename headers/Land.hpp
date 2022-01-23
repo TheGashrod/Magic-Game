@@ -18,7 +18,7 @@ class Land : public Card {
 	Land(string name, Color color, bool isEngaged);
 
 	// Getters/setters
-	virtual std::unique_ptr<Card> clone() const;
+	virtual bool isLand() const;
 
 	virtual ostream& print(ostream& os) const;
 
