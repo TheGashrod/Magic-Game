@@ -13,6 +13,7 @@ src/Land.cpp \
 src/Creature.cpp \
 src/Contender.cpp \
 src/Player.cpp \
+src/AttackAction.cpp \
 src/enums/Color.cpp \
 src/consoleInterface/ConsoleInterface.cpp \
 src/test/testConsoleInterface.cpp \
