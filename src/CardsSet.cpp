@@ -23,22 +23,30 @@ vector<const Card*> CardsSet::getCardsSet() const {
 }
 void CardsSet::setCardsSet(vector<Card*> cardsSet){c_cardsSet = cardsSet;}
 
-vector<Card*>* CardsSet::getOriginalCardsSet() { return &c_cardsSet; }
+vector<Card*>* CardsSet::getOriginalCardsSet() { return & c_cardsSet; }
 
 
 // Methods :
-void CardsSet::transfer(const Card *c, CardsSet *cardsSetDestination){
+
+
+void CardsSet::push(Card *c){
+	c_cardsSet.push_back(c);
+}
+
+
+void CardsSet::transfer(Card *c, CardsSet *cardsSetDestination){
 	bool flag = false;
-	for (int i = 0; i< c_cardsSet.size(); i++){
+	for (int i = 0; i< int(c_cardsSet.size()); i++){
 		if ((c_cardsSet[i])->hasSameId(c)){
 			
     	cout << "Même ID" << "\n";
 			flag = true;
 			c_cardsSet.erase (c_cardsSet.begin()+i);
-			cardsSetDestination->getCardsSet().push_back(c);
+			cardsSetDestination->push(c);
 			break;
 		}
 		else{ continue;}
 	}
 	if (flag == false){ throw std::invalid_argument( "The given card doesn't exist on this cardsSet" ); }
 }
+

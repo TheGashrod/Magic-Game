@@ -41,6 +41,19 @@ int mainTest() {
 	
 	const Contender* con1Ptr = con1;
 
+	CardsSet l1 = CardsSet(std::vector<Card*>({c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2}));
+	CardsSet l2 = CardsSet(std::vector<Card*>({}));
+
+	std::cout << l1.getOriginalCardsSet()->size();
+
+	std::cout << l2.getOriginalCardsSet()->size();
+
+	l1.transfer(c1Ptr2, & l2);
+
+	std::cout << l1.getOriginalCardsSet()->size();
+
+	std::cout << l2.getOriginalCardsSet()->size();
+
 
 	inter.showText("showText works !!");
 	
