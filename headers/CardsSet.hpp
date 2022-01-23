@@ -30,7 +30,7 @@ class CardsSet {
 
 		// Methods :
 		void push(Card *c);
-		void transfer(Card *c, CardsSet *cardsSetDestination);
+		void transfer(const Card *c, CardsSet *cardsSetDestination);
 
 
 

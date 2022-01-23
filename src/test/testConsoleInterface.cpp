@@ -48,7 +48,7 @@ int mainTest() {
 
 	std::cout << l2.getOriginalCardsSet()->size();
 
-	l1.transfer(c1Ptr2, & l2);
+	//l1.transfer(c1Ptr2, & l2);
 
 	std::cout << l1.getOriginalCardsSet()->size();
 

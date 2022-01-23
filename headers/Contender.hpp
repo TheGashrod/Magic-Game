@@ -39,6 +39,11 @@ class Contender {
 		CardsSet getCemetary() const;
 		CardsSet getHand() const;
 		CardsSet getInGameCards() const;
+		CardsSet* getOriginalLibrary();
+		CardsSet* getOriginalCemetary();
+		CardsSet* getOriginalHand();
+		CardsSet* getOriginalInGameCards();
+		
 
 		// Setters :
 		void setVitality(int vita);

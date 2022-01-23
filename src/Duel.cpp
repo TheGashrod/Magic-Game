@@ -162,8 +162,17 @@ void Duel::chooseCard(const Card* c) {
 			d_remainingLands--;
 	}
 
-	cout << "Received card in Duel : " << c << "\n";
-	// TODO
+	// Effectively moving the card to the board
+	d_currentContender->getOriginalHand()->transfer(c, d_currentContender->getOriginalInGameCards() );
+
+
+	// Notifying interfaces again
+	if(d_currentPhase == 3)
+		for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++)
+			(*inter)->ph3PlayCards_wait(d_currentContender);
+	else if(d_currentPhase == 5)
+		for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++)
+			(*inter)->ph5PlayCards_wait(d_currentContender);
 }
 
 

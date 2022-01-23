@@ -23,6 +23,10 @@ CardsSet Contender::getLibrary() const { return c_library; }
 CardsSet Contender::getCemetary() const { return c_cemetary; }
 CardsSet Contender::getHand() const { return c_hand; }
 CardsSet Contender::getInGameCards() const { return c_inGameCards; }
+CardsSet* Contender::getOriginalLibrary() { return &c_library; }
+CardsSet* Contender::getOriginalCemetary() { return &c_cemetary; }
+CardsSet* Contender::getOriginalHand() { return &c_hand; }
+CardsSet* Contender::getOriginalInGameCards() { return &c_inGameCards; }
 
 // Setter :
 void Contender::setVitality(int vita) { c_vitality = vita; }
