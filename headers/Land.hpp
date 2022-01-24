@@ -15,12 +15,15 @@ class Land : public Card {
 	// None
 
 	// Constructors :
-	Land(string name, Color color, bool isEngaged);
+	public:
+		Land(string name, Color color, bool isEngaged);
+		virtual shared_ptr<Card> clone() const;
 
 	// Getters/setters
-	virtual bool isLand() const;
+	public:
+		virtual bool isLand() const;
 
-	virtual ostream& print(ostream& os) const;
+		virtual ostream& print(ostream& os) const;
 
 };
 

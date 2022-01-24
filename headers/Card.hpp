@@ -40,6 +40,7 @@ using namespace std;
     public:
         long getId() const;
         string getName() const;
+        std::list<Color> getColor() const;
         bool isEngaged() const;
         virtual bool isLand() const = 0;
 
