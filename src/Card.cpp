@@ -27,6 +27,7 @@ Card::~Card() {};
 // Getters/setters :
 long Card::getId() const { return c_id; }
 string Card::getName() const { return c_name; }
+std::list<Color> Card::getColor() const { return c_colors; }
 bool Card::isEngaged() const { return c_isEngaged; }
 
 void Card::engage() { c_isEngaged = true; }
