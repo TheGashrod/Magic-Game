@@ -33,10 +33,12 @@ using namespace std;
     public:
         Card(string name, std::list<Color> colors, bool isEngaged);
         ~Card();
+        virtual shared_ptr<Card> clone() const = 0;
 
 
     // Getters/setters :
     public:
+        long getId() const;
         string getName() const;
         bool isEngaged() const;
         virtual bool isLand() const = 0;

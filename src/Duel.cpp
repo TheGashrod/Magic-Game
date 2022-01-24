@@ -10,7 +10,6 @@
 #include "../headers/Card.hpp"
 #include "../headers/Creature.hpp"
 #include "../headers/Land.hpp"
-#include "../headers/actions/FightHit.hpp"
 
 
 
@@ -19,7 +18,7 @@ using std::size_t;
 
 
 /* --------------------------------------------------------------------------------------------------/
-                                        Constructeurs
+                                          Constructors
 / --------------------------------------------------------------------------------------------------*/
 
 
@@ -48,6 +47,16 @@ const vector<const Contender*> Duel::getContenders() const {
 }
 
 
+const Contender* Duel::getOtherContender() const {
+	for(auto con = d_contenders.begin(); con != d_contenders.end(); con++) {
+		if(&(*con) != d_currentContender) {
+			return &(*con);
+		}
+	}
+	throw string("No other Contender found in Duel instance");
+}
+
+
 void Duel::addInterface(Interface_interface* i) {
 	d_interfaces.push_back(i);
 }
@@ -67,6 +76,10 @@ void Duel::showTextInInterfaces(string t) {
                  Game phases and exchanges with interfaces
 / --------------------------------------------------------------------------------------------------*/
 void Duel::start() {
+	if(d_currentPhase != 0) { 
+		throw string("Duel::start has been called while the game was already started");
+		return;
+	}
 
 	
 	// Picking the starting player
@@ -86,7 +99,7 @@ void Duel::start() {
 		
 		for(int i = 0; i < MAX_CARDS_AMOUNT; i++) {
 			cout << "Drawing a card\n";
-			c->drawCard(); // TODO To check
+			c->drawCard();
 		}
 	}
 
@@ -164,6 +177,7 @@ void Duel::chooseCard(const Card* c) {
 
 	// Effectively moving the card to the board
 	d_currentContender->getOriginalHand()->transfer(c, d_currentContender->getOriginalInGameCards() );
+	d_currentContender->getOriginalInGameCards()->getCardById(c->getId())->engage();
 
 
 	// Notifying interfaces again
@@ -179,7 +193,11 @@ void Duel::chooseCard(const Card* c) {
 
 
 void Duel::ph3_end() {
-	// TODO
+	if(d_currentPhase != 3) { 
+		throw string("Duel::ph3_end has been called out of phase 3");
+		return;
+	}
+	ph4Fight_start();
 }
 
 
@@ -187,13 +205,20 @@ void Duel::ph3_end() {
 
 void Duel::ph4Fight_start() {
 	d_currentPhase = 4;
-	// TODO
+
+	for(Interface_interface* interface : d_interfaces) {
+		interface->ph4Fight_wait(d_currentContender, getOtherContender());
+	}
 }
 
 
 
 
-void Duel::ph4Fight(Creature att, Contender c, std::list<Creature> def) {
+void Duel::ph4Fight(const Creature* att, std::vector<const Creature*> def) {
+	if(d_currentPhase != 4) { 
+		throw string("Duel::ph4Fight has been called out of phase 4");
+		return;
+	}
 	// TODO
 }
 
@@ -201,6 +226,10 @@ void Duel::ph4Fight(Creature att, Contender c, std::list<Creature> def) {
 
 
 void Duel::ph4_end() {
+	if(d_currentPhase != 4) { 
+		throw string("Duel::end has been called out of phase 4");
+		return;
+	}
 	// TODO
 }
 
@@ -221,6 +250,10 @@ void Duel::ph5PlayCard_start() {
 
 
 void Duel::ph5_end() {
+	if(d_currentPhase != 5) { 
+		throw string("Duel::ph5_end has been called out of phase 5");
+		return;
+	}
 	// TODO
 }
 
@@ -235,11 +268,19 @@ void Duel::ph6Discard_start() {
 
 
 
-void Duel::ph6_end(std::list<const Card*> discarded) {
+void Duel::ph6_end(std::vector<const Card*> discarded) {
+	if(d_currentPhase != 6) { 
+		throw string("Duel::ph6_end has been called out of phase 6");
+		return;
+	}
 	// TODO
 }
 
 
+
+/* --------------------------------------------------------------------------------------------------/
+                                         Other methods
+/ --------------------------------------------------------------------------------------------------*/
 
 
 void Duel::gameOver(Contender* winner) { //! winner can be nullptr if the game failed to begin
