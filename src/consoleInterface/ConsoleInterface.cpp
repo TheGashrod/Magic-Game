@@ -13,6 +13,7 @@
 using std::cout;
 using std::endl;
 using std::size_t;
+using std::string;
 using std::vector;
 
 
@@ -66,11 +67,18 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
 }
 
 void ConsoleInterface::ph4Fight_wait(const Contender* att, const Contender* def) {
-    cout << endl << "Do you want to attack your opponent ?" << endl;
-    // TODO : Do you want to attack ?
-    cout << endl << "Pick your attacking creature." << endl;
-    const Creature* attCreature = pickACreature( att->getHand().getCreatures() );
-    // TODO
+    cout << endl << "Do you want to attack " << def->getPlayer().getName() << " ?";
+    bool isAttacking = pickYesOrNo();
+    
+    if(isAttacking) {
+
+        cout << endl << "Pick your attacking creature." << endl;
+        const Creature* attCreature = pickACreature( att->getHand().getCreatures() );
+        cout << endl << "Action from " << def->getPlayer().getName() << endl;
+        
+    }
+    else
+        i_duel->ph4_end();
 }
 
 void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
@@ -161,4 +169,14 @@ const Creature* ConsoleInterface::pickACreature(vector<const Creature*> cards) c
     } while(choice == 0 || choice > cards.size());
 
     return cards.at(choice-1);
+}
+
+
+bool ConsoleInterface::pickYesOrNo() const {
+    bool answer;
+    
+    cout << "\nYour answer (1 for yes, 0 for no) : ";
+    cin >> answer;;
+
+    return answer;
 }

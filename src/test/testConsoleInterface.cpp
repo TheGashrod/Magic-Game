@@ -78,6 +78,9 @@ int mainTest() {
 	*/
 
 	d.showTextInInterfaces("showTextInInterfaces works too !\n");
+
+	cout << "Other player : " << d.getOtherContender()->getPlayer().getName() << endl;
+
 	d.start();
 
 	

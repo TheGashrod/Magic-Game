@@ -48,9 +48,9 @@ const vector<const Contender*> Duel::getContenders() const {
 
 
 const Contender* Duel::getOtherContender() const {
-	for(auto contender : d_contenders) {
-		if(&contender != d_currentContender) {
-			return &contender;
+	for(auto con = d_contenders.begin(); con != d_contenders.end(); con++) {
+		if(&(*con) != d_currentContender) {
+			return &(*con);
 		}
 	}
 	throw string("No other Contender found in Duel instance");
@@ -208,7 +208,6 @@ void Duel::ph4Fight_start() {
 	for(Interface_interface* interface : d_interfaces) {
 		interface->ph4Fight_wait(d_currentContender, getOtherContender());
 	}
-	// TODO
 }
 
 
