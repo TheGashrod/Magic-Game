@@ -25,6 +25,12 @@ class FightCreature {
 		int c_overtoughness;
 	
 
+	// Constructors :
+	public:
+		FightCreature(Creature* c, bool isAttacker);
+
+
+
 	// Getters & setters
 	public:
 		const Creature* getCreature() const;
@@ -62,6 +68,13 @@ class AttackAction {
 		//std::vector<tuple<Ability*, long>> a_appliedAbilities; // TODO : Decomment when Ability is released
 	
 
+
+	// Constructors :
+	public:
+		AttackAction(Contender* orderer, Contender* victim, Creature* attacker);
+
+
+
 	// Getters & setters
 	public:
 		const Contender* getAttacker() const;
@@ -71,6 +84,8 @@ class AttackAction {
 		//std::vector<const Ability*> getAbilities() const; // TODO : Decomment when Ability is released
 
 		void addFightCreature(FightCreature fc);
+	private:
+		void clearFightCreatures();
 
 
 
