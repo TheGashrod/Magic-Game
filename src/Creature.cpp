@@ -32,6 +32,7 @@ stat Creature::getPower() const { return c_power; }
 stat Creature::getPowerDefault() const { return c_powerDef; }
 stat Creature::getToughness() const { return c_toughness; }
 stat Creature::getToughnessDefault() const { return c_toughnessDef; }
+bool Creature::isAlive() const { return c_toughness > 0; }
 
 void Creature::setPowerDefault(stat val) { c_powerDef = val; }
 void Creature::setToughnessDefault(stat val) { c_toughnessDef = val; }

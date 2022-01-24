@@ -34,6 +34,7 @@ class FightCreature {
 	// Getters & setters
 	public:
 		const Creature* getCreature() const;
+		Creature* getOriginalCreature();
 		bool isAttacker() const;
 		bool isEngaged() const;
 		int getOverstrength() const;
@@ -80,12 +81,12 @@ class AttackAction {
 		const Contender* getAttacker() const;
 		const Contender* getVictim() const;
 		std::vector<FightCreature>* getOriginalCreatures();
+		bool isAnyAttackCreatureAlive() const;
+		FightCreature* getOriginalAttackCreature();
 		//std::vector<tuple<Ability*, long>>* getOriginalAbilities(); // TODO : Decomment when Ability is released
 		//std::vector<const Ability*> getAbilities() const; // TODO : Decomment when Ability is released
 
 		void addFightCreature(FightCreature fc);
-	private:
-		void clearFightCreatures();
 
 
 
@@ -93,6 +94,8 @@ class AttackAction {
 	// Methods :
 	public:
 		void execute();
+	private:
+
 
 };
 

@@ -52,6 +52,7 @@ class Creature : public Card {
 		stat getPowerDefault() const;
 		stat getToughness() const;
 		stat getToughnessDefault() const;
+		bool isAlive() const;
 
 		void setPowerDefault(stat val);
 		void setToughnessDefault(stat val);
