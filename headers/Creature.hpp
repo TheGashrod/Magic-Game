@@ -32,6 +32,8 @@ class Creature : public Card {
 
 		~Creature();
 
+		virtual shared_ptr<Card> clone() const;
+
 
 	// Getters/setters
 	public:
@@ -52,6 +54,7 @@ class Creature : public Card {
 		stat getPowerDefault() const;
 		stat getToughness() const;
 		stat getToughnessDefault() const;
+		bool isAlive() const;
 
 		void setPowerDefault(stat val);
 		void setToughnessDefault(stat val);

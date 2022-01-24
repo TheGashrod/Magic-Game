@@ -3,9 +3,14 @@
 
 
 
-#include "../headers/Card.hpp"
-
 #include <vector>
+#include <iostream>
+
+
+#include "../headers/Card.hpp"
+class Creature;
+class Land;
+
 
 using std::vector;
 
@@ -24,22 +29,24 @@ class CardsSet {
 		// Getter & Setter :
 		vector<const Card*> getCardsSet() const;
 		void setCardsSet(vector<Card* > cardsSet);
-
-		vector<Card*> * getOriginalCardsSet();
+		CardsSet getDisengaged() const;
+		std::vector<const Creature*> getCreatures() const;
+		std::vector<const Land*> getLands() const;
+		std::vector<Creature*> getOriginalCreatures();
+		std::vector<Land*> getOriginalLands();
+		vector<Card*>* getOriginalCardsSet();
+		Card* getCardById(long id);
 		
 
 		// Methods :
 		void push(Card *c);
 		void transfer(const Card *c, CardsSet *cardsSetDestination);
-
-
-
-
-
-
-
+		ostream& print(ostream& os) const;
 
 };
+
+
+ostream& operator<<(ostream& os, const CardsSet cs);
 
 
 

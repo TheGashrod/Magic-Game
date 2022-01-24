@@ -25,6 +25,7 @@ Card::~Card() {};
 
 
 // Getters/setters :
+long Card::getId() const { return c_id; }
 string Card::getName() const { return c_name; }
 bool Card::isEngaged() const { return c_isEngaged; }
 
