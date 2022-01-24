@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <list>
+#include <memory>
 
 
 #include "../../headers/consoleInterface/ConsoleInterface.hpp"
@@ -17,6 +18,9 @@ int mainTest() {
 
 	Creature c1 = Creature("Démon de Pagaille", std::list<Color>({Blue, Red}), false, std::list<Color>({Red, Red}), 1, 3, 3);
 	Creature c2 = Creature("The purple scare", std::list<Color>({Black}), false, std::list<Color>({Red, Blue}), 0, 2, 3);
+
+	shared_ptr<Card> c1clone = c1.clone();
+	cout << "ID of c1 :  " << c1.getId() << " ; ID of c1Clone : " << (*c1clone).getId() << endl;
 
 
 	Card* c1Ptr2 = &c1;

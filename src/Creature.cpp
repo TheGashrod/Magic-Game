@@ -23,6 +23,11 @@ stat powerDefault, stat toughnessDefault)
 
 Creature::~Creature() { };
 
+shared_ptr<Card> Creature::clone() const {
+	Creature c = Creature(c_name, c_colors, isEngaged(), getColorCost(), getAnyCost(), c_powerDef, c_toughnessDef);
+	return std::make_shared<Creature>(c);
+}
+
 
 // Getters/setters :
 tuple<int, std::list<Color>> Creature::getCost() const { return tuple<int, std::list<Color>>(c_cost); }

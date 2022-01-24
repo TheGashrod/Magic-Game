@@ -32,6 +32,8 @@ class Creature : public Card {
 
 		~Creature();
 
+		virtual shared_ptr<Card> clone() const;
+
 
 	// Getters/setters
 	public:
