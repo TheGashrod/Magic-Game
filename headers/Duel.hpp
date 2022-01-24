@@ -52,13 +52,13 @@ class Duel : public Duel_interface {
     public: virtual void chooseCard(const Card* c);
     public: virtual void ph3_end();
     private: virtual void ph4Fight_start();
-    public: virtual void ph4Fight(Creature att, Contender c, std::list<Creature> def);
+    public: virtual void ph4Fight(const Creature* att, std::vector<const Creature*> def);
     public: virtual void ph4_end();
     private: virtual void ph5PlayCard_start();
     // chooseCard is called again here
     public: virtual void ph5_end();
     private: virtual void ph6Discard_start();
-    public: virtual void ph6_end(std::list<const Card*> discarded);
+    public: virtual void ph6_end(std::vector<const Card*> discarded);
     private: void gameOver(Contender* winner);
 
 

@@ -37,6 +37,7 @@ using namespace std;
 
     // Getters/setters :
     public:
+        long getId() const;
         string getName() const;
         bool isEngaged() const;
         virtual bool isLand() const = 0;

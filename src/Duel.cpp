@@ -177,6 +177,7 @@ void Duel::chooseCard(const Card* c) {
 
 	// Effectively moving the card to the board
 	d_currentContender->getOriginalHand()->transfer(c, d_currentContender->getOriginalInGameCards() );
+	d_currentContender->getOriginalInGameCards()->getCardById(c->getId())->engage();
 
 
 	// Notifying interfaces again
@@ -213,7 +214,7 @@ void Duel::ph4Fight_start() {
 
 
 
-void Duel::ph4Fight(Creature att, Contender c, std::list<Creature> def) {
+void Duel::ph4Fight(const Creature* att, std::vector<const Creature*> def) {
 	if(d_currentPhase != 4) { 
 		throw string("Duel::ph4Fight has been called out of phase 4");
 		return;
@@ -267,7 +268,7 @@ void Duel::ph6Discard_start() {
 
 
 
-void Duel::ph6_end(std::list<const Card*> discarded) {
+void Duel::ph6_end(std::vector<const Card*> discarded) {
 	if(d_currentPhase != 6) { 
 		throw string("Duel::ph6_end has been called out of phase 6");
 		return;

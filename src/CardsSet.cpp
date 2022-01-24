@@ -32,7 +32,18 @@ vector<const Card*> CardsSet::getCardsSet() const {
 	}
 	return cards;
 }
-void CardsSet::setCardsSet(vector<Card*> cardsSet){c_cardsSet = cardsSet;}
+
+
+CardsSet CardsSet::getDisengaged() const {
+	vector<Card*> cards = vector<Card*>();
+	for(auto c = c_cardsSet.begin(); c != c_cardsSet.end(); c++) {
+		if( !(*c)->isEngaged() ) {
+			cards.push_back( (*c) );
+		}
+	}
+	return cards;
+}
+
 
 vector<Card*>* CardsSet::getOriginalCardsSet() { return & c_cardsSet; }
 
@@ -46,6 +57,7 @@ vector<const Creature*> CardsSet::getCreatures() const {
 	}
 	return cards;	
 }
+
 
 vector<const Land*> CardsSet::getLands() const {
 	vector<const Land*> cards = vector<const Land*>();
@@ -68,6 +80,7 @@ std::vector<Creature*> CardsSet::getOriginalCreatures() {
 	return cards;	
 }
 
+
 std::vector<Land*> CardsSet::getOriginalLands() {
 	vector<Land*> cards = vector<Land*>();
 	for(Card* c : c_cardsSet) {
@@ -78,11 +91,23 @@ std::vector<Land*> CardsSet::getOriginalLands() {
 	return cards;	
 }
 
+
+
+Card* CardsSet::getCardById(long id) {
+	bool flag = false;
+	for (int i = 0; i< int(c_cardsSet.size()); i++) {
+		if ((c_cardsSet[i])->getId() == id)
+			return c_cardsSet[i];
+	}
+	throw std::invalid_argument( "The given card doesn't exist on this cardsSet" );
+}
+
 /* --------------------------------------------------------------------------------------------------/
                                              Setters
 / --------------------------------------------------------------------------------------------------*/
 
 
+void CardsSet::setCardsSet(vector<Card*> cardsSet) { c_cardsSet = cardsSet; }
 
 
 /* --------------------------------------------------------------------------------------------------/
@@ -100,14 +125,26 @@ void CardsSet::transfer(const Card *c, CardsSet *cardsSetDestination){
 	for (int i = 0; i< int(c_cardsSet.size()); i++){
 		if ((c_cardsSet[i])->hasSameId(c)){
 			
-    	cout << "Même ID" << "\n";
 			flag = true;
 			cardsSetDestination->push(c_cardsSet[i]);
 			c_cardsSet.erase (c_cardsSet.begin()+i);
-			break;
+			return;
 		}
-		else{ continue;}
 	}
-	if (flag == false){ throw std::invalid_argument( "The given card doesn't exist on this cardsSet" ); }
+	throw std::invalid_argument( "The given card doesn't exist on this cardsSet" );
 }
 
+
+
+ostream& CardsSet::print(ostream& os) const {
+	os << "CARDSSET" << endl;
+	for(auto c = c_cardsSet.begin(); c != c_cardsSet.end(); c++) {
+		os << "| " << (*c) << endl;
+	}
+}
+
+
+
+ostream& operator<<(ostream& os, const CardsSet cs) {
+	return cs.print(os);
+}
