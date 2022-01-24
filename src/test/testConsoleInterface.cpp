@@ -92,6 +92,8 @@ int mainTest() {
 	cout << "Other player : " << d.getOtherContender()->getPlayer().getName() << endl;
 
 	d.start();
+	d.ph1Draw_start();
+	d.ph6Discard_start();
 
 	
 }
