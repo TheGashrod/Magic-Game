@@ -3,6 +3,7 @@
 
 
 
+#include <memory>
 
 
 #include "CardsSet.hpp"
@@ -18,7 +19,7 @@ class Contender {
 	private :
 		Player c_player;
 		int c_vitality;
-		vector<Card*> c_cards = vector<Card*>();
+		vector<shared_ptr<Card>> c_cards = vector<shared_ptr<Card>>();
 		CardsSet c_library;
 		CardsSet c_cemetary;
 		CardsSet c_hand;

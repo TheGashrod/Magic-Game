@@ -16,18 +16,22 @@ Contender::Contender (Player p, int vita, CardsSet deck):
 	c_player(p), c_vitality(vita), c_library({}), c_cemetary({}), c_inGameCards({}), c_hand({})
 {
 	cout << "Contender constructor 1" << endl;
-	vector<shared_ptr<Card>> newCards = vector<shared_ptr<Card>>();
+	vector<Card*> newCards = vector<Card*>();
 	cout << "Contender constructor 1.2" << endl;
 	cout << deck << endl;
 	for(auto card = deck.getOriginalCardsSet()->begin() ; card != deck.getOriginalCardsSet()->end(); card++) {
 		cout << "Contender constructor 1.3" << endl;
 		shared_ptr<Card> cPtr = (*card)->clone();
 		cout << "Contender constructor 1.4" << endl;
-		newCards.push_back( cPtr );
+		c_cards.push_back( cPtr );
+		newCards.push_back( c_cards.at(c_cards.size()-1).get() );
+		//newCards.push_back( cPtr.get() );
 	}
 	cout << "Contender constructor 2" << endl;
 	//c_library = CardsSet(std::vector<Card*>()); //TODO
-	c_library = CardsSet(deck);
+	CardsSet cs = CardsSet(newCards);
+	cout << cs << endl;
+	c_library = cs;
 	cout << "Contender constructor 3" << endl;
 }
 
