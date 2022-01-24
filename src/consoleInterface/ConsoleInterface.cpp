@@ -13,7 +13,12 @@
 using std::cout;
 using std::endl;
 using std::size_t;
+using std::vector;
 
+
+/* --------------------------------------------------------------------------------------------------/
+                                          Constructors
+/ --------------------------------------------------------------------------------------------------*/
 
 
 ConsoleInterface::ConsoleInterface(Duel* d) : i_duel(d) {
@@ -22,6 +27,9 @@ ConsoleInterface::ConsoleInterface(Duel* d) : i_duel(d) {
 
 
 
+/* --------------------------------------------------------------------------------------------------/
+                                       Duel listeners
+/ --------------------------------------------------------------------------------------------------*/
 
 void ConsoleInterface::showText(std::string t) {
     cout << t << endl;
@@ -58,6 +66,10 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
 }
 
 void ConsoleInterface::ph4Fight_wait(const Contender* att, const Contender* def) {
+    cout << endl << "Do you want to attack your opponent ?" << endl;
+    // TODO : Do you want to attack ?
+    cout << endl << "Pick your attacking creature." << endl;
+    const Creature* attCreature = pickACreature( att->getHand().getCreatures() );
     // TODO
 }
 
@@ -77,6 +89,13 @@ void ConsoleInterface::ph6Discard_wait(const Contender* con, size_t nbToDiscard)
     // TODO
 }
 
+
+
+
+
+/* --------------------------------------------------------------------------------------------------/
+                                          User actions
+/ --------------------------------------------------------------------------------------------------*/
 
 
 /**
@@ -114,6 +133,24 @@ const Card* ConsoleInterface::pickACard(std::vector<const Card*> cards) const {
 
     do {
         cout << "Pick a card among these (type the number) :\n";
+        size_t k = 1;
+        for(auto i = cards.begin(); i != cards.end(); i++) {
+            cout << k << ". " << *i << endl;
+            k++;
+        }
+        cout << "Your choice : ";
+        cin >> choice;
+    } while(choice == 0 || choice > cards.size());
+
+    return cards.at(choice-1);
+}
+
+
+const Creature* ConsoleInterface::pickACreature(vector<const Creature*> cards) const {
+    size_t choice;
+
+    do {
+        cout << "Pick a creature among these (type the number) :\n";
         size_t k = 1;
         for(auto i = cards.begin(); i != cards.end(); i++) {
             cout << k << ". " << *i << endl;

@@ -2,18 +2,29 @@
 #include "../headers/CardsSet.hpp"
 
 
+
+#include "../headers/Creature.hpp"
+#include "../headers/Land.hpp"
+
+
 #include <stdexcept>
 #include <vector>
 
 using std::vector;
 
 
-// Constructors :
+/* --------------------------------------------------------------------------------------------------/
+                                         Constructors
+/ --------------------------------------------------------------------------------------------------*/
 CardsSet::CardsSet (vector<Card *> cardsSet) : c_cardsSet(cardsSet){};
 CardsSet::~CardsSet(){};
 
 
-// Getter & Setter :
+
+/* --------------------------------------------------------------------------------------------------/
+                                             Getters
+/ --------------------------------------------------------------------------------------------------*/
+
 vector<const Card*> CardsSet::getCardsSet() const { 
 	vector<const Card*> cards = vector<const Card*>();
 	for(auto c = c_cardsSet.begin(); c != c_cardsSet.end(); c++) {
@@ -26,7 +37,57 @@ void CardsSet::setCardsSet(vector<Card*> cardsSet){c_cardsSet = cardsSet;}
 vector<Card*>* CardsSet::getOriginalCardsSet() { return & c_cardsSet; }
 
 
-// Methods :
+vector<const Creature*> CardsSet::getCreatures() const {
+	vector<const Creature*> cards = vector<const Creature*>();
+	for(Card* c : c_cardsSet) {
+		if (Creature* card = dynamic_cast<Creature*>(c) ) {
+        cards.push_back(card);
+   	}
+	}
+	return cards;	
+}
+
+vector<const Land*> CardsSet::getLands() const {
+	vector<const Land*> cards = vector<const Land*>();
+	for(Card* c : c_cardsSet) {
+		if (Land* card = dynamic_cast<Land*>(c) ) {
+        cards.push_back(card);
+   	}
+	}
+	return cards;	
+}
+
+
+std::vector<Creature*> CardsSet::getOriginalCreatures() {
+	vector<Creature*> cards = vector<Creature*>();
+	for(Card* c : c_cardsSet) {
+		if ( Creature* card = dynamic_cast<Creature*>(c) ) {
+        cards.push_back(card);
+   	}
+	}
+	return cards;	
+}
+
+std::vector<Land*> CardsSet::getOriginalLands() {
+	vector<Land*> cards = vector<Land*>();
+	for(Card* c : c_cardsSet) {
+		if ( Land* card = dynamic_cast<Land*>(c) ) {
+        cards.push_back(card);
+   	}
+	}
+	return cards;	
+}
+
+/* --------------------------------------------------------------------------------------------------/
+                                             Setters
+/ --------------------------------------------------------------------------------------------------*/
+
+
+
+
+/* --------------------------------------------------------------------------------------------------/
+                                           Methods
+/ --------------------------------------------------------------------------------------------------*/
 
 
 void CardsSet::push(Card *c){

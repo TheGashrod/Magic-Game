@@ -10,6 +10,7 @@
 
 
 class Duel;
+class Creature;
 
 
 
@@ -39,6 +40,7 @@ class ConsoleInterface : public Interface_interface {
 	private:
 		const Card* pickACard_option(std::vector<const Card*> cards) const;
 		const Card* pickACard(std::vector<const Card*> cards) const;
+		const Creature* pickACreature(std::vector<const Creature*> cards) const;
 
 
 
