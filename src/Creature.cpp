@@ -24,8 +24,12 @@ stat powerDefault, stat toughnessDefault)
 Creature::~Creature() { };
 
 shared_ptr<Card> Creature::clone() const {
+	cout << "Creature copy constructor 1" << endl;
 	Creature c = Creature(c_name, getColor(), isEngaged(), getColorCost(), getAnyCost(), c_powerDef, c_toughnessDef);
-	return std::make_shared<Creature>(c);
+	cout << "Creature copy constructor 2" << endl;
+	shared_ptr<Card> ptr = std::make_shared<Creature>(c);
+	cout << "Creature copy constructor 3" << endl;
+	return ptr;
 }
 
 
