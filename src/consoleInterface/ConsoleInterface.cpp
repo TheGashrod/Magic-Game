@@ -38,7 +38,7 @@ void ConsoleInterface::showText(std::string t) {
 
 
 void ConsoleInterface::ph1DrawnCard(const Contender* con, const Card* card) {
-    cout << endl << "Vous piochez une carte : \n" << card << "\n";
+    cout << endl << "Vous draw a card : \n" << card << "\n";
 }
 
 void ConsoleInterface::ph2Disengage(const Contender* con, const std::list<const Card*> c) {
