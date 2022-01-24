@@ -154,8 +154,6 @@ void Duel::ph3PlayCard_start() {
 	for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
 		(*inter)->ph3PlayCards_wait(d_currentContender);
 	}
-	
-	// TODO
 }
 
 
