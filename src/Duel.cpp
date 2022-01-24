@@ -47,6 +47,13 @@ const vector<const Contender*> Duel::getContenders() const {
 }
 
 
+unsigned char Duel::getRemainingTurns() const{ return d_remainingTurns;}
+
+void Duel::setRemainingTurns(unsigned char nb){
+	d_remainingTurns = nb;
+}
+
+
 const Contender* Duel::getOtherContender() const {
 	for(auto con = d_contenders.begin(); con != d_contenders.end(); con++) {
 		if(&(*con) != d_currentContender) {
@@ -113,8 +120,17 @@ void Duel::start() {
 void Duel::ph1Draw_start() {
 	d_currentPhase = 1;
 
-	// TODO : Check whether the player has any card
-	// TODO
+	if ((d_currentContender->getOriginalLibrary()->getOriginalCardsSet())->size() == 0 ){gameOver(nullptr);}
+	else{ const Card * c = d_currentContender->drawCard();
+
+		// Notifying interfaces
+		for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
+			Interface_interface* i = *inter;
+			i->ph1DrawnCard(d_currentContender, c);
+		}
+
+		ph2Disengage_start();
+	}
 }
 
 void Duel::ph2Disengage_start() {
@@ -154,8 +170,6 @@ void Duel::ph3PlayCard_start() {
 	for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
 		(*inter)->ph3PlayCards_wait(d_currentContender);
 	}
-	
-	// TODO
 }
 
 
@@ -258,11 +272,16 @@ void Duel::ph5_end() {
 }
 
 
-
-
 void Duel::ph6Discard_start() {
 	d_currentPhase = 6;
-	// TODO
+	// TODO verif que le jour à moins de 7 cartes sinon calculer cmb il a en plus, l'envoyer à l'interface...
+	// puis passer à phase6end depuis l'interface
+	int n = (d_currentContender->getOriginalHand()->getOriginalCardsSet())->size();
+	if (n>7){
+		for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
+			(*inter)->ph6Discard_wait(d_currentContender, (n-7));
+		}
+	}else{ph6_end({});}
 }
 
 
@@ -273,7 +292,24 @@ void Duel::ph6_end(std::vector<const Card*> discarded) {
 		throw string("Duel::ph6_end has been called out of phase 6");
 		return;
 	}
-	// TODO
+
+	// Transfer the discarded cards to the cimetery
+	
+
+
+	// Check if the Current contender still have some remaining turns and give the Other contender the hand to play if not
+	if((getRemainingTurns()-1) > 0){
+		setRemainingTurns(getRemainingTurns()-1);
+		ph1Draw_start();
+	}else{ 
+		for(auto con = d_contenders.begin(); con != d_contenders.end(); con++) {
+			if(&(*con) != d_currentContender) {
+				d_currentContender = &(*con);
+			}
+		}
+		ph1Draw_start();
+	}
+
 }
 
 

@@ -12,6 +12,14 @@ Land::Land (string name, Color color, bool isEngaged)
 }
 
 
+shared_ptr<Card> Land::clone() const {
+	Land l = Land(getName(), *getColor().begin(), isEngaged());
+	return std::make_shared<Land>(l);
+}
+
+
+
+
 bool Land::isLand() const {
 	return true;
 }
