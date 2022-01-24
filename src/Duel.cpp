@@ -113,8 +113,17 @@ void Duel::start() {
 void Duel::ph1Draw_start() {
 	d_currentPhase = 1;
 
-	// TODO : Check whether the player has any card
-	// TODO
+	if ((d_currentContender->getOriginalLibrary()->getOriginalCardsSet())->size() == 0 ){gameOver(nullptr);}
+	else{ const Card * c = d_currentContender->drawCard();
+
+		// Notifying interfaces
+		for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
+			Interface_interface* i = *inter;
+			i->ph1DrawnCard(d_currentContender, c);
+		}
+
+		ph2Disengage_start();
+	}
 }
 
 void Duel::ph2Disengage_start() {

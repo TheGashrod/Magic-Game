@@ -34,7 +34,9 @@ int Contender::damageBy(stat hp) { c_vitality = std::max(0, c_vitality - hp); }
 
 
 // Methods :
-void Contender::drawCard(){
-	c_library.transfer( c_library.getOriginalCardsSet()->at( randInt(c_library.getOriginalCardsSet()->size()) ), & c_hand);
+const Card * Contender::drawCard() {
+	const Card * c = c_library.getOriginalCardsSet()->at( randInt(c_library.getOriginalCardsSet()->size()) );
+	c_library.transfer( c, & c_hand);
+	return c;
 };
 

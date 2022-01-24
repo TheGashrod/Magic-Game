@@ -4,7 +4,7 @@
 
 
 
-
+#include "Card.hpp"
 #include "CardsSet.hpp"
 #include "Player.hpp"
 
@@ -49,7 +49,7 @@ class Contender {
 		void setVitality(int vita);
 
 		// Methods :
-		void drawCard();
+		const Card * drawCard();
 
 
 
