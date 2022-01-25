@@ -23,12 +23,35 @@ int mainTest() {
 	
 
 	Creature c1 = Creature("Démon de Pagaille", std::list<Color>({Blue, Red}), false, std::list<Color>({Red, Red}), 1, 3, 3);
-	Creature c2 = Creature("The purple scare", std::list<Color>({Black}), false, std::list<Color>({Red, Blue}), 0, 2, 3);
+	Creature c2 = Creature("The purple scare", std::list<Color>({White}), false, std::list<Color>({Black, Red, Black}), 0, 2, 3);
 
 	
 
 	Land la1 = Land("Terres désolées", Red, false);
+	Land la12 = Land(la1);
+	Land la2 = Land("Une boîte noire", Black, false);
 
+	auto a =  la1.clone();
+
+	if(c1.isFittingCosts( vector<Land>({la1, la1.duplicateLand()}), vector<Land>({la1.cloneLand()}) ) != false)
+		cout << "ERROR_MTG : isFittingCosts with c1;<[la1, la1'], la1> test should be false because the same element is input twice" << endl;
+
+	if(c1.isFittingCosts( vector<Land>({la1, la1.cloneLand()}), vector<Land>({la1.cloneLand()}) ) != true)
+		cout << "ERROR_MTG : isFittingCosts with c1;<[la1, la1'], la1''> test should be true" << endl;
+	
+	if(c2.isFittingCosts( vector<Land>({la1, la1.cloneLand(), la1.cloneLand()}), vector<Land>({}) ) != false)
+		cout << "ERROR_MTG : isFittingCosts with c2;<[la1, la1', la1''], []> test should be false because unmatching colors" << endl;
+	
+	if(c2.isFittingCosts( vector<Land>({la1, la2.cloneLand(), la2}), vector<Land>({}) ) != true)
+		cout << "ERROR_MTG : isFittingCosts with c2;<[la1, la2', la2], []> test should be true" << endl;
+	
+	
+
+	cout << "Color creature : " << *c1.getColorCost().begin() << endl;
+	cout << "Color land : " << *la1.getColor().begin() << endl;
+
+
+	cout << la1 << endl;
 	
 
 	shared_ptr<Card> c1clone = c1.clone();
@@ -54,9 +77,13 @@ int mainTest() {
 
 	Player p1 = Player("J1", CardsSet(std::vector<Card*>({c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2})));
 	Player p2 = Player("J2", CardsSet(std::vector<Card*>({c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2})));
+	Player p3 = Player("J3", CardsSet(std::vector<Card*>({&la1, &la1, &la1, &la2, &la2, &la2, &la2, &la2, &la2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2})));
 
 	Duel d = Duel(p1, p2);
 	ConsoleInterface inter = ConsoleInterface(&d);
+
+
+	inter.pickALand_option( p3.getDeck().getLands() );
 
 
 	const Contender* con1 = d.getContenders().at(0);
@@ -106,7 +133,7 @@ int mainTest() {
 
 	cout << "Other player : " << d.getOtherContender()->getPlayer().getName() << endl;
 
-	d.start();
+	//d.start();
 	//d.ph1Draw_start();
 	//d.ph6Discard_start();
 

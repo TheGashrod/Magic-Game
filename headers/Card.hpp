@@ -28,7 +28,7 @@ using namespace std;
         const std::list<Color> c_colors;
 
     // Constructors :
-    private:
+    protected:
         Card(unsigned long id, string name, std::list<Color> colors, bool isEngaged);
     public:
         Card(string name, std::list<Color> colors, bool isEngaged);

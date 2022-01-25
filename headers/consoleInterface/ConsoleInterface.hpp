@@ -12,7 +12,7 @@
 
 class Duel;
 class Creature;
-
+class Land;
 
 
 class ConsoleInterface : public Interface_interface {
@@ -43,6 +43,8 @@ class ConsoleInterface : public Interface_interface {
 		const Card* pickACard(std::vector<const Card*> cards) const;
 		const Creature* pickACreature(std::vector<const Creature*> cards) const;
 		const Creature* pickACreature_option(std::vector<const Creature*> cards) const;
+		const Land* pickALand(std::vector<const Land*> cards) const;
+		const Land* pickALand_option(std::vector<const Land*> cards) const;
 		bool pickYesOrNo() const;
 		void contenderGameVision(); 
 

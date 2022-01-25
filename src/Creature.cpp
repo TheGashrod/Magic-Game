@@ -5,10 +5,12 @@
 #include <tuple>
 
 #include "../headers/Contender.hpp"
+#include "../headers/Land.hpp"
 
 
 
 using std::endl;
+using std::size_t;
 using std::tuple;
 using std::unique_ptr;
 
@@ -24,11 +26,8 @@ stat powerDefault, stat toughnessDefault)
 Creature::~Creature() { };
 
 shared_ptr<Card> Creature::clone() const {
-	cout << "Creature copy constructor 1" << endl;
 	Creature c = Creature(c_name, getColor(), isEngaged(), getColorCost(), getAnyCost(), c_powerDef, c_toughnessDef);
-	cout << "Creature copy constructor 2" << endl;
 	shared_ptr<Card> ptr = std::make_shared<Creature>(c);
-	cout << "Creature copy constructor 3" << endl;
 	return ptr;
 }
 
@@ -73,10 +72,63 @@ int Creature::dealDamageTo(Contender* c) const {
 
 int Creature::receiveDamageFrom(Creature* c) {
 	stat damage = std::min( c->getPower() , this->getToughness() );
-	cout << "Damage : " << (int) damage << endl;
 	this->damageBy( damage );
 	c->usePower( damage );
 	return damage;
+}
+
+
+bool Creature::isFittingCosts(vector<Land> specificCost, vector<Land> anyCost) const {
+	
+
+	// Checking whether each Land is unique :
+	vector<Land> allLands = vector<Land>();
+	for(auto land = specificCost.begin(); land != specificCost.end(); land++) {
+		allLands.push_back( *land );
+	}
+	for(auto land = anyCost.begin(); land != anyCost.end(); land++) {
+		allLands.push_back( *land );
+	}
+	for(size_t i = allLands.size()-1; i > 0; i--) {
+		for(size_t i2 = 0; i2 < i; i2++) {
+			if(allLands.at(i).hasSameId( &allLands.at(i2) ))
+				return false;
+		}
+	}
+
+	
+
+	// Checking whether there are enough "any" lands for this creature
+	if(anyCost.size() != getAnyCost()) {
+		return false;
+	}
+
+
+	// Matching each specific cost with a land
+	std::list<Color> cost = std::list<Color>(getColorCost());
+	for(auto land = specificCost.begin(); land != specificCost.end(); land++) {
+		
+		auto color = cost.begin();
+		int k = 0;
+		bool hasFound = false;
+		while(color != cost.end() && !hasFound) {
+			if( *(*land).getColor().begin() == *color) {
+				cost.erase( color );
+				hasFound = true;
+			}
+			color++;
+			k++;
+		}
+		// If found nowhere
+		if(!hasFound) {
+			return false;
+		}
+	}
+
+	
+
+	// Returning true if everything's fine
+	return true;
 }
 
 
