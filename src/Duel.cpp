@@ -81,20 +81,22 @@ void Duel::showTextInInterfaces(string t) {
 	}
 }
 
-void contenderGameVision(Contender* currentContender, std::vector<Contender> contenders){
+void Duel::contenderGameVision(Contender* currentContender){
 	
-	for(int i=0; i<contenders.size(); i++) {
-		if(&contenders[i] != &currentContender){
-			cout << " My opposent in game's cards " << endl;
-			contenders[i].getOriginalInGameCards()->getOriginalCardsSet();
-		}
-	}
+	// for(int i=0; i<contenders.size(); i++) {
+	// 	if(&contenders[i] == &currentContender){
+	// 	}else{
+	// 		cout << " My opposent in game's cards " << contenders[i]->getOriginalInGameCards()->getOriginalCardsSet()<< endl;
+	// 	}
+	// }
 
-	cout << " My in game's cards " << endl;
-	currentContender->getOriginalInGameCards()->getOriginalCardsSet();
+	cout << " My opposent in game's cards " << getOtherContender()->getOriginalInGameCards()->getOriginalCardsSet()<< endl;
 
-	cout << " My hand's cards " << endl;
-	currentContender->getOriginalHand()->getOriginalCardsSet();
+
+	cout << " My in game's cards "<< currentContender->getOriginalInGameCards()->getOriginalCardsSet() << endl;
+	
+
+	cout << " My hand's cards " << currentContender->getOriginalHand()->getOriginalCardsSet() << endl;
 }
 
 
@@ -129,6 +131,8 @@ void Duel::start() {
 			c->drawCard();
 		}
 	}
+
+	contenderGameVision(d_currentContender);
 
 	// Starting first turn, skipping the 1st phase as mentioned in the rules
 	ph2Disengage_start();
