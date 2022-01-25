@@ -37,12 +37,17 @@ void ConsoleInterface::showText(std::string t) {
 }
 
 
+
+
 void ConsoleInterface::ph1DrawnCard(const Contender* con, const Card* card) {
-    cout << endl << "Vous draw a card : \n" << card << "\n";
+    cout << endl << con << " You draw a card : \n" << card << "\n";
 }
 
+
+
+
 void ConsoleInterface::ph2Disengage(const Contender* con, const std::list<const Card*> c) {
-    cout << endl << "Vos cartes ont été désengagées :" << endl;
+    cout << endl << con << " Your in-game cards have been disengaged :" << endl;
     if(c.size() == 0) {
         cout << "Aucune" << endl;
     }
@@ -53,9 +58,11 @@ void ConsoleInterface::ph2Disengage(const Contender* con, const std::list<const 
     }
 }
 
+
+
+
 void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
-    cout << endl << "You can put cards from your hand into the game." << endl;
-    cout << "Nombre de cartes : " << con->getHand().getCardsSet().size() << endl;
+    cout << endl << con << " You can put cards from your hand into the game." << endl;
     const Card* picked = pickACard_option( con->getHand().getCardsSet() );
     
     if(picked == nullptr) {
@@ -66,24 +73,27 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
     }
 }
 
+
+
+
 void ConsoleInterface::ph4Fight_wait(const Contender* att, const Contender* def) {
     
     if( att->getInGameCards().getDisengaged().getCreatures().size() > 0 ) {
     
-        cout << endl << "Do you want to attack " << def->getPlayer().getName() << " ?";
+        cout << endl << att << " Do you want to attack " << def->getPlayer().getName() << " ?";
         bool isAttacking = pickYesOrNo();
         
         if(isAttacking) {
 
-            cout << endl << "Pick your attacking creature." << endl;
+            cout << endl << att << " Pick your attacking creature." << endl;
             const Creature* attCreature = pickACreature( att->getInGameCards().getDisengaged().getCreatures() );
             
-            cout << endl << "Action from " << def->getPlayer().getName() << endl;
+            cout << endl << def << " Action from " << def->getPlayer().getName() << endl;
             vector<const Creature*> defCreatures = vector<const Creature*>();
             bool mustContinue = true;
             cout << def->getInGameCards() << endl;
             do {
-                cout << endl << "Pick a defending creature. (you can pick multiple ones till you type 0)" << endl;
+                cout << endl << def << " Pick a defending creature. (you can pick multiple ones till you type 0)" << endl;
                 const Creature* c = pickACreature_option( def->getInGameCards().getDisengaged().getCreatures() );
                 if(c == nullptr) {
                     mustContinue = false;
@@ -101,25 +111,41 @@ void ConsoleInterface::ph4Fight_wait(const Contender* att, const Contender* def)
             i_duel->ph4_end();
     }
     else {
-        cout << endl << "You do not have any creature able to attack. Skipping fight phase." << endl;
+        cout << endl << att << " You do not have any creature able to attack. Skipping fight phase." << endl;
         i_duel->ph4_end();
     }
 }
 
+
+
+
 void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
-    cout << endl << "You can put cards from your hand into the game again." << endl;
+    cout << endl << con << " You can put cards from your hand into the game again." << endl;
     const Card* picked = pickACard_option( con->getHand().getCardsSet() );
     
     if(picked == nullptr) {
-        i_duel->ph3_end();
+        i_duel->ph5_end();
     }
     else {
         i_duel->chooseCard( picked );
     }
 }
 
+
+
+
 void ConsoleInterface::ph6Discard_wait(const Contender* con, size_t nbToDiscard) {
-    // TODO
+    vector<const Card*> cardsToDiscard = vector<const Card*>();
+    
+    while(nbToDiscard > 0) {
+        cout << endl << con << " You have an excessive number of cards. You must send " << nbToDiscard << " cards from your hand to the cemetary." << endl;
+        
+        const Card* picked = pickACard( con->getHand().getCardsSet() );
+        cardsToDiscard.push_back(picked);
+        nbToDiscard--;
+    }
+
+    i_duel->ph6_end(cardsToDiscard);
 }
 
 

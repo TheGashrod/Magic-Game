@@ -122,8 +122,17 @@ void Duel::start() {
 void Duel::ph1Draw_start() {
 	d_currentPhase = 1;
 
-	if ((d_currentContender->getOriginalLibrary()->getOriginalCardsSet())->size() == 0 ){gameOver(nullptr);}
-	else{ const Card * c = d_currentContender->drawCard();
+	// Test whether the player has remaining cards
+	if ((d_currentContender->getOriginalLibrary()->getOriginalCardsSet())->size() == 0 ) {
+		for(auto inter=d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
+			(*inter)->showText("\nThis player doesn't have any remaining card and cannot draw.");
+		}
+		gameOver( getOtherContender() );
+	}
+
+	// Picking a card
+	else{
+		const Card * c = d_currentContender->drawCard();
 
 		// Notifying interfaces
 		for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
@@ -143,30 +152,12 @@ void Duel::ph2Disengage_start() {
 	std::list<const Card*> disengaged = std::list<const Card*>();
 
 	for(auto card=(*cards).begin(); card != (*cards).end(); card++) {
-		cout << "Boucle ph2Disengage 1" << endl;
 		Card* c = *card;
-		cout << "Boucle ph2Disengage 2" << endl;
 		if(c->isEngaged()) {
-			cout << "Boucle ph2Disengage 2.1" << endl;
 			c->disengage();
-			cout << "Boucle ph2Disengage 2.2" << endl;
-			//cout << "Value of c : " << *card << endl;
-			//cout << "Value of c : " << c << endl;
-			const Card* cc = *card;
-			cout << "Boucle ph2Disengage 2.3" << endl;
 			disengaged.push_back( *card );
-			cout << "Boucle ph2Disengage 2.4" << endl;
-			*disengaged.begin();
-			cout << "Boucle ph2Disengage 2.5" << endl;
-			(*disengaged.begin())->isEngaged();
-			cout << "Boucle ph2Disengage 2.6" << endl;
-			//(*disengaged.begin())->print(cout);
-			cout << "Boucle ph2Disengage 2.7" << ", Size of disengaged : " << disengaged.size() << endl;
-			cout << *disengaged.begin() << endl;
-			cout << "Boucle ph2Disengage 2.8" << endl;
 		}
 	}
-	cout << "Boucle ph2Disengage 3" << endl;
 	
 	// Resetting right to set lands
 	d_remainingLands = 1;
@@ -193,6 +184,7 @@ void Duel::ph3PlayCard_start() {
 
 
 
+
 /* Note : c cannot be nullptr, since ph3_end() is supposed to be called in these cases instead */
 void Duel::chooseCard(const Card* c) {
 	if( !(d_currentPhase == 3 || d_currentPhase == 5) ) {
@@ -200,6 +192,9 @@ void Duel::chooseCard(const Card* c) {
 		return;
 	}
 
+
+	// TODO : Check cost in interface
+	// TODO : Check number of lands in interface
 	
 	if(c->isLand()) {
 		if(d_remainingLands > 0)
@@ -238,6 +233,7 @@ void Duel::ph3_end() {
 
 void Duel::ph4Fight_start() {
 	d_currentPhase = 4;
+	cout << "Beginning phase 4" << endl;
 
 	for(Interface_interface* interface : d_interfaces) {
 		interface->ph4Fight_wait(d_currentContender, getOtherContender());
@@ -273,6 +269,19 @@ void Duel::ph4Fight(const Creature* att, std::vector<const Creature*> def) {
 	// Executing AttackRound
 	ar.execute();
 
+	// TODO Add damage to contenders
+
+	// Check if a player has died
+	if( d_currentContender->getVitality() <= 0 ) {
+		gameOver( getOtherContender() );
+		return;
+	}
+	else if( getOtherContender()->getVitality() <= 0 ) {
+		gameOver( d_currentContender );
+		return;
+	}
+
+
 	// Notifying interfaces
 	for(Interface_interface* interface : d_interfaces) {
 		interface->ph4Fight_wait(d_currentContender, getOtherContender());
@@ -287,7 +296,8 @@ void Duel::ph4_end() {
 		throw string("Duel::end has been called out of phase 4");
 		return;
 	}
-	// TODO
+	
+	ph5PlayCard_start();
 }
 
 
@@ -295,7 +305,11 @@ void Duel::ph4_end() {
 
 void Duel::ph5PlayCard_start() {
 	d_currentPhase = 5;
-	// TODO
+	cout << "Beginning phase 5" << endl;
+	
+	for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
+		(*inter)->ph5PlayCards_wait(d_currentContender);
+	}
 }
 
 
@@ -311,18 +325,21 @@ void Duel::ph5_end() {
 		throw string("Duel::ph5_end has been called out of phase 5");
 		return;
 	}
-	// TODO
+	
+	ph6Discard_start();
 }
 
 
 void Duel::ph6Discard_start() {
 	d_currentPhase = 6;
-	// TODO verif que le jour à moins de 7 cartes sinon calculer cmb il a en plus, l'envoyer à l'interface...
+	cout << "Beginning phase 6" << endl;
+
+	// Verif que le jour à moins de 7 cartes sinon calculer cmb il a en plus, l'envoyer à l'interface...
 	// puis passer à phase6end depuis l'interface
 	int n = (d_currentContender->getOriginalHand()->getOriginalCardsSet())->size();
-	if (n>7){
+	if (n>MAX_CARDS_AMOUNT){
 		for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
-			(*inter)->ph6Discard_wait(d_currentContender, (n-7));
+			(*inter)->ph6Discard_wait(d_currentContender, (n-MAX_CARDS_AMOUNT));
 		}
 	}else{ph6_end({});}
 }
@@ -336,20 +353,35 @@ void Duel::ph6_end(std::vector<const Card*> discarded) {
 		return;
 	}
 
-	// Transfer the discarded cards to the cimetery
+
+	// Check whether the interface has discarded enough cards
+	if(discarded.size() > 0) {
+		size_t newSize = d_currentContender->getHand().getCardsSet().size() - discarded.size();
+		if(newSize < 7) {
+			throw string("An interface has given an excessive number of cards to discard");
+		}
+		else if(newSize > 7) {
+			for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
+				(*inter)->ph6Discard_wait(d_currentContender, newSize-7);
+			}
+			return;
+		}
+	}
 	
+
+	// Transfer the discarded cards to the cemetery
+	for(auto dis = discarded.begin(); dis != discarded.end(); dis++) {
+		d_currentContender->getOriginalHand()->transfer( *dis, d_currentContender->getOriginalCemetary() );
+	}
 
 
 	// Check if the Current contender still have some remaining turns and give the Other contender the hand to play if not
 	if((getRemainingTurns()-1) > 0){
 		setRemainingTurns(getRemainingTurns()-1);
 		ph1Draw_start();
-	}else{ 
-		for(auto con = d_contenders.begin(); con != d_contenders.end(); con++) {
-			if(&(*con) != d_currentContender) {
-				d_currentContender = &(*con);
-			}
-		}
+	}
+	else {
+		d_currentContender = getOtherContender();
 		ph1Draw_start();
 	}
 
@@ -367,5 +399,9 @@ void Duel::gameOver(Contender* winner) { //! winner can be nullptr if the game f
 		showTextInInterfaces("The game has been cancelled.");
 		return;
 	}
+
+	showTextInInterfaces("\nEND OF THE GAME");
+	showTextInInterfaces("Winner : ");
+	showTextInInterfaces(winner->getPlayer().getName());
 	// TODO
 }

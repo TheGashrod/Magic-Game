@@ -64,3 +64,15 @@ const Card * Contender::drawCard() {
 	return c;
 };
 
+
+
+// Print :
+ostream& Contender::print(ostream& os) const {
+	return os << "[" << getPlayer().getName() << "]";
+}
+
+ostream& operator<<(ostream& os, const Contender* c) {
+	return c->print(os);
+}ostream& operator<<(ostream& os, const Contender c) {
+	return c.print(os);
+}

@@ -4,6 +4,7 @@
 
 
 #include <memory>
+#include <iostream>
 
 #include "Card.hpp"
 #include "CardsSet.hpp"
@@ -64,8 +65,16 @@ class Contender {
 		int damageBy(stat hp);
 
 
- };
 
+		// Print :
+		ostream& print(ostream& os) const;
+
+
+};
+
+
+ostream& operator<<(ostream& os, const Contender* c);
+ostream& operator<<(ostream& os, const Contender c);
 
 
  #endif

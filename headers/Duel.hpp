@@ -30,7 +30,7 @@ class Duel : public Duel_interface {
     // Members :
     private:
         char d_currentPhase = 0;
-        char d_remainingTurns = 0;
+        char d_remainingTurns = 1;
         char d_remainingLands = 1;
         std::vector<Contender> d_contenders = std::vector<Contender>();
         Contender* d_currentContender;
