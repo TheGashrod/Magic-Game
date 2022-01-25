@@ -137,17 +137,34 @@ void Duel::ph2Disengage_start() {
 	d_currentPhase = 2;
 
 	// Disengaging cards
-	vector<Card*>* cards = d_currentContender->getInGameCards().getOriginalCardsSet();
+	vector<Card*>* cards = d_currentContender->getOriginalInGameCards()->getOriginalCardsSet();
 	std::list<const Card*> disengaged = std::list<const Card*>();
 
 	for(auto card=(*cards).begin(); card != (*cards).end(); card++) {
+		cout << "Boucle ph2Disengage 1" << endl;
 		Card* c = *card;
+		cout << "Boucle ph2Disengage 2" << endl;
 		if(c->isEngaged()) {
+			cout << "Boucle ph2Disengage 2.1" << endl;
 			c->disengage();
-			const Card* cc = c;
-			disengaged.push_back( cc );
+			cout << "Boucle ph2Disengage 2.2" << endl;
+			//cout << "Value of c : " << *card << endl;
+			//cout << "Value of c : " << c << endl;
+			const Card* cc = *card;
+			cout << "Boucle ph2Disengage 2.3" << endl;
+			disengaged.push_back( *card );
+			cout << "Boucle ph2Disengage 2.4" << endl;
+			*disengaged.begin();
+			cout << "Boucle ph2Disengage 2.5" << endl;
+			(*disengaged.begin())->isEngaged();
+			cout << "Boucle ph2Disengage 2.6" << endl;
+			//(*disengaged.begin())->print(cout);
+			cout << "Boucle ph2Disengage 2.7" << ", Size of disengaged : " << disengaged.size() << endl;
+			cout << *disengaged.begin() << endl;
+			cout << "Boucle ph2Disengage 2.8" << endl;
 		}
 	}
+	cout << "Boucle ph2Disengage 3" << endl;
 	
 	// Resetting right to set lands
 	d_remainingLands = 1;
