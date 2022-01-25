@@ -2,9 +2,16 @@
 #define __MTG_CREATURE_ASSETS_INCLUDED__
 
 
-class CardsSet;
+#include <vector>
 
-CardsSet creaturesList;
+
+#include "../../headers/Creature.hpp"
+
+
+vector<Creature> creaturesList = vector<Creature>({
+	
+});
+// TODO When CardsSet will be made
 
 
 #endif

@@ -2,9 +2,19 @@
 #define __MTG_LAND_ASSETS_INCLUDED__
 
 
-class CardsSet;
+#include <vector>
 
-CardsSet landsList;
+
+
+#include "../../headers/Land.hpp"
+
+
+
+
+vector<Land> landsList = vector<Land>({
+
+});
+// TODO When CardsSet will be made
 
 
 #endif

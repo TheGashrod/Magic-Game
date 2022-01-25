@@ -173,6 +173,25 @@ void ConsoleInterface::ph6Discard_wait(const Contender* con, size_t nbToDiscard)
 / --------------------------------------------------------------------------------------------------*/
 
 
+
+const Card* ConsoleInterface::pickACard(std::vector<const Card*> cards) const {
+    size_t choice;
+
+    do {
+        cout << "Pick a card among these (type the number) :\n";
+        size_t k = 1;
+        for(auto i = cards.begin(); i != cards.end(); i++) {
+            cout << k << ". " << *i << endl;
+            k++;
+        }
+        cout << "Your choice : ";
+        cin >> choice;
+    } while(choice == 0 || choice > cards.size());
+
+    return cards.at(choice-1);
+}
+
+
 /**
  * @brief Lets the player pick a card among a list if they want
  * 
@@ -203,11 +222,11 @@ const Card* ConsoleInterface::pickACard_option(std::vector<const Card*> cards) c
 
 
 
-const Card* ConsoleInterface::pickACard(std::vector<const Card*> cards) const {
+const Creature* ConsoleInterface::pickACreature(vector<const Creature*> cards) const {
     size_t choice;
 
     do {
-        cout << "Pick a card among these (type the number) :\n";
+        cout << "Pick a creature among these (type the number) :\n";
         size_t k = 1;
         for(auto i = cards.begin(); i != cards.end(); i++) {
             cout << k << ". " << *i << endl;
@@ -246,11 +265,12 @@ const Creature* ConsoleInterface::pickACreature_option(std::vector<const Creatur
 
 
 
-const Creature* ConsoleInterface::pickACreature(vector<const Creature*> cards) const {
+
+const Land* ConsoleInterface::pickALand(std::vector<const Land*> cards) const {
     size_t choice;
 
     do {
-        cout << "Pick a creature among these (type the number) :\n";
+        cout << "Pick a land among these (type the number) :\n";
         size_t k = 1;
         for(auto i = cards.begin(); i != cards.end(); i++) {
             cout << k << ". " << *i << endl;
@@ -262,6 +282,31 @@ const Creature* ConsoleInterface::pickACreature(vector<const Creature*> cards) c
 
     return cards.at(choice-1);
 }
+
+
+
+const Land* ConsoleInterface::pickALand_option(std::vector<const Land*> cards) const {
+    size_t choice;
+
+    do {
+        cout << "Pick a land among these (type the number) :\n";
+        size_t k = 1;
+        for(auto i = cards.begin(); i != cards.end(); i++) {
+            cout << k << ". " << *i << endl;
+            k++;
+        }
+        cout << "0. Don't pick any land" << endl << endl;
+        cout << "Your choice : ";
+        cin >> choice;
+    } while(choice > cards.size());
+
+    if(choice == 0) {
+        return nullptr; // Return if the player doesn't make any choice
+    } else {
+        return cards.at(choice-1);
+    }
+}
+
 
 
 bool ConsoleInterface::pickYesOrNo() const {

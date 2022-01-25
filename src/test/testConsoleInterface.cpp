@@ -45,6 +45,7 @@ int mainTest() {
 	if(c2.isFittingCosts( vector<Land>({la1, la2.cloneLand(), la2}), vector<Land>({}) ) != true)
 		cout << "ERROR_MTG : isFittingCosts with c2;<[la1, la2', la2], []> test should be true" << endl;
 	
+	
 
 	cout << "Color creature : " << *c1.getColorCost().begin() << endl;
 	cout << "Color land : " << *la1.getColor().begin() << endl;
@@ -76,9 +77,13 @@ int mainTest() {
 
 	Player p1 = Player("J1", CardsSet(std::vector<Card*>({c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2})));
 	Player p2 = Player("J2", CardsSet(std::vector<Card*>({c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2})));
+	Player p3 = Player("J3", CardsSet(std::vector<Card*>({&la1, &la1, &la1, &la2, &la2, &la2, &la2, &la2, &la2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2})));
 
 	Duel d = Duel(p1, p2);
 	ConsoleInterface inter = ConsoleInterface(&d);
+
+
+	inter.pickALand_option( p3.getDeck().getLands() );
 
 
 	const Contender* con1 = d.getContenders().at(0);
