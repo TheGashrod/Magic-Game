@@ -10,6 +10,8 @@
 #include "../headers/Card.hpp"
 #include "../headers/Creature.hpp"
 #include "../headers/Land.hpp"
+#include "../headers/AttackRound.hpp"
+#include "../headers/AttackAction.hpp"
 
 
 
@@ -54,7 +56,7 @@ void Duel::setRemainingTurns(unsigned char nb){
 }
 
 
-const Contender* Duel::getOtherContender() const {
+Contender* Duel::getOtherContender() {
 	for(auto con = d_contenders.begin(); con != d_contenders.end(); con++) {
 		if(&(*con) != d_currentContender) {
 			return &(*con);
@@ -250,7 +252,31 @@ void Duel::ph4Fight(const Creature* att, std::vector<const Creature*> def) {
 		throw string("Duel::ph4Fight has been called out of phase 4");
 		return;
 	}
-	// TODO
+
+	// Building AttackRound
+	AttackRound ar = AttackRound();
+	Creature* c;
+	if (c = dynamic_cast<Creature*>( d_currentContender->getOriginalInGameCards()->getCardById(att->getId()) )) {
+		AttackAction aa = AttackAction(d_currentContender, getOtherContender(), c );
+		for(auto defen = def.begin(); defen != def.end(); defen++) {
+			if (c = dynamic_cast<Creature*>( d_currentContender->getOriginalInGameCards()->getCardById((*defen)->getId()) )) {
+				aa.addFightCreature( FightCreature(c, false) );
+			}
+		}
+		ar.addAttack(aa);
+	}
+
+
+	// TODO : Take abilities into account
+
+
+	// Executing AttackRound
+	ar.execute();
+
+	// Notifying interfaces
+	for(Interface_interface* interface : d_interfaces) {
+		interface->ph4Fight_wait(d_currentContender, getOtherContender());
+	}
 }
 
 

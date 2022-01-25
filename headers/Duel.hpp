@@ -67,7 +67,7 @@ class Duel : public Duel_interface {
         char getPhase() const;
         unsigned char getRemainingTurns() const;
         const Contender* getCurrentContender() const;
-        const Contender* getOtherContender() const;
+        Contender* getOtherContender();
 
         void setRemainingTurns(unsigned char nb);
         void addInterface(Interface_interface* i);
