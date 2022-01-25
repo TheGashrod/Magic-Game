@@ -12,22 +12,34 @@
 #include "../../headers/Duel.hpp"
 
 
+
+using std::cout;
+
+
+
 int mainTest() {
 
 	
-
+	
 
 	Creature c1 = Creature("Démon de Pagaille", std::list<Color>({Blue, Red}), false, std::list<Color>({Red, Red}), 1, 3, 3);
 	Creature c2 = Creature("The purple scare", std::list<Color>({Black}), false, std::list<Color>({Red, Blue}), 0, 2, 3);
 
+	
+
 	Land la1 = Land("Terres désolées", Red, false);
+
+	
 
 	shared_ptr<Card> c1clone = c1.clone();
 	cout << "ID of c1 :  " << c1.getId() << " ; ID of c1Clone : " << (*c1clone).getId() << endl;
 
+	
+
 	shared_ptr<Card> la1clone = la1.clone();
 	cout << "ID of la1 : "  << la1.getId() << " ; ID of laClone : " << (*la1clone).getId() << endl;
 
+	
 
 	Card* c1Ptr2 = &c1;
 	const Card* c1Ptr = &c1;
@@ -35,6 +47,8 @@ int mainTest() {
 	const Card* c2Ptr = &c2;
 	
 	const std::list<const Card*> cList1 = std::list<const Card*>({c1Ptr, c2Ptr, c1Ptr, c1Ptr, c1Ptr, c1Ptr, c1Ptr, c1Ptr, c1Ptr, c1Ptr, c1Ptr});
+
+	cout << c1Ptr << endl;
 
 
 
@@ -87,6 +101,7 @@ int mainTest() {
 	inter.ph3PlayCards_wait(con1Ptr);
 	*/
 
+	
 	d.showTextInInterfaces("showTextInInterfaces works too !\n");
 
 	cout << "Other player : " << d.getOtherContender()->getPlayer().getName() << endl;
