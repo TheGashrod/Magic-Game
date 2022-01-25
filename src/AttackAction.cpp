@@ -121,8 +121,15 @@ void AttackAction::execute() {
 			for(auto def = defenders.begin(); def != defenders.end(); def++) {
 				if((*att)->isAlive() && (*def)->isAlive()) {
 					
+
+					cout << endl << "FIGHT" << endl;
+					cout << (*att) << endl << (*def) << endl;
+
 					(*att)->dealDamageTo( (*def) );
 					(*def)->dealDamageTo( (*att) );
+
+					
+					cout << (*att) << endl << (*def) << endl;
 					
 					// TODO Find why the card being sent to cemetary (probably) cannot be found
 

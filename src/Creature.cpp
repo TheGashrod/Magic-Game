@@ -47,10 +47,10 @@ void Creature::setPowerDefault(stat val) { c_powerDef = val; }
 void Creature::setToughnessDefault(stat val) { c_toughnessDef = val; }
 void Creature::setPower(stat val) { c_power = val; }
 void Creature::setToughness(stat val) { c_toughness = val; }
-void Creature::usePower(stat amount) { c_power = std::max( (stat)0 , amount );}
+void Creature::usePower(stat amount) { c_power = std::max( 0 , (int)c_power - amount );}
 void Creature::regainPower(stat amount) { c_power += amount; }
 void Creature::healBy(stat hp) { c_toughness += hp; }
-void Creature::damageBy(stat hp) { c_toughness = std::max( (stat)0 , hp ); }
+void Creature::damageBy(stat hp) { c_toughness = std::max( 0 , (int)c_toughness - hp ); }
 void Creature::resetStats() {
 	c_power = c_powerDef;
 	c_toughness = c_toughnessDef;
@@ -73,6 +73,7 @@ int Creature::dealDamageTo(Contender* c) const {
 
 int Creature::receiveDamageFrom(Creature* c) {
 	stat damage = std::min( c->getPower() , this->getToughness() );
+	cout << "Damage : " << (int) damage << endl;
 	this->damageBy( damage );
 	c->usePower( damage );
 	return damage;
