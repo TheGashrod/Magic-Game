@@ -90,13 +90,13 @@ void Duel::contenderGameVision(Contender* currentContender){
 	// 	}
 	// }
 
-	cout << " My opposent in game's cards " << getOtherContender()->getOriginalInGameCards()->getOriginalCardsSet()<< endl;
+	cout << " My opposent in game's cards " << *getOtherContender()->getOriginalInGameCards() << endl;
 
 
-	cout << " My in game's cards "<< currentContender->getOriginalInGameCards()->getOriginalCardsSet() << endl;
+	cout << " My in game's cards "<< *currentContender->getOriginalInGameCards() << endl;
 	
 
-	cout << " My hand's cards " << currentContender->getOriginalHand()->getOriginalCardsSet() << endl;
+	cout << " My hand's cards " << *currentContender->getOriginalHand() << endl;
 }
 
 
