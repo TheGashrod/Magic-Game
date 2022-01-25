@@ -3,6 +3,7 @@
 
 #include <typeinfo>
 #include <vector>
+#include <iostream>
 #include "../headers/tools/random.hpp"
 
 #include "../headers/Interface.hpp"
@@ -14,6 +15,7 @@
 #include "../headers/AttackAction.hpp"
 
 
+using std::cout;
 
 using std::vector;
 using std::size_t;
@@ -77,6 +79,22 @@ void Duel::showTextInInterfaces(string t) {
 		Interface_interface* i = *inter;
 		i->showText(t);
 	}
+}
+
+void contenderGameVision(Contender* currentContender, std::vector<Contender> contenders){
+	
+	for(int i=0; i<contenders.size(); i++) {
+		if(&contenders[i] != &currentContender){
+			cout << " My opposent in game's cards " << endl;
+			contenders[i].getOriginalInGameCards()->getOriginalCardsSet();
+		}
+	}
+
+	cout << " My in game's cards " << endl;
+	currentContender->getOriginalInGameCards()->getOriginalCardsSet();
+
+	cout << " My hand's cards " << endl;
+	currentContender->getOriginalHand()->getOriginalCardsSet();
 }
 
 
