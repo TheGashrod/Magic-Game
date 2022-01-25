@@ -16,6 +16,14 @@
 using std::cout;
 
 
+Card* ca(Creature c) {
+	return &c;
+}
+Card* ca(Land a) {
+	return &a;
+}
+
+
 
 int mainTest() {
 
@@ -77,13 +85,14 @@ int mainTest() {
 
 	Player p1 = Player("J1", CardsSet(std::vector<Card*>({c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2})));
 	Player p2 = Player("J2", CardsSet(std::vector<Card*>({c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2})));
-	Player p3 = Player("J3", CardsSet(std::vector<Card*>({&la1, &la1, &la1, &la2, &la2, &la2, &la2, &la2, &la2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2})));
+	Player p3 = Player("J3", CardsSet(std::vector<Card*>({ca(la1), ca(la1), ca(la1), &la2, &la2, &la2, &la2, &la2, &la2, &c1, &c1, c1Ptr2, c1Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2})));
 
 	Duel d = Duel(p1, p2);
 	ConsoleInterface inter = ConsoleInterface(&d);
 
 
 	inter.pickALand_option( p3.getDeck().getLands() );
+	//inter.pickACreature( p3.getDeck().getCreatures() );
 
 
 	const Contender* con1 = d.getContenders().at(0);

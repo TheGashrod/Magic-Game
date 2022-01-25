@@ -6,6 +6,7 @@
 #include "../../headers/Duel.hpp"
 #include "../../headers/Card.hpp"
 #include "../../headers/Creature.hpp"
+#include "../../headers/Land.hpp"
 #include "../../headers/Contender.hpp"
 
 
