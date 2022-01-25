@@ -99,7 +99,7 @@ void AttackAction::addFightCreature(FightCreature fc) { a_creatures.push_back(fc
 
 void AttackAction::execute() {
 	
-	// Sort attackers and defenders
+	// Sort attackers and defenders :
 	vector<Creature*> attackers = vector<Creature*>();
 	vector<Creature*> defenders = vector<Creature*>();
 	for(auto c = a_creatures.begin(); c != a_creatures.end(); c++) {
@@ -109,9 +109,13 @@ void AttackAction::execute() {
 		else {
 			defenders.push_back( (*c).getOriginalCreature() );
 		}
+
+		// Engage creatures :
+		if( (*c).isEngaged() )
+			(*c).getOriginalCreature()->engage();
 	}
 
-	// Actual fight
+	// Actual fight :
 	if(defenders.size() > 0) {
 		for(auto att = attackers.begin(); att != attackers.end(); att++) {
 			for(auto def = defenders.begin(); def != defenders.end(); def++) {
@@ -120,17 +124,39 @@ void AttackAction::execute() {
 					(*att)->dealDamageTo( (*def) );
 					(*def)->dealDamageTo( (*att) );
 					
-					// Send deads to cemetary
+					// TODO Find why the card being sent to cemetary (probably) cannot be found
+
+					// Send deads to cemetary :
 					if( !(*def)->isAlive() ) {
+						cout << "SENDING A DEFENDING CARD TO CEMETARY" << endl;
+						cout << (*def) << endl;
+						cout << "----------------------------------------------------------" << endl;
+						cout << a_victim->getInGameCards() << endl;
 						a_victim->getInGameCards().transfer( (*def), a_victim->getOriginalCemetary() );
+						cout << "----------------------------------------------------------" << endl;
 					}
 					if( !(*att)->isAlive() ) {
+						cout << "SENDING AN ATTACKING CARD TO CEMETARY" << endl;
+						cout << (*att) << endl;
+						cout << "----------------------------------------------------------" << endl;
+						cout << a_victim->getInGameCards() << endl;
 						a_attacker->getInGameCards().transfer( (*att), a_attacker->getOriginalCemetary() );
+						cout << "----------------------------------------------------------" << endl;
 						break;
 					}
 				}		
 				
 			}
+		}
+	}
+
+	// Attacking the player if there's no defender
+	else {
+		for(auto att = attackers.begin(); att != attackers.end(); att++) {
+			cout << "Victim's vitality changes from " << a_victim->getVitality() << " to ";
+			int dmg = a_victim->damageBy((*att)->getPower());
+			(*att)->usePower(dmg);
+			cout << a_victim->getVitality() << endl;
 		}
 	}
 }

@@ -249,13 +249,15 @@ void Duel::ph4Fight(const Creature* att, std::vector<const Creature*> def) {
 		return;
 	}
 
+	cout << "Before building AttackRound" << endl;
+
 	// Building AttackRound
 	AttackRound ar = AttackRound();
 	Creature* c;
 	if (c = dynamic_cast<Creature*>( d_currentContender->getOriginalInGameCards()->getCardById(att->getId()) )) {
 		AttackAction aa = AttackAction(d_currentContender, getOtherContender(), c );
 		for(auto defen = def.begin(); defen != def.end(); defen++) {
-			if (c = dynamic_cast<Creature*>( d_currentContender->getOriginalInGameCards()->getCardById((*defen)->getId()) )) {
+			if (c = dynamic_cast<Creature*>( getOtherContender()->getOriginalInGameCards()->getCardById((*defen)->getId()) )) {
 				aa.addFightCreature( FightCreature(c, false) );
 			}
 		}
@@ -267,9 +269,10 @@ void Duel::ph4Fight(const Creature* att, std::vector<const Creature*> def) {
 
 
 	// Executing AttackRound
+	cout << "Before executing attack " << endl;
 	ar.execute();
 
-	// TODO Add damage to contenders
+	cout << "After executing attack" << endl;
 
 	// Check if a player has died
 	if( d_currentContender->getVitality() <= 0 ) {

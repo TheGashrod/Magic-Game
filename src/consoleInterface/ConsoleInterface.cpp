@@ -91,15 +91,33 @@ void ConsoleInterface::ph4Fight_wait(const Contender* att, const Contender* def)
             cout << endl << def << " Action from " << def->getPlayer().getName() << endl;
             vector<const Creature*> defCreatures = vector<const Creature*>();
             bool mustContinue = true;
-            cout << def->getInGameCards() << endl;
+            vector<const Creature*> defCandidates = def->getInGameCards().getDisengaged().getCreatures();
             do {
+                // TODO : Make sure the player doesn't select the same creature twice
                 cout << endl << def << " Pick a defending creature. (you can pick multiple ones till you type 0)" << endl;
-                const Creature* c = pickACreature_option( def->getInGameCards().getDisengaged().getCreatures() );
+                const Creature* c = pickACreature_option( defCandidates );
                 if(c == nullptr) {
                     mustContinue = false;
                 }
                 else {
                     defCreatures.push_back(c);
+
+                    // Removing from the pickable creatures
+                    auto altC = defCandidates.begin();
+                    bool hasDeleted = false;
+                    cout << "ph4 interface remove from pickable 1" << endl;
+                    while(!hasDeleted && altC != defCandidates.end()) {
+                        cout << "ph4 interface remove from pickable 2" << endl;
+                        if((*altC)->hasSameId(c)) {
+                             cout << "ph4 interface remove from pickable 3" << endl;
+                            defCandidates.erase( altC );
+                            hasDeleted = true;
+                        }
+                        cout << "ph4 interface remove from pickable 4" << endl;
+                        altC++;
+                        cout << "ph4 interface remove from pickable 5" << endl;
+                    }
+                    cout << "ph4 interface remove from pickable 6" << endl;
                 }
             } while(mustContinue);
 
