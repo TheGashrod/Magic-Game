@@ -294,6 +294,9 @@ void Duel::ph6_end(std::vector<const Card*> discarded) {
 	}
 
 	// Transfer the discarded cards to the cimetery
+	for (int i=0; i<discarded.size(); i++){
+		d_currentContender->getOriginalHand()->transfer(discarded[0], d_currentContender->getOriginalCemetary());
+	}
 	
 
 

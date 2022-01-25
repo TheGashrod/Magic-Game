@@ -119,7 +119,14 @@ void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
 }
 
 void ConsoleInterface::ph6Discard_wait(const Contender* con, size_t nbToDiscard) {
-    // TODO
+    // boucler sur nb to discard en demandant quelle carte envoyer au cimetière sur la hand du joueur
+    std::vector<const Card*> discarded = {};
+
+    for (int i=0; i<nbToDiscard; i++){
+        discarded.push_back(pickACard_option(con->getHand().getCardsSet()));
+    }
+
+    i_duel->ph6_end(discarded);
 }
 
 
