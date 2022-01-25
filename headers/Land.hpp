@@ -38,6 +38,7 @@ class Land : public Card {
 
 
 ostream& operator<<(ostream& os, const Land l);
+ostream& operator<<(ostream& os, const Land* l);
 
 
 

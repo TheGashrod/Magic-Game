@@ -59,3 +59,7 @@ ostream& Land::print(ostream& os) const {
 ostream& operator<<(ostream& os, const Land l) {
 	return l.print(os);
 }
+
+ostream& operator<<(ostream& os, const Land* l) {
+	return l->print(os);
+}
