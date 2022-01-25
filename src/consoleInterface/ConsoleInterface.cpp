@@ -153,17 +153,15 @@ void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
 
 
 void ConsoleInterface::ph6Discard_wait(const Contender* con, size_t nbToDiscard) {
-    vector<const Card*> cardsToDiscard = vector<const Card*>();
-    
-    while(nbToDiscard > 0) {
-        cout << endl << con << " You have an excessive number of cards. You must send " << nbToDiscard << " cards from your hand to the cemetary." << endl;
-        
-        const Card* picked = pickACard( con->getHand().getCardsSet() );
-        cardsToDiscard.push_back(picked);
-        nbToDiscard--;
+    // boucler sur nb to discard en demandant quelle carte envoyer au cimetière sur la hand du joueur
+    std::vector<const Card*> discarded = {};
+
+    for (int i=nbToDiscard; i>0; i--){
+        cout << endl << con << " You have an excessive number of cards. You must send " << i << " cards from your hand to the cemetary." << endl;
+        discarded.push_back(pickACard(con->getHand().getCardsSet()));
     }
 
-    i_duel->ph6_end(cardsToDiscard);
+    i_duel->ph6_end(discarded);
 }
 
 

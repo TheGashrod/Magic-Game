@@ -58,7 +58,7 @@ class Duel : public Duel_interface {
     // chooseCard is called again here
     public: virtual void ph5_end();
     private: virtual void ph6Discard_start();
-    public: virtual void ph6_end(std::vector<const Card*> discarded);
+    public: virtual void ph6_end(std::vector<const Card*> discarded);   
     private: void gameOver(Contender* winner);
 
 

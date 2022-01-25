@@ -360,12 +360,12 @@ void Duel::ph6_end(std::vector<const Card*> discarded) {
 	// Check whether the interface has discarded enough cards
 	if(discarded.size() > 0) {
 		size_t newSize = d_currentContender->getHand().getCardsSet().size() - discarded.size();
-		if(newSize < 7) {
+		if(newSize < MAX_CARDS_AMOUNT) {
 			throw string("An interface has given an excessive number of cards to discard");
 		}
-		else if(newSize > 7) {
+		else if(newSize > MAX_CARDS_AMOUNT) {
 			for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
-				(*inter)->ph6Discard_wait(d_currentContender, newSize-7);
+				(*inter)->ph6Discard_wait(d_currentContender, newSize-MAX_CARDS_AMOUNT);
 			}
 			return;
 		}
