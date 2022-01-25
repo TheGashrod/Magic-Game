@@ -57,6 +57,7 @@ void Duel::setRemainingTurns(unsigned char nb){
 	d_remainingTurns = nb;
 }
 
+Contender* Duel::getCurrentContender(){ return d_currentContender;}
 
 Contender* Duel::getOtherContender() {
 	for(auto con = d_contenders.begin(); con != d_contenders.end(); con++) {
@@ -81,23 +82,7 @@ void Duel::showTextInInterfaces(string t) {
 	}
 }
 
-void Duel::contenderGameVision(Contender* currentContender){
-	
-	// for(int i=0; i<contenders.size(); i++) {
-	// 	if(&contenders[i] == &currentContender){
-	// 	}else{
-	// 		cout << " My opposent in game's cards " << contenders[i]->getOriginalInGameCards()->getOriginalCardsSet()<< endl;
-	// 	}
-	// }
 
-	cout << " My opposent in game's cards " << *getOtherContender()->getOriginalInGameCards() << endl;
-
-
-	cout << " My in game's cards "<< *currentContender->getOriginalInGameCards() << endl;
-	
-
-	cout << " My hand's cards " << *currentContender->getOriginalHand() << endl;
-}
 
 
 
@@ -132,7 +117,7 @@ void Duel::start() {
 		}
 	}
 
-	contenderGameVision(d_currentContender);
+
 
 	// Starting first turn, skipping the 1st phase as mentioned in the rules
 	ph2Disengage_start();

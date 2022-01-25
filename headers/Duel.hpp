@@ -66,7 +66,7 @@ class Duel : public Duel_interface {
     public:
         char getPhase() const;
         unsigned char getRemainingTurns() const;
-        const Contender* getCurrentContender() const;
+        Contender* getCurrentContender();
         Contender* getOtherContender();
 
         void setRemainingTurns(unsigned char nb);
@@ -77,7 +77,7 @@ class Duel : public Duel_interface {
     // Other getters/setters :
     public:
         const std::vector<const Contender*> getContenders() const;
-        void contenderGameVision(Contender* currentContender); 
+        
     
 
 

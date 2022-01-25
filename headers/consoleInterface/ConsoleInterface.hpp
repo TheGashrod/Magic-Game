@@ -44,6 +44,7 @@ class ConsoleInterface : public Interface_interface {
 		const Creature* pickACreature(std::vector<const Creature*> cards) const;
 		const Creature* pickACreature_option(std::vector<const Creature*> cards) const;
 		bool pickYesOrNo() const;
+		void contenderGameVision(); 
 
 
 

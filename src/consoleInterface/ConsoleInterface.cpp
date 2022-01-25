@@ -47,6 +47,9 @@ void ConsoleInterface::ph1DrawnCard(const Contender* con, const Card* card) {
 
 
 void ConsoleInterface::ph2Disengage(const Contender* con, const std::list<const Card*> c) {
+    // print  Game vision :
+    contenderGameVision();
+
     cout << endl << con << " Your in-game cards have been disengaged :" << endl;
     if(c.size() == 0) {
         cout << "Aucune" << endl;
@@ -271,4 +274,15 @@ bool ConsoleInterface::pickYesOrNo() const {
     cin >> answer;;
 
     return answer;
+}
+
+void ConsoleInterface::contenderGameVision(){
+
+    cout << *i_duel->getOtherContender() << " In game's cards " << *i_duel->getOtherContender()->getOriginalInGameCards() << endl;
+
+
+    cout << *i_duel->getCurrentContender() << " In game's cards "<< *i_duel->getCurrentContender()->getOriginalInGameCards() << endl;
+    
+
+    cout << *i_duel->getCurrentContender() <<" Hand's cards " << *i_duel->getCurrentContender()->getOriginalHand() << endl;
 }
