@@ -49,7 +49,7 @@ class Duel : public Duel_interface {
     private: virtual void ph1Draw_start();
     private: virtual void ph2Disengage_start();
     private: virtual void ph3PlayCard_start();
-    public: virtual void chooseCard(const Card* c);
+    public: virtual void chooseCard(const Card* c, const vector<const Land*> specificCosts, const vector<const Land*> anyCosts);
     public: virtual void ph3_end();
     private: virtual void ph4Fight_start();
     public: virtual void ph4Fight(const Creature* att, std::vector<const Creature*> def);

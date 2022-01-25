@@ -186,7 +186,7 @@ void Duel::ph3PlayCard_start() {
 
 
 /* Note : c cannot be nullptr, since ph3_end() is supposed to be called in these cases instead */
-void Duel::chooseCard(const Card* c) {
+void Duel::chooseCard(const Card* c, const vector<const Land*> specificCosts, const vector<const Land*> anyCosts) {
 	if( !(d_currentPhase == 3 || d_currentPhase == 5) ) {
 		throw string("Duel::chooseCard has been called out of phase 3 or 5");
 		return;

@@ -16,7 +16,7 @@ class Duel_interface {
    protected: virtual void ph1Draw_start() = 0;
    protected: virtual void ph2Disengage_start() = 0;
    protected: virtual void ph3PlayCard_start() = 0;
-   public: virtual void chooseCard(const Card* c) = 0;
+   public: virtual void chooseCard(const Card* c, const vector<const Land*> specificCosts, const vector<const Land*> anyCosts) = 0;
    public: virtual void ph3_end() = 0;
    protected: virtual void ph4Fight_start() = 0;
    public: virtual void  ph4Fight(const Creature* att, std::vector<const Creature*> def) = 0;

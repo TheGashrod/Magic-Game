@@ -70,7 +70,21 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
         i_duel->ph3_end();
     }
     else {
-        i_duel->chooseCard( picked );
+        vector<const Land*> specificCost = vector<const Land*>();
+        vector<const Land*> anyCost = vector<const Land*>();
+
+        Card* c = con->getHand().getCardById(picked->getId());
+        if( Creature* c = dynamic_cast<Creature*>(c) ) {
+            size_t nbColors = c->getColorCost().size();
+            while(nbColors > 0) {
+                cout << endl << "You must pick " << nbColors << " specific lands and " << c->getAnyCost() << " lands of any type to invoke " << c->getName() << "." << endl
+                << "You will now pick the first specific land." << endl;
+                nbColors--;
+            }
+        }
+
+
+        i_duel->chooseCard( picked, specificCost, anyCost );
     }
 }
 
