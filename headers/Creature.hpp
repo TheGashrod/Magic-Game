@@ -4,6 +4,7 @@
 
 #include <list>
 #include <tuple>
+#include <vector>
 
 
 #include "Card.hpp"
@@ -11,6 +12,7 @@
 
 
 class Contender;
+class Land;
 
 
 typedef unsigned char stat;
@@ -74,6 +76,7 @@ class Creature : public Card {
 		int dealDamageTo(Creature* c);
 		int dealDamageTo(Contender* c) const;
 		int receiveDamageFrom(Creature* c);
+		bool isFittingCosts(std::vector<Land> specificCost, std::vector<Land> anyCost) const;
 
 	
 	// Print :
