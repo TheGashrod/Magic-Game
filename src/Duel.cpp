@@ -197,7 +197,6 @@ void Duel::chooseCard(const Card* c, const vector<const Land*> specificCosts, co
 	cout << "Duel::chooseCard 1" << endl;
 
 
-	// TODO : Check cost in interface
 	// TODO : Check number of lands in interface
 	
 	// Preventing using multiple lands during the same turn
