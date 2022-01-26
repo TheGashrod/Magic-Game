@@ -6,12 +6,17 @@
 #include "../headers/Player.hpp"
 #include "../headers/CardsSet.hpp"
 #include "../headers/enums/Color.hpp"
+#include "../headers/assets/Lands.hpp"
+#include "../headers/assets/Creatures.hpp"
 #include "../headers/test/testConsoleInterface.hpp"
 #include <iostream>
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
+
+	Lands landCards = Lands();
+	Creatures creatureCards = Creatures();
 
 	Player p1 = Player("J1", CardsSet(std::vector<Card*>()));
 	Player p2 = Player("J2", CardsSet(std::vector<Card*>()));
@@ -25,12 +30,15 @@ int main(int argc, char *argv[]) {
 	Color f = Blue;
 
 	if (f == Blue){
-		cout << "hello Gael et Simo" << endl;
+		cout << landCards.at(0) << endl;
 	}
 
 
 
-	mainTest();
+
+
+
+	// mainTest();
 
 
 
