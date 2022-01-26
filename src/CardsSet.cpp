@@ -33,6 +33,16 @@ vector<const Card*> CardsSet::getCardsSet() const {
 	return cards;
 }
 
+CardsSet CardsSet::getNotLands() const{
+	vector<Card*> NotLands = vector<Card*>();
+	for(auto c = c_cardsSet.begin(); c != c_cardsSet.end(); c++) {
+		if( !(!(*c)->isLand())) {
+			NotLands.push_back( (*c) );
+		}
+	}
+	return NotLands;
+}
+
 
 CardsSet CardsSet::getDisengaged() const {
 	vector<Card*> cards = vector<Card*>();

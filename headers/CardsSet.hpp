@@ -30,11 +30,13 @@ class CardsSet {
 		vector<const Card*> getCardsSet() const;
 		void setCardsSet(vector<Card* > cardsSet);
 		CardsSet getDisengaged() const;
+		CardsSet getNotLands() const;
 		std::vector<const Creature*> getCreatures() const;
 		std::vector<const Land*> getLands() const;
 		std::vector<Creature*> getOriginalCreatures();
 		std::vector<Land*> getOriginalLands();
 		vector<Card*>* getOriginalCardsSet();
+
 		Card* getCardById(long id);
 		
 
