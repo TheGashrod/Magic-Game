@@ -97,26 +97,18 @@ bool Creature::isFittingCosts(const vector<const Land*> specificCost, const vect
 		}
 	}
 
-	cout << "Checked whether each land is unique" << endl;
-
 	// Checking whether each land is engaged
 	for(auto land = allLands.begin(); land != allLands.end(); land++) {
 		if((*land)->isEngaged()) {
 			return false;
 		}
 	}
-
-
-	cout << "Checked whether each land is disengaged" << endl;
 	
 
 	// Checking whether there are enough "any" lands for this creature
 	if(anyCost.size() != getAnyCost()) {
 		return false;
 	}
-
-
-	cout << "Checked whether there are enough any lands" << endl;
 
 	// Matching each specific cost with a land
 	std::list<Color> cost = std::list<Color>(getColorCost());
@@ -139,9 +131,6 @@ bool Creature::isFittingCosts(const vector<const Land*> specificCost, const vect
 		}
 	}
 
-	cout << "Checked match between specific colors" << endl;
-
-	
 
 	// Returning true if everything's fine
 	return true;

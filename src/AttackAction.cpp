@@ -120,35 +120,16 @@ void AttackAction::execute() {
 		for(auto att = attackers.begin(); att != attackers.end(); att++) {
 			for(auto def = defenders.begin(); def != defenders.end(); def++) {
 				if((*att)->isAlive() && (*def)->isAlive()) {
-					
-
-					cout << endl << "FIGHT" << endl;
-					cout << (*att) << endl << (*def) << endl;
 
 					(*att)->dealDamageTo( (*def) );
 					(*def)->dealDamageTo( (*att) );
 
-					
-					cout << (*att) << endl << (*def) << endl;
-					
-					// TODO Find why the card being sent to cemetary (probably) cannot be found
-
 					// Send deads to cemetary :
 					if( !(*def)->isAlive() ) {
-						cout << "SENDING A DEFENDING CARD TO CEMETARY" << endl;
-						cout << (*def) << endl;
-						cout << "----------------------------------------------------------" << endl;
-						cout << a_victim->getInGameCards() << endl;
 						a_victim->getInGameCards().transfer( (*def), a_victim->getOriginalCemetary() );
-						cout << "----------------------------------------------------------" << endl;
 					}
 					if( !(*att)->isAlive() ) {
-						cout << "SENDING AN ATTACKING CARD TO CEMETARY" << endl;
-						cout << (*att) << endl;
-						cout << "----------------------------------------------------------" << endl;
-						cout << a_victim->getInGameCards() << endl;
 						a_attacker->getInGameCards().transfer( (*att), a_attacker->getOriginalCemetary() );
-						cout << "----------------------------------------------------------" << endl;
 						break;
 					}
 				}		
@@ -160,10 +141,8 @@ void AttackAction::execute() {
 	// Attacking the player if there's no defender
 	else {
 		for(auto att = attackers.begin(); att != attackers.end(); att++) {
-			cout << "Victim's vitality changes from " << a_victim->getVitality() << " to ";
 			int dmg = a_victim->damageBy((*att)->getPower());
 			(*att)->usePower(dmg);
-			cout << a_victim->getVitality() << endl;
 		}
 	}
 }

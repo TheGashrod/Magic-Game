@@ -117,7 +117,6 @@ void Duel::start() {
 		}
 		
 		for(int i = 0; i < MAX_CARDS_AMOUNT; i++) {
-			// cout << "Drawing a card\n";
 			c->drawCard();
 		}
 	}
@@ -282,7 +281,6 @@ void Duel::ph3_end() {
 
 void Duel::ph4Fight_start() {
 	d_currentPhase = 4;
-	cout << "Beginning phase 4" << endl;
 
 	for(Interface_interface* interface : d_interfaces) {
 		interface->ph4Fight_wait(d_currentContender, getOtherContender());
@@ -297,8 +295,6 @@ void Duel::ph4Fight(const Creature* att, std::vector<const Creature*> def) {
 		throw string("Duel::ph4Fight has been called out of phase 4");
 		return;
 	}
-
-	cout << "Before building AttackRound" << endl;
 
 	// Building AttackRound
 	AttackRound ar = AttackRound();
@@ -318,10 +314,8 @@ void Duel::ph4Fight(const Creature* att, std::vector<const Creature*> def) {
 
 
 	// Executing AttackRound
-	cout << "Before executing attack " << endl;
 	ar.execute();
 
-	cout << "After executing attack" << endl;
 
 	// Check if a player has died
 	if( d_currentContender->getVitality() <= 0 ) {
@@ -357,7 +351,6 @@ void Duel::ph4_end() {
 
 void Duel::ph5PlayCard_start() {
 	d_currentPhase = 5;
-	cout << "Beginning phase 5" << endl;
 	
 	for(auto inter = d_interfaces.begin(); inter != d_interfaces.end(); inter++) {
 		(*inter)->ph5PlayCards_wait(d_currentContender);
@@ -384,7 +377,6 @@ void Duel::ph5_end() {
 
 void Duel::ph6Discard_start() {
 	d_currentPhase = 6;
-	cout << "Beginning phase 6" << endl;
 
 	// Verif que le jour à moins de 7 cartes sinon calculer cmb il a en plus, l'envoyer à l'interface...
 	// puis passer à phase6end depuis l'interface
@@ -447,7 +439,7 @@ void Duel::ph6_end(std::vector<const Card*> discarded) {
 
 
 void Duel::gameOver(Contender* winner) { //! winner can be nullptr if the game failed to begin
-	cout << "\033[0;0m";
+	showTextInInterfaces("\033[0;0m");
 
 	if(winner == nullptr) {
 		showTextInInterfaces("The game has been cancelled.");
@@ -457,5 +449,4 @@ void Duel::gameOver(Contender* winner) { //! winner can be nullptr if the game f
 	showTextInInterfaces("\nEND OF THE GAME");
 	showTextInInterfaces("Winner : ");
 	showTextInInterfaces(winner->getPlayer().getName());
-	// TODO
 }

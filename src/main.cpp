@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
 	for (int i=0; i<20; i++){ deck.push_back(&landCards.landsList.at(i)); };
 
 
-	Player p1 = Player("SIMO", CardsSet(deck));
+	Player p1 = Player("MOHAMMED", CardsSet(deck));
 	Player p2 = Player("GAEL", CardsSet(deck));
 	
    Duel duel = Duel(p1, p2);

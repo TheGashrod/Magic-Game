@@ -85,32 +85,21 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
     
     
     const Card* picked = pickACard_option( pickableCards );
-    // cout << "ConsoleInterface::ph3PlayCards_wait 0.2" << endl;
     
     if(picked == nullptr) {
         i_duel->ph3_end();
     }
     else {
 
-        
-        // cout << "ConsoleInterface::ph3PlayCards_wait 0.3" << endl;
         vector<const Land*> specificCost = vector<const Land*>();
         vector<const Land*> anyCost = vector<const Land*>();
-        
-        // cout << "ConsoleInterface::ph3PlayCards_wait 0.4" << endl;
 
 
         shared_ptr<Card> ptr = picked->clone();
-        //CardsSet(vector<Card*>({&(*ptr)}));
         Card* card = &(*ptr);
 
         if(!card->isLand())
         if( Creature* c = dynamic_cast<Creature*>(card) ) {
-
-            
-            // cout << "ConsoleInterface::ph3PlayCards_wait 1" << endl;
-            cout << c << endl;
-            // cout << "ConsoleInterface::ph3PlayCards_wait 1.0" << endl;
 
 
             // Picking the specific lands
@@ -133,17 +122,13 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
                     }
                 }
 
-                // cout << "ConsoleInterface::ph3PlayCards_wait 1.4" << endl;
-
                 if(land == nullptr) {
                     cout << "\033[1;32m" << con << "\033[1;32m Aborting creature invokation." << endl;
                     ph3PlayCards_wait(con);
                     return;
                 }
 
-                // cout << "ConsoleInterface::ph3PlayCards_wait 1.5" << endl;
                 specificCost.push_back(land);
-                // cout << "ConsoleInterface::ph3PlayCards_wait 1.6" << endl;
                 remainingColors--;
             }
             
@@ -161,9 +146,6 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
                 anyCost.push_back(land);
             }
 
-
-            
-            // cout << "ConsoleInterface::ph3PlayCards_wait 3";
 
         }else{
             if(i_duel->getRemainingLands() > 0){
@@ -267,7 +249,6 @@ void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
         vector<const Land*> anyCost = vector<const Land*>();
 
         shared_ptr<Card> ptr = picked->clone();
-        //CardsSet(vector<Card*>({&(*ptr)}));
         Card* card = &(*ptr);
 
         if(!card->isLand())

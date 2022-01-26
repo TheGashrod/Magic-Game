@@ -21,7 +21,6 @@ Contender::Contender (Player p, int vita, CardsSet deck):
 		c_cards.push_back( cPtr );
 		newCards.push_back( c_cards.at(c_cards.size()-1).get() );
 	}
-	// cout << "Contender::Contender : After loop" << endl;
 	CardsSet cs = CardsSet(newCards);
 	c_library = cs;
 }
