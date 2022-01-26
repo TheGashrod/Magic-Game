@@ -90,6 +90,9 @@ int mainTest() {
 	cout << "TEST AAAAH 2" << endl;
 
 
+	Duel d3 = Duel(p3, p3);
+	ConsoleInterface inter3 = ConsoleInterface(&d3);
+
 
 	const Contender* con1 = d.getContenders().at(0);
 	const Contender* con2 = d.getContenders().at(1);
@@ -139,8 +142,16 @@ int mainTest() {
 	cout << "Other player : " << d.getOtherContender()->getPlayer().getName() << endl;
 
 	//d.start();
+	/*
 	try {
 		d2.start();
+	}
+	catch(string s) {
+		cout << s << endl;
+	}
+	*/
+	try {
+		d3.start();
 	}
 	catch(string s) {
 		cout << s << endl;
