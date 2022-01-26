@@ -1,6 +1,3 @@
-// #include <iomanip>
-
-
 #include "../headers/consoleInterface/ConsoleInterface.hpp"
 #include "../headers/Duel.hpp"
 #include "../headers/Player.hpp"
@@ -12,6 +9,9 @@
 #include <iostream>
 
 using namespace std;
+
+#define UNUSED(x) (void)x;
+
 
 int main(int argc, char *argv[]) {
 
@@ -29,6 +29,8 @@ int main(int argc, char *argv[]) {
 	
    Duel duel = Duel(p1, p2);
    ConsoleInterface interface = ConsoleInterface(&duel);
+
+	UNUSED(argc); UNUSED(argv); UNUSED(interface);
    
 
 

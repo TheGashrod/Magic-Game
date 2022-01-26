@@ -104,7 +104,6 @@ std::vector<Land*> CardsSet::getOriginalLands() {
 
 
 Card* CardsSet::getCardById(long id) {
-	bool flag = false;
 	for (int i = 0; i< int(c_cardsSet.size()); i++) {
 		if ((c_cardsSet[i])->getId() == id)
 			return c_cardsSet[i];
@@ -131,11 +130,9 @@ void CardsSet::push(Card *c){
 
 
 void CardsSet::transfer(const Card *c, CardsSet *cardsSetDestination){
-	bool flag = false;
 	for (int i = 0; i< int(c_cardsSet.size()); i++){
 		if ((c_cardsSet[i])->hasSameId(c)){
 			
-			flag = true;
 			cardsSetDestination->push(c_cardsSet[i]);
 			c_cardsSet.erase (c_cardsSet.begin()+i);
 			return;
