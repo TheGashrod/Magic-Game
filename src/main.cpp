@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
 	Color f = Blue;
 
 	if (f == Blue){
-		cout << landCards.at(0) << endl;
+		cout << landCards.landsList.at(0) << endl;
 	}
 
 
