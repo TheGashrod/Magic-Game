@@ -76,7 +76,7 @@ class Creature : public Card {
 		int dealDamageTo(Creature* c);
 		int dealDamageTo(Contender* c) const;
 		int receiveDamageFrom(Creature* c);
-		bool isFittingCosts(std::vector<Land> specificCost, std::vector<Land> anyCost) const;
+		bool isFittingCosts(const std::vector<const Land*> specificCost, const std::vector<const Land*> anyCost) const; 
 
 	
 	// Print :

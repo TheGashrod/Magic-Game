@@ -200,11 +200,36 @@ void Duel::chooseCard(const Card* c, const vector<const Land*> specificCosts, co
 	// TODO : Check cost in interface
 	// TODO : Check number of lands in interface
 	
+	// Preventing using multiple lands during the same turn
 	if(c->isLand()) {
 		if(d_remainingLands <= 0)
 			throw string("[Error] Cannot add multiple lands to the game during the same turn");
 		else
 			d_remainingLands--;
+	}
+	// Checking whether lands match a creature invokation
+	else {
+		Card* cNC = d_currentContender->getOriginalHand()->getCardById(c->getId());
+		if(Creature* crea = dynamic_cast<Creature*>(cNC)) {
+			if(!crea->isFittingCosts(specificCosts, anyCosts)) {
+				throw string("[Error] An interface has provided an unmatching set of lands to invoke a creature");
+				return;
+			}
+			// If the lands check was successful
+			vector<Land*> inGameLands = d_currentContender->getOriginalInGameCards()->getOriginalLands();
+			for(auto land = specificCosts.begin(); land != specificCosts.end(); land++) {
+				bool hasFound = false;
+				for(auto origLand = inGameLands.begin(); origLand != inGameLands.end(); origLand++) {
+					if((*land)->getId() == (*origLand)->getId()) {
+						(*origLand)->disengage();
+						hasFound = true;
+					}
+				}
+				if(!hasFound) {
+					throw string("[Error] An interface has provided an inexistent land");
+				}
+			}
+		}
 	}
 
 	// Effectively moving the card to the board

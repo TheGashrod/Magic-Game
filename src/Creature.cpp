@@ -78,11 +78,11 @@ int Creature::receiveDamageFrom(Creature* c) {
 }
 
 
-bool Creature::isFittingCosts(vector<Land> specificCost, vector<Land> anyCost) const {
+bool Creature::isFittingCosts(const vector<const Land*> specificCost, const vector<const Land*> anyCost) const {
 	
 
 	// Checking whether each Land is unique :
-	vector<Land> allLands = vector<Land>();
+	vector<const Land*> allLands = vector<const Land*>();
 	for(auto land = specificCost.begin(); land != specificCost.end(); land++) {
 		allLands.push_back( *land );
 	}
@@ -91,18 +91,22 @@ bool Creature::isFittingCosts(vector<Land> specificCost, vector<Land> anyCost) c
 	}
 	for(size_t i = allLands.size()-1; i > 0; i--) {
 		for(size_t i2 = 0; i2 < i; i2++) {
-			if(allLands.at(i).hasSameId( &allLands.at(i2) ))
+			if(allLands.at(i)->hasSameId( allLands.at(i2) ))
 				return false;
 		}
 	}
 
+	cout << "Checked whether each land is unique" << endl;
+
 	// Checking whether each land is engaged
 	for(auto land = allLands.begin(); land != allLands.end(); land++) {
-		if((*land).isEngaged()) {
+		if((*land)->isEngaged()) {
 			return false;
 		}
 	}
 
+
+	cout << "Checked whether each land is disengaged" << endl;
 	
 
 	// Checking whether there are enough "any" lands for this creature
@@ -110,6 +114,8 @@ bool Creature::isFittingCosts(vector<Land> specificCost, vector<Land> anyCost) c
 		return false;
 	}
 
+
+	cout << "Checked whether there are enough any lands" << endl;
 
 	// Matching each specific cost with a land
 	std::list<Color> cost = std::list<Color>(getColorCost());
@@ -119,7 +125,7 @@ bool Creature::isFittingCosts(vector<Land> specificCost, vector<Land> anyCost) c
 		int k = 0;
 		bool hasFound = false;
 		while(color != cost.end() && !hasFound) {
-			if( *(*land).getColor().begin() == *color) {
+			if( *(*land)->getColor().begin() == *color) {
 				cost.erase( color );
 				hasFound = true;
 			}
@@ -131,6 +137,8 @@ bool Creature::isFittingCosts(vector<Land> specificCost, vector<Land> anyCost) c
 			return false;
 		}
 	}
+
+	cout << "Checked match between specific colors" << endl;
 
 	
 

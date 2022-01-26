@@ -14,6 +14,7 @@
 
 
 using std::cout;
+using std::vector;
 
 
 
@@ -28,26 +29,39 @@ int mainTest() {
 	
 
 	Land la1 = Land("Terres désolées", Red, false);
-	Land la12 = Land(la1);
+	Land la12 = la1.cloneLand();
+	Land la13 = la1.cloneLand();
+	Land la14 = la1.cloneLand();
+	Land la1dup = la1.duplicateLand();
+	Land la1dup2 = la12.duplicateLand();
+	Land la1dup3 = la13.duplicateLand();
+	Land la1dup4 = la14.duplicateLand();
 	Land la2 = Land("Une boîte noire", Black, false);
+	Land la22 = la2.cloneLand();
+	Land la23 = la2.cloneLand();
+	Land la2dup = la2.duplicateLand();
+	Land la2dup2 = la22.duplicateLand();
+	Land la2dup3 = la23.duplicateLand();
 
 	auto a =  la1.clone();
 
-	if(c1.isFittingCosts( vector<Land>({la1, la1.duplicateLand()}), vector<Land>({la1.cloneLand()}) ) != false)
+	
+	if(c1.isFittingCosts( vector<const Land*>({&la1, &la1dup}), vector<const Land*>({&la12}) ) != false)
 		cout << "ERROR_MTG : isFittingCosts with c1;<[la1, la1'], la1> test should be false because the same element is input twice" << endl;
 
-	if(c1.isFittingCosts( vector<Land>({la1, la1.cloneLand()}), vector<Land>({la1.cloneLand()}) ) != true)
+	if(c1.isFittingCosts( vector<const Land*>({&la1, &la12}), vector<const Land*>({&la13}) ) != true)
 		cout << "ERROR_MTG : isFittingCosts with c1;<[la1, la1'], la1''> test should be true" << endl;
 	
-	if(c2.isFittingCosts( vector<Land>({la1, la1.cloneLand(), la1.cloneLand()}), vector<Land>({}) ) != false)
+	
+	if(c2.isFittingCosts( vector<const Land*>({&la1, &la12, &la13}), vector<const Land*>({}) ) != false)
 		cout << "ERROR_MTG : isFittingCosts with c2;<[la1, la1', la1''], []> test should be false because unmatching colors" << endl;
 	
 	la1.engage();
-	if(c2.isFittingCosts( vector<Land>({la1, la2.cloneLand(), la2}), vector<Land>({}) ) != false)
+	if(c2.isFittingCosts( vector<const Land*>({&la1, &la22, &la2}), vector<const Land*>({}) ) != false)
 		cout << "ERROR_MTG : isFittingCosts with c2;<[engaged la1, la2', la2], []> test should be false since all lands must be disengaged" << endl;
 	la1.disengage();
 	
-	if(c2.isFittingCosts( vector<Land>({la1, la2.cloneLand(), la2}), vector<Land>({}) ) != true)
+	if(c2.isFittingCosts( vector<const Land*>({&la1, &la22, &la2}), vector<const Land*>({}) ) != true)
 		cout << "ERROR_MTG : isFittingCosts with c2;<[la1, la2', la2], []> test should be true" << endl;
 	
 	
@@ -105,8 +119,13 @@ int mainTest() {
 	
 	const Contender* con1Ptr = con1;
 
+	cout << "== CARDSSET ==" << endl;
+
 	CardsSet l1 = CardsSet(std::vector<Card*>({c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2}));
 	CardsSet l2 = CardsSet(std::vector<Card*>({}));
+
+	CardsSet l1dis = l1.getDisengaged();
+	cout << l1dis << endl;
 
 	std::cout << l1.getOriginalCardsSet()->size();
 
