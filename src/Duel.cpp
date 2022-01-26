@@ -29,9 +29,7 @@ using std::size_t;
 
 Duel::Duel(Player player1, Player player2) {
 	Contender c1 = Contender(player1, 20, player1.getDeck());
-	// cout << "Duel::Duel : Before c2 initialization" << endl;
 	Contender c2 = Contender(player2, 20, player2.getDeck());
-	// cout << "Duel::Duel : After c2 initialization" << endl;
 	d_contenders.push_back(c1);
 	d_contenders.push_back(c2);
 }
@@ -107,7 +105,7 @@ void Duel::start() {
 	size_t startId = randInt(d_contenders.size());
 	d_currentContender = &(d_contenders.at(startId));
 	
-	showTextInInterfaces("The first player has been chosen randomly.");
+	showTextInInterfaces("\033[1;32mThe first player has been chosen randomly.");
 
 
 	// Pick 7 cards randomly
@@ -206,10 +204,7 @@ void Duel::chooseCard(const Card* c, const vector<const Land*> specificCosts, co
 		return;
 	}
 
-	cout << "Duel::chooseCard 1" << endl;
 
-
-	// TODO : Check number of lands in interface
 	
 	// Preventing using multiple lands during the same turn
 	if(c->isLand()) {
@@ -226,13 +221,27 @@ void Duel::chooseCard(const Card* c, const vector<const Land*> specificCosts, co
 				throw string("[Error] An interface has provided an unmatching set of lands to invoke a creature");
 				return;
 			}
-			// If the lands check was successful
+			// If the lands check was successful,
+			// Engaging the specific lands
 			vector<Land*> inGameLands = d_currentContender->getOriginalInGameCards()->getOriginalLands();
 			for(auto land = specificCosts.begin(); land != specificCosts.end(); land++) {
 				bool hasFound = false;
 				for(auto origLand = inGameLands.begin(); origLand != inGameLands.end(); origLand++) {
 					if((*land)->getId() == (*origLand)->getId()) {
-						(*origLand)->disengage();
+						(*origLand)->engage();
+						hasFound = true;
+					}
+				}
+				if(!hasFound) {
+					throw string("[Error] An interface has provided an inexistent land");
+				}
+			}
+			// Engaging the "any" lands
+			for(auto land = anyCosts.begin(); land != anyCosts.end(); land++) {
+				bool hasFound = false;
+				for(auto origLand = inGameLands.begin(); origLand != inGameLands.end(); origLand++) {
+					if((*land)->getId() == (*origLand)->getId()) {
+						(*origLand)->engage();
 						hasFound = true;
 					}
 				}
