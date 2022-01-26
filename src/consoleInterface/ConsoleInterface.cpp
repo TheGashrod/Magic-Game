@@ -118,10 +118,14 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
             vector<const Land*> availableCol = con->getInGameCards().getDisengaged().getLands();
             size_t remainingColors = costs.size();
             for(auto cost = costs.begin(); cost != costs.end(); cost++) {
-                cout << endl << con << " You must pick a " <<  *cost << " land, " << remainingColors << " other specific land(s) and " << c->getAnyCost() << " land(s) of any type to invoke " << c->getName() << "." << endl
-                << con << " You will now pick the first asked land." << endl;
-                const Land* land = pickALand_option( availableCol );
-                cout << "Size of availableCol : " << availableCol.size() << endl;
+                cout << endl << con << " You must pick a " <<  *cost << " land, " << remainingColors-1 << " other specific land(s) and " << c->getAnyCost() << " land(s) of any type to invoke " << c->getName() << "." << endl
+                << con << " You will now pick the first asked land.";
+
+                const Land* land; // Force the player to give the right color of land
+                do {
+                    cout << endl;
+                    land = pickALand_option( availableCol );
+                } while( !(land == nullptr || *land->getColor().begin() == *cost) );
                 for(auto land2 = availableCol.begin(); land2 != availableCol.end(); land2++) { // Removing from the pickable list
                     if(land == (*land2)) {
                         availableCol.erase(land2);
@@ -148,7 +152,7 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
             // Picking the "any" lands
             for(remainingColors = c->getAnyCost(); remainingColors > 0; remainingColors--) {
                 cout << endl << con << " You must now pick " << remainingColors << " land(s) of any color." << endl;
-                const Land* land = pickALand_option( con->getInGameCards().getLands() );
+                const Land* land = pickALand_option( availableCol );
                 if(land == nullptr) {
                     cout << con << " Aborting creature invokation." << endl;
                     ph3PlayCards_wait(con);
@@ -176,8 +180,6 @@ void ConsoleInterface::ph4Fight_wait(const Contender* att, const Contender* def)
 
     // print  contender Game vision :
     contenderGameVision();
-
-    cout << endl;
     cout << "= FIGHT PHASE ===/" << endl;
 
 
@@ -207,19 +209,13 @@ void ConsoleInterface::ph4Fight_wait(const Contender* att, const Contender* def)
                     // Removing from the pickable creatures
                     auto altC = defCandidates.begin();
                     bool hasDeleted = false;
-                    cout << "ph4 interface remove from pickable 1" << endl;
                     while(!hasDeleted && altC != defCandidates.end()) {
-                        cout << "ph4 interface remove from pickable 2" << endl;
                         if((*altC)->hasSameId(c)) {
-                             cout << "ph4 interface remove from pickable 3" << endl;
                             defCandidates.erase( altC );
                             hasDeleted = true;
                         }
-                        cout << "ph4 interface remove from pickable 4" << endl;
                         altC++;
-                        cout << "ph4 interface remove from pickable 5" << endl;
                     }
-                    cout << "ph4 interface remove from pickable 6" << endl;
                 }
             } while(mustContinue);
 
@@ -243,12 +239,19 @@ void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
 
     // print  contender Game vision :
     contenderGameVision();
-
-    cout << endl;
     cout << "= INVOCATION PHASE 2 ===/" << endl;
-
     cout << endl << con << " You can put cards from your hand into the game again." << endl;
-    const Card* picked = pickACard_option( con->getHand().getCardsSet() );
+
+
+    std::vector<const Card*> pickableCards;
+    if(i_duel->getRemainingLands() > 0) {
+        pickableCards = con->getHand().getCardsSet();
+    }
+    else {
+        pickableCards = con->getHand().getNotLands().getCardsSet();
+    }
+    
+    const Card* picked = pickACard_option( pickableCards );
     
     if(picked == nullptr) {
         i_duel->ph5_end();
@@ -269,9 +272,15 @@ void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
             vector<const Land*> availableCol = con->getInGameCards().getDisengaged().getLands();
             size_t remainingColors = costs.size();
             for(auto cost = costs.begin(); cost != costs.end(); cost++) {
-                cout << endl << con << " You must pick a " <<  *cost << " land, " << remainingColors << " other specific land(s) and " << c->getAnyCost() << " land(s) of any type to invoke " << c->getName() << "." << endl
-                << con << " You will now pick the first asked land." << endl;
-                const Land* land = pickALand_option( availableCol );
+                cout << endl << con << " You must pick a " <<  *cost << " land, " << remainingColors-1 << " other specific land(s) and " << c->getAnyCost() << " land(s) of any type to invoke " << c->getName() << "." << endl
+                << con << " You will now pick the first asked land.";
+                
+                const Land* land; // Force the player to give the right color of land
+                do {
+                    cout << endl;
+                    land = pickALand_option( availableCol );
+                } while( !(land == nullptr || *land->getColor().begin() == *cost) );
+
                 for(auto land2 = availableCol.begin(); land2 != availableCol.end(); land2++) { // Removing from the pickable list
                     if(land == (*land2)) {
                         availableCol.erase(land2);
@@ -291,7 +300,7 @@ void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
             // Picking the "any" lands
             for(remainingColors = c->getAnyCost(); remainingColors > 0; remainingColors--) {
                 cout << endl << con << " You must now pick " << remainingColors << " land(s) of any color." << endl;
-                const Land* land = pickALand_option( con->getInGameCards().getLands() );
+                const Land* land = pickALand_option( availableCol );
                 if(land == nullptr) {
                     cout << con << " Aborting creature invokation." << endl;
                     ph5PlayCards_wait(con);
