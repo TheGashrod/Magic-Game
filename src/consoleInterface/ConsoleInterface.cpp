@@ -66,23 +66,23 @@ void ConsoleInterface::ph2Disengage(const Contender* con, const std::list<const 
 
 
 void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
-    cout << "ConsoleInterface::ph3PlayCards_wait 0" << endl;
+    // cout << "ConsoleInterface::ph3PlayCards_wait 0" << endl;
     cout << endl << con << " You can put cards from your hand into the game." << endl;
     auto cardsTemp = con->getHand().getCardsSet();
-    cout << "ConsoleInterface::ph3PlayCards_wait 0.1" << endl;
+    // cout << "ConsoleInterface::ph3PlayCards_wait 0.1" << endl;
     const Card* picked = pickACard_option( cardsTemp );
-    cout << "ConsoleInterface::ph3PlayCards_wait 0.2" << endl;
+    // cout << "ConsoleInterface::ph3PlayCards_wait 0.2" << endl;
     
     if(picked == nullptr) {
         i_duel->ph3_end();
     }
     else {
         
-        cout << "ConsoleInterface::ph3PlayCards_wait 0.3" << endl;
+        // cout << "ConsoleInterface::ph3PlayCards_wait 0.3" << endl;
         vector<const Land*> specificCost = vector<const Land*>();
         vector<const Land*> anyCost = vector<const Land*>();
         
-        cout << "ConsoleInterface::ph3PlayCards_wait 0.4" << endl;
+        // cout << "ConsoleInterface::ph3PlayCards_wait 0.4" << endl;
 
         shared_ptr<Card> ptr = picked->clone();
         //CardsSet(vector<Card*>({&(*ptr)}));
@@ -92,9 +92,9 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
         if(!card->isLand())
         if( Creature* c = dynamic_cast<Creature*>(card) ) {
             
-            cout << "ConsoleInterface::ph3PlayCards_wait 1" << endl;
+            // cout << "ConsoleInterface::ph3PlayCards_wait 1" << endl;
             cout << c << endl;
-            cout << "ConsoleInterface::ph3PlayCards_wait 1.0" << endl;
+            // cout << "ConsoleInterface::ph3PlayCards_wait 1.0" << endl;
 
             // Picking the specific lands
             std::list<Color> costs = c->getColorCost();
@@ -113,20 +113,20 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
                         break;
                     }
                 }
-                cout << "ConsoleInterface::ph3PlayCards_wait 1.4" << endl;
+                // cout << "ConsoleInterface::ph3PlayCards_wait 1.4" << endl;
                 if(land == nullptr) {
                     cout << con << " Aborting creature invokation." << endl;
                     ph3PlayCards_wait(con);
                     return;
                 }
-                cout << "ConsoleInterface::ph3PlayCards_wait 1.5" << endl;
+                // cout << "ConsoleInterface::ph3PlayCards_wait 1.5" << endl;
                 specificCost.push_back(land);
-                cout << "ConsoleInterface::ph3PlayCards_wait 1.6" << endl;
+                // cout << "ConsoleInterface::ph3PlayCards_wait 1.6" << endl;
                 remainingColors--;
             }
             
             
-            cout << "ConsoleInterface::ph3PlayCards_wait 2" << endl;
+            // cout << "ConsoleInterface::ph3PlayCards_wait 2" << endl;
 
             // Picking the "any" lands
             for(remainingColors = c->getAnyCost(); remainingColors > 0; remainingColors--) {
@@ -141,7 +141,7 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
             }
 
             
-            cout << "ConsoleInterface::ph3PlayCards_wait 3";
+            // cout << "ConsoleInterface::ph3PlayCards_wait 3";
         }
 
 

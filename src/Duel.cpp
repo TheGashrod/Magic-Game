@@ -29,9 +29,9 @@ using std::size_t;
 
 Duel::Duel(Player player1, Player player2) {
 	Contender c1 = Contender(player1, 20, player1.getDeck());
-	cout << "Duel::Duel : Before c2 initialization" << endl;
+	// cout << "Duel::Duel : Before c2 initialization" << endl;
 	Contender c2 = Contender(player2, 20, player2.getDeck());
-	cout << "Duel::Duel : After c2 initialization" << endl;
+	// cout << "Duel::Duel : After c2 initialization" << endl;
 	d_contenders.push_back(c1);
 	d_contenders.push_back(c2);
 }
@@ -114,7 +114,7 @@ void Duel::start() {
 		}
 		
 		for(int i = 0; i < MAX_CARDS_AMOUNT; i++) {
-			cout << "Drawing a card\n";
+			// cout << "Drawing a card\n";
 			c->drawCard();
 		}
 	}

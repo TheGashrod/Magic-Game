@@ -149,11 +149,11 @@ void CardsSet::transfer(const Card *c, CardsSet *cardsSetDestination){
 ostream& CardsSet::print(ostream& os) const {
 	os << "CARDSSET" << endl;
 	
-	cout << "CardsSet::print 1" << endl;
+	// cout << "CardsSet::print 1" << endl;
 	for(auto c = c_cardsSet.begin(); c != c_cardsSet.end(); c++) {
 		os << "| " << (*c) << endl;
 	}
-	cout << "CardsSet::print 3" << endl;
+	cout << "" << endl;
 }
 
 

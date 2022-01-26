@@ -18,20 +18,21 @@ int main(int argc, char *argv[]) {
 	Lands landCards = Lands();
 	Creatures creatureCards = Creatures();
 
-	Player p1 = Player("J1", CardsSet(std::vector<Card*>()));
-	Player p2 = Player("J2", CardsSet(std::vector<Card*>()));
+	vector<Card*> deck = vector<Card*>();
+
+	for (int i=0; i<21; i++){ deck.push_back(&creatureCards.creaturesList.at(i)); };
+	for (int i=0; i<10; i++){ deck.push_back(&landCards.landsList.at(i)); };
+
+
+	Player p1 = Player("SIMO", CardsSet(deck));
+	Player p2 = Player("GAEL", CardsSet(deck));
 	
    Duel duel = Duel(p1, p2);
    ConsoleInterface interface = ConsoleInterface(&duel);
    duel.addInterface(&interface);
 
 
-
-	Color f = Blue;
-
-	if (f == Blue){
-		cout << landCards.landsList.at(0) << endl;
-	}
+   duel.start();
 
 
 
