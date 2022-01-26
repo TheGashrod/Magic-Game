@@ -96,6 +96,13 @@ bool Creature::isFittingCosts(vector<Land> specificCost, vector<Land> anyCost) c
 		}
 	}
 
+	// Checking whether each land is engaged
+	for(auto land = allLands.begin(); land != allLands.end(); land++) {
+		if((*land).isEngaged()) {
+			return false;
+		}
+	}
+
 	
 
 	// Checking whether there are enough "any" lands for this creature

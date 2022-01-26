@@ -42,6 +42,11 @@ int mainTest() {
 	if(c2.isFittingCosts( vector<Land>({la1, la1.cloneLand(), la1.cloneLand()}), vector<Land>({}) ) != false)
 		cout << "ERROR_MTG : isFittingCosts with c2;<[la1, la1', la1''], []> test should be false because unmatching colors" << endl;
 	
+	la1.engage();
+	if(c2.isFittingCosts( vector<Land>({la1, la2.cloneLand(), la2}), vector<Land>({}) ) != false)
+		cout << "ERROR_MTG : isFittingCosts with c2;<[engaged la1, la2', la2], []> test should be false since all lands must be disengaged" << endl;
+	la1.disengage();
+	
 	if(c2.isFittingCosts( vector<Land>({la1, la2.cloneLand(), la2}), vector<Land>({}) ) != true)
 		cout << "ERROR_MTG : isFittingCosts with c2;<[la1, la2', la2], []> test should be true" << endl;
 	
