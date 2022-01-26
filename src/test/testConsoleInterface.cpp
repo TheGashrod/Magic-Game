@@ -16,14 +16,6 @@
 using std::cout;
 
 
-Card* ca(Creature c) {
-	return &c;
-}
-Card* ca(Land a) {
-	return &a;
-}
-
-
 
 int mainTest() {
 
@@ -85,14 +77,18 @@ int mainTest() {
 
 	Player p1 = Player("J1", CardsSet(std::vector<Card*>({c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2, c1Ptr2})));
 	Player p2 = Player("J2", CardsSet(std::vector<Card*>({c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2})));
-	Player p3 = Player("J3", CardsSet(std::vector<Card*>({ca(la1), ca(la1), ca(la1), &la2, &la2, &la2, &la2, &la2, &la2, &c1, &c1, c1Ptr2, c1Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2})));
+	Player p3 = Player("J3", CardsSet(std::vector<Card*>({&la1, &la1, &la1, &la2, &la2, &la2, &la2, &la2, &la2, &c1, &c1, c1Ptr2, c1Ptr2, c2Ptr2, c2Ptr2, c2Ptr2, c2Ptr2})));
 
 	Duel d = Duel(p1, p2);
 	ConsoleInterface inter = ConsoleInterface(&d);
 
+	cout << "TEST AAAAH" << endl;
 
-	inter.pickALand_option( p3.getDeck().getLands() );
-	//inter.pickACreature( p3.getDeck().getCreatures() );
+	Duel d2 = Duel(p1, p3);
+	ConsoleInterface inter2 = ConsoleInterface(&d2);
+
+	cout << "TEST AAAAH 2" << endl;
+
 
 
 	const Contender* con1 = d.getContenders().at(0);
@@ -143,8 +139,20 @@ int mainTest() {
 	cout << "Other player : " << d.getOtherContender()->getPlayer().getName() << endl;
 
 	//d.start();
+	try {
+		d2.start();
+	}
+	catch(string s) {
+		cout << s << endl;
+	}
 	//d.ph1Draw_start();
 	//d.ph6Discard_start();
+	//inter.pickALand_option( p3.getDeck().getLands() );
+	//inter.pickACreature( p3.getDeck().getCreatures() );
 
 	
+
+
+
+	return 0;
 }

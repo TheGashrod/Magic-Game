@@ -27,7 +27,9 @@ using std::size_t;
 
 Duel::Duel(Player player1, Player player2) {
 	Contender c1 = Contender(player1, 20, player1.getDeck());
+	cout << "Duel::Duel : Before c2 initialization" << endl;
 	Contender c2 = Contender(player2, 20, player2.getDeck());
+	cout << "Duel::Duel : After c2 initialization" << endl;
 	d_contenders.push_back(c1);
 	d_contenders.push_back(c2);
 }
@@ -192,12 +194,14 @@ void Duel::chooseCard(const Card* c, const vector<const Land*> specificCosts, co
 		return;
 	}
 
+	cout << "Duel::chooseCard 1" << endl;
+
 
 	// TODO : Check cost in interface
 	// TODO : Check number of lands in interface
 	
 	if(c->isLand()) {
-		if(d_remainingLands > 0)
+		if(d_remainingLands <= 0)
 			throw string("[Error] Cannot add multiple lands to the game during the same turn");
 		else
 			d_remainingLands--;
