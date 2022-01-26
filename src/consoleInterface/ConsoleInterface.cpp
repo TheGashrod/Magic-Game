@@ -77,6 +77,7 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
         i_duel->ph3_end();
     }
     else {
+
         
         // cout << "ConsoleInterface::ph3PlayCards_wait 0.3" << endl;
         vector<const Land*> specificCost = vector<const Land*>();
@@ -84,28 +85,27 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
         
         // cout << "ConsoleInterface::ph3PlayCards_wait 0.4" << endl;
 
+
         shared_ptr<Card> ptr = picked->clone();
         //CardsSet(vector<Card*>({&(*ptr)}));
         Card* card = &(*ptr);
-        cout << "c obtained from ID : " << card << endl;
 
         if(!card->isLand())
         if( Creature* c = dynamic_cast<Creature*>(card) ) {
+
             
             // cout << "ConsoleInterface::ph3PlayCards_wait 1" << endl;
             cout << c << endl;
             // cout << "ConsoleInterface::ph3PlayCards_wait 1.0" << endl;
 
+
             // Picking the specific lands
             std::list<Color> costs = c->getColorCost();
-            vector<const Land*> availableCol = con->getInGameCards().getLands();
-            cout << "ConsoleInterface::ph3PlayCards_wait 1.1" << endl;
+            vector<const Land*> availableCol = con->getInGameCards().getDisengaged().getLands();
             size_t remainingColors = costs.size();
             for(auto cost = costs.begin(); cost != costs.end(); cost++) {
-                cout << "ConsoleInterface::ph3PlayCards_wait 1.2" << endl;
                 cout << endl << con << " You must pick a " <<  *cost << " land, " << remainingColors << " other specific land(s) and " << c->getAnyCost() << " land(s) of any type to invoke " << c->getName() << "." << endl
                 << con << " You will now pick the first asked land." << endl;
-                cout << "ConsoleInterface::ph3PlayCards_wait 1.3" << endl;
                 const Land* land = pickALand_option( availableCol );
                 for(auto land2 = availableCol.begin(); land2 != availableCol.end(); land2++) { // Removing from the pickable list
                     if(land == (*land2)) {
@@ -113,20 +113,22 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
                         break;
                     }
                 }
+
                 // cout << "ConsoleInterface::ph3PlayCards_wait 1.4" << endl;
+
                 if(land == nullptr) {
                     cout << con << " Aborting creature invokation." << endl;
                     ph3PlayCards_wait(con);
                     return;
                 }
+
                 // cout << "ConsoleInterface::ph3PlayCards_wait 1.5" << endl;
                 specificCost.push_back(land);
                 // cout << "ConsoleInterface::ph3PlayCards_wait 1.6" << endl;
                 remainingColors--;
             }
             
-            
-            // cout << "ConsoleInterface::ph3PlayCards_wait 2" << endl;
+ 
 
             // Picking the "any" lands
             for(remainingColors = c->getAnyCost(); remainingColors > 0; remainingColors--) {
@@ -140,8 +142,10 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
                 anyCost.push_back(land);
             }
 
+
             
             // cout << "ConsoleInterface::ph3PlayCards_wait 3";
+
         }
 
 
@@ -220,7 +224,56 @@ void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
         i_duel->ph5_end();
     }
     else {
-        //i_duel->chooseCard( picked );
+        vector<const Land*> specificCost = vector<const Land*>();
+        vector<const Land*> anyCost = vector<const Land*>();
+
+        shared_ptr<Card> ptr = picked->clone();
+        //CardsSet(vector<Card*>({&(*ptr)}));
+        Card* card = &(*ptr);
+
+        if(!card->isLand())
+        if( Creature* c = dynamic_cast<Creature*>(card) ) {
+
+            // Picking the specific lands
+            std::list<Color> costs = c->getColorCost();
+            vector<const Land*> availableCol = con->getInGameCards().getDisengaged().getLands();
+            size_t remainingColors = costs.size();
+            for(auto cost = costs.begin(); cost != costs.end(); cost++) {
+                cout << endl << con << " You must pick a " <<  *cost << " land, " << remainingColors << " other specific land(s) and " << c->getAnyCost() << " land(s) of any type to invoke " << c->getName() << "." << endl
+                << con << " You will now pick the first asked land." << endl;
+                const Land* land = pickALand_option( availableCol );
+                for(auto land2 = availableCol.begin(); land2 != availableCol.end(); land2++) { // Removing from the pickable list
+                    if(land == (*land2)) {
+                        availableCol.erase(land2);
+                        break;
+                    }
+                }
+                if(land == nullptr) {
+                    cout << con << " Aborting creature invokation." << endl;
+                    ph5PlayCards_wait(con);
+                    return;
+                }
+                specificCost.push_back(land);
+                remainingColors--;
+            }
+            
+
+            // Picking the "any" lands
+            for(remainingColors = c->getAnyCost(); remainingColors > 0; remainingColors--) {
+                cout << endl << con << " You must now pick " << remainingColors << " land(s) of any color." << endl;
+                const Land* land = pickALand_option( con->getInGameCards().getLands() );
+                if(land == nullptr) {
+                    cout << con << " Aborting creature invokation." << endl;
+                    ph5PlayCards_wait(con);
+                    return;
+                }
+                anyCost.push_back(land);
+            }
+
+        }
+
+
+        i_duel->chooseCard( picked, specificCost, anyCost );
     }
 }
 
