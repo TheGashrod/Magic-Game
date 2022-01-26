@@ -46,8 +46,8 @@ class ConsoleInterface : public Interface_interface {
 		const Land* pickALand(std::vector<const Land*> cards) const;
 		const Land* pickALand_option(std::vector<const Land*> cards) const;
 		bool pickYesOrNo() const;
-		void contenderGameVision(); 
-
+		void contenderGameVision();
+		void contenderOposentGameVision();
 
 
 
