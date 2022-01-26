@@ -5,6 +5,9 @@
 #include <list>
 
 
+#include "../headers/tools/str.hpp"
+
+
 using std::vector;
 using std::unique_ptr;
 
@@ -43,7 +46,7 @@ bool Land::isLand() const {
 
 
 ostream& Land::print(ostream& os) const {
-	os << "[Land] ";
+	os << "[Land" << str_if(!isEngaged(),"*") << "] ";
 
 	std::list<Color> colors = getColor();
 	for(auto color = colors.begin(); color != colors.end(); color++) {

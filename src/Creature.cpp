@@ -6,6 +6,7 @@
 
 #include "../headers/Contender.hpp"
 #include "../headers/Land.hpp"
+#include "../headers/tools/str.hpp"
 
 
 
@@ -151,7 +152,7 @@ bool Creature::isFittingCosts(const vector<const Land*> specificCost, const vect
 
 // Print :
 ostream& Creature::print(ostream& os) const {
-	os << "[Creature] " << c_colors << " " << c_name << "#" << getId()
+	os << "[Creature" << str_if(!isEngaged(),"*") << "] " << c_colors << " " << c_name << "#" << getId()
 			<< " | Power : " << (int)c_power<<"/"<<(int)c_powerDef
 			<< " | Toughness : "<<(int)c_toughness<<"/"<<(int)c_toughnessDef
 			<< " | Cost : "<<getColorCost();

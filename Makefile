@@ -4,6 +4,7 @@ LDFLAGS=-lncurses
 
 SRCS=\
 src/tools/random.cpp \
+src/tools/str.cpp \
 src/assets/Creatures.cpp \
 src/assets/Lands.cpp \
 src/Duel_interface.cpp \
