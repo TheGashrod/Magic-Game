@@ -95,6 +95,7 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
 
             // Picking the specific lands
             std::list<Color> costs = c->getColorCost();
+            vector<const Land*> availableCol = con->getInGameCards().getLands();
             cout << "ConsoleInterface::ph3PlayCards_wait 1.1" << endl;
             size_t remainingColors = costs.size();
             for(auto cost = costs.begin(); cost != costs.end(); cost++) {
@@ -102,7 +103,13 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
                 cout << endl << con << " You must pick a " <<  *cost << " land, " << remainingColors << " other specific land(s) and " << c->getAnyCost() << " land(s) of any type to invoke " << c->getName() << "." << endl
                 << con << " You will now pick the first asked land." << endl;
                 cout << "ConsoleInterface::ph3PlayCards_wait 1.3" << endl;
-                const Land* land = pickALand_option( con->getInGameCards().getLands() );
+                const Land* land = pickALand_option( availableCol );
+                for(auto land2 = availableCol.begin(); land2 != availableCol.end(); land2++) { // Removing from the pickable list
+                    if(land == (*land2)) {
+                        availableCol.erase(land2);
+                        break;
+                    }
+                }
                 cout << "ConsoleInterface::ph3PlayCards_wait 1.4" << endl;
                 if(land == nullptr) {
                     cout << con << " Aborting creature invokation." << endl;
