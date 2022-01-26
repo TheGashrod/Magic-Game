@@ -59,7 +59,7 @@ const Card * Contender::drawCard() {
 
 // Print :
 ostream& Contender::print(ostream& os) const {
-	return os << "[ " << getPlayer().getName() << " ( pv : " << c_vitality << ") ]";
+	return os << "[" << getPlayer().getName() << " ❤" << c_vitality << "]";
 }
 
 ostream& operator<<(ostream& os, const Contender* c) {
