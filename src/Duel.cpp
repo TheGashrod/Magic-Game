@@ -29,7 +29,9 @@ using std::size_t;
 
 Duel::Duel(Player player1, Player player2) {
 	Contender c1 = Contender(player1, 20, player1.getDeck());
+	cout << "Duel::Duel : Before c2 initialization" << endl;
 	Contender c2 = Contender(player2, 20, player2.getDeck());
+	cout << "Duel::Duel : After c2 initialization" << endl;
 	d_contenders.push_back(c1);
 	d_contenders.push_back(c2);
 }
@@ -193,21 +195,47 @@ void Duel::ph3PlayCard_start() {
 
 
 /* Note : c cannot be nullptr, since ph3_end() is supposed to be called in these cases instead */
-void Duel::chooseCard(const Card* c) {
+void Duel::chooseCard(const Card* c, const vector<const Land*> specificCosts, const vector<const Land*> anyCosts) {
 	if( !(d_currentPhase == 3 || d_currentPhase == 5) ) {
 		throw string("Duel::chooseCard has been called out of phase 3 or 5");
 		return;
 	}
 
+	cout << "Duel::chooseCard 1" << endl;
 
-	// TODO : Check cost in interface
+
 	// TODO : Check number of lands in interface
 	
+	// Preventing using multiple lands during the same turn
 	if(c->isLand()) {
-		if(d_remainingLands > 0)
+		if(d_remainingLands <= 0)
 			throw string("[Error] Cannot add multiple lands to the game during the same turn");
 		else
 			d_remainingLands--;
+	}
+	// Checking whether lands match a creature invokation
+	else {
+		Card* cNC = d_currentContender->getOriginalHand()->getCardById(c->getId());
+		if(Creature* crea = dynamic_cast<Creature*>(cNC)) {
+			if(!crea->isFittingCosts(specificCosts, anyCosts)) {
+				throw string("[Error] An interface has provided an unmatching set of lands to invoke a creature");
+				return;
+			}
+			// If the lands check was successful
+			vector<Land*> inGameLands = d_currentContender->getOriginalInGameCards()->getOriginalLands();
+			for(auto land = specificCosts.begin(); land != specificCosts.end(); land++) {
+				bool hasFound = false;
+				for(auto origLand = inGameLands.begin(); origLand != inGameLands.end(); origLand++) {
+					if((*land)->getId() == (*origLand)->getId()) {
+						(*origLand)->disengage();
+						hasFound = true;
+					}
+				}
+				if(!hasFound) {
+					throw string("[Error] An interface has provided an inexistent land");
+				}
+			}
+		}
 	}
 
 	// Effectively moving the card to the board
