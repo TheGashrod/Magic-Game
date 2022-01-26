@@ -42,7 +42,7 @@ void ConsoleInterface::showText(std::string t) {
 
 void ConsoleInterface::ph1DrawnCard(const Contender* con, const Card* card) {
     cout << endl;
-    cout << "(======================================== DRAWING A CARD ========================================)" << endl;
+    cout << "\033[1;32m(======================================== DRAWING A CARD ========================================)" << endl;
     cout << con << " You draw a card : \n" << card << "\n";
 }
 
@@ -51,7 +51,7 @@ void ConsoleInterface::ph1DrawnCard(const Contender* con, const Card* card) {
 
 void ConsoleInterface::ph2Disengage(const Contender* con, const std::list<const Card*> c) {
     cout << endl;
-    cout << "(======================================= DISENGAGING CARDS =======================================)" << endl;
+    cout << "\033[1;32m(======================================= DISENGAGING CARDS =======================================)" << endl;
     cout << con << " Your in-game cards have been disengaged :" << endl;
     if(c.size() == 0) {
         cout << "Aucune" << endl;
@@ -71,9 +71,9 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
     // print contender Game vision :
     contenderGameVision();
 
-    cout << "= INVOCATION PHASE ===/" << endl;
+    cout << "\033[38;5;153m= INVOCATION PHASE ===/" << endl;
 
-    cout << endl << con << " You can put cards from your hand into the game." << endl;
+    cout << endl << "\033[38;5;202m" << con << "\033[38;5;202m You can put cards from your hand into the game." << endl;
     
     std::vector<const Card*> pickableCards;
     if(i_duel->getRemainingLands() > 0) {
@@ -118,8 +118,8 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
             vector<const Land*> availableCol = con->getInGameCards().getDisengaged().getLands();
             size_t remainingColors = costs.size();
             for(auto cost = costs.begin(); cost != costs.end(); cost++) {
-                cout << endl << con << " You must pick a " <<  *cost << " land, " << remainingColors-1 << " other specific land(s) and " << c->getAnyCost() << " land(s) of any type to invoke " << c->getName() << "." << endl
-                << con << " You will now pick the first asked land.";
+                cout << endl << "\033[38;5;202m" << con << "\033[38;5;202m You must pick a " <<  *cost << " land, " << remainingColors-1 << " other specific land(s) and " << c->getAnyCost() << " land(s) of any type to invoke " << c->getName() << "." << endl
+                << con << "\033[38;5;202m You will now pick the first asked land.";
 
                 const Land* land; // Force the player to give the right color of land
                 do {
@@ -136,7 +136,7 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
                 // cout << "ConsoleInterface::ph3PlayCards_wait 1.4" << endl;
 
                 if(land == nullptr) {
-                    cout << con << " Aborting creature invokation." << endl;
+                    cout << "\033[1;32m" << con << "\033[1;32m Aborting creature invokation." << endl;
                     ph3PlayCards_wait(con);
                     return;
                 }
@@ -151,10 +151,10 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
 
             // Picking the "any" lands
             for(remainingColors = c->getAnyCost(); remainingColors > 0; remainingColors--) {
-                cout << endl << con << " You must now pick " << remainingColors << " land(s) of any color." << endl;
+                cout << endl << "\033[38;5;202m" << con << "\033[38;5;202m You must now pick " << remainingColors << " land(s) of any color." << endl;
                 const Land* land = pickALand_option( availableCol );
                 if(land == nullptr) {
-                    cout << con << " Aborting creature invokation." << endl;
+                    cout << "\033[1;32m" << con << "\033[1;32m Aborting creature invokation." << endl;
                     ph3PlayCards_wait(con);
                     return;
                 }
@@ -185,26 +185,26 @@ void ConsoleInterface::ph4Fight_wait(const Contender* att, const Contender* def)
 
     // print  contender Game vision :
     contenderGameVision();
-    cout << "= FIGHT PHASE ===/" << endl;
+    cout << "\033[38;5;153m= FIGHT PHASE ===/" << endl;
 
 
     if( att->getInGameCards().getDisengaged().getCreatures().size() > 0 ) {
     
-        cout << endl << att << " Do you want to attack " << def->getPlayer().getName() << " ?";
+        cout << endl << "\033[38;5;202m" << att << "\033[38;5;202m Do you want to attack " << def->getPlayer().getName() << " ?";
         bool isAttacking = pickYesOrNo();
         
         if(isAttacking) {
 
-            cout << endl << att << " Pick your attacking creature." << endl;
+            cout << endl << "\033[38;5;202m" << att << "\033[38;5;202m Pick your attacking creature." << endl;
             const Creature* attCreature = pickACreature( att->getInGameCards().getDisengaged().getCreatures() );
             
-            cout << endl << def << " Action from " << def->getPlayer().getName() << endl;
+            cout << endl << "\033[1;32m" << def << "\033[1;32m Action from " << def->getPlayer().getName() << endl;
             vector<const Creature*> defCreatures = vector<const Creature*>();
             bool mustContinue = true;
             vector<const Creature*> defCandidates = def->getInGameCards().getDisengaged().getCreatures();
             do {
                 contenderOposentGameVision();
-                cout << endl << def << " Pick a defending creature. (you can pick multiple ones till you type 0)" << endl;
+                cout << endl << "\033[38;5;202m" << def << "\033[38;5;202m Pick a defending creature. (you can pick multiple ones till you type 0)" << endl;
                 const Creature* c = pickACreature_option( defCandidates );
                 if(c == nullptr) {
                     mustContinue = false;
@@ -233,7 +233,7 @@ void ConsoleInterface::ph4Fight_wait(const Contender* att, const Contender* def)
             i_duel->ph4_end();
     }
     else {
-        cout << endl << att << " You do not have any creature able to attack. Skipping fight phase." << endl;
+        cout << endl << "\033[38;5;202m" << att << "\033[38;5;202m You do not have any creature able to attack. Skipping fight phase." << endl;
         i_duel->ph4_end();
     }
 }
@@ -245,8 +245,8 @@ void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
 
     // print  contender Game vision :
     contenderGameVision();
-    cout << "= INVOCATION PHASE 2 ===/" << endl;
-    cout << endl << con << " You can put cards from your hand into the game again." << endl;
+    cout << "\033[38;5;153m= INVOCATION PHASE 2 ===/" << endl;
+    cout << endl << "\033[38;5;202m" << con << "\033[38;5;202m You can put cards from your hand into the game again." << endl;
 
 
     std::vector<const Card*> pickableCards;
@@ -278,8 +278,8 @@ void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
             vector<const Land*> availableCol = con->getInGameCards().getDisengaged().getLands();
             size_t remainingColors = costs.size();
             for(auto cost = costs.begin(); cost != costs.end(); cost++) {
-                cout << endl << con << " You must pick a " <<  *cost << " land, " << remainingColors-1 << " other specific land(s) and " << c->getAnyCost() << " land(s) of any type to invoke " << c->getName() << "." << endl
-                << con << " You will now pick the first asked land.";
+                cout << endl << "\033[38;5;202m" << con << "\033[38;5;202m You must pick a " <<  *cost << " land, " << remainingColors-1 << " other specific land(s) and " << c->getAnyCost() << " land(s) of any type to invoke " << c->getName() << "." << endl
+                << "\033[38;5;202m" << con << " You will now pick the first asked land.";
                 
                 const Land* land; // Force the player to give the right color of land
                 do {
@@ -294,7 +294,7 @@ void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
                     }
                 }
                 if(land == nullptr) {
-                    cout << con << " Aborting creature invokation." << endl;
+                    cout << "\033[1;32m" << con << "\033[1;32m Aborting creature invokation." << endl;
                     ph5PlayCards_wait(con);
                     return;
                 }
@@ -305,10 +305,10 @@ void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
 
             // Picking the "any" lands
             for(remainingColors = c->getAnyCost(); remainingColors > 0; remainingColors--) {
-                cout << endl << con << " You must now pick " << remainingColors << " land(s) of any color." << endl;
+                cout << endl << "\033[38;5;202m" << con << "\033[38;5;202m You must now pick " << remainingColors << " land(s) of any color." << endl;
                 const Land* land = pickALand_option( availableCol );
                 if(land == nullptr) {
-                    cout << con << " Aborting creature invokation." << endl;
+                    cout << "\033[1;32m" << con << "\033[1;32m Aborting creature invokation." << endl;
                     ph5PlayCards_wait(con);
                     return;
                 }
@@ -328,14 +328,14 @@ void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
 void ConsoleInterface::ph6Discard_wait(const Contender* con, size_t nbToDiscard) {
 
     cout << endl;
-    cout << "(======================================= DISCARD PHASE =======================================)" << endl;
+    cout << "\033[1;32m(======================================= DISCARD PHASE =======================================)" << endl;
 
 
     // boucler sur nb to discard en demandant quelle carte envoyer au cimetière sur la hand du joueur
     std::vector<const Card*> discarded = {};
 
     for (int i=nbToDiscard; i>0; i--){
-        cout << endl << con << " You have an excessive number of cards. You must send " << i << " card(s) from your hand to the cemetary." << endl;
+        cout << endl << "\033[38;5;202m" << con << "\033[38;5;202m You have an excessive number of cards. You must send " << i << " card(s) from your hand to the cemetary." << endl;
         discarded.push_back(pickACard(con->getHand().getCardsSet()));
     }
 
@@ -356,13 +356,13 @@ const Card* ConsoleInterface::pickACard(std::vector<const Card*> cards) const {
     size_t choice;
 
     do {
-        cout << "Pick a card among these (type the number) :\n";
+        cout << "\033[38;5;202mPick a card among these (type the number) :\n\033[38;5;181m";
         size_t k = 1;
         for(auto i = cards.begin(); i != cards.end(); i++) {
             cout << k << ". " << *i << endl;
             k++;
         }
-        cout << "Your choice : ";
+        cout << "\033[38;5;202mYour choice : ";
         cin >> choice;
     } while(choice == 0 || choice > cards.size());
 
@@ -380,14 +380,14 @@ const Card* ConsoleInterface::pickACard_option(std::vector<const Card*> cards) c
     size_t choice;
 
     do {
-        cout << "Pick a card among these (type the number) :\n";
+        cout << "\033[38;5;202mPick a card among these (type the number) :\n\033[38;5;181m";
         size_t k = 1;
         for(auto i = cards.begin(); i != cards.end(); i++) {
             cout << k << ". " << *i << endl;
             k++;
         }
         cout << "0. Don't pick any card" << endl << endl;
-        cout << "Your choice : ";
+        cout << "\033[38;5;202mYour choice : ";
         cin >> choice;
     } while(choice > cards.size());
 
@@ -404,13 +404,13 @@ const Creature* ConsoleInterface::pickACreature(vector<const Creature*> cards) c
     size_t choice;
 
     do {
-        cout << "Pick a creature among these (type the number) :\n";
+        cout << "\033[38;5;202mPick a creature among these (type the number) :\n\033[38;5;181m";
         size_t k = 1;
         for(auto i = cards.begin(); i != cards.end(); i++) {
             cout << k << ". " << *i << endl;
             k++;
         }
-        cout << "Your choice : ";
+        cout << "\033[38;5;202mYour choice : ";
         cin >> choice;
     } while(choice == 0 || choice > cards.size());
 
@@ -423,14 +423,14 @@ const Creature* ConsoleInterface::pickACreature_option(std::vector<const Creatur
     size_t choice;
 
     do {
-        cout << "Pick a creature among these (type the number) :\n";
+        cout << "\033[38;5;202mPick a creature among these (type the number) :\n\033[38;5;181m";
         size_t k = 1;
         for(auto i = cards.begin(); i != cards.end(); i++) {
             cout << k << ". " << *i << endl;
             k++;
         }
         cout << "0. Don't pick any creature" << endl << endl;
-        cout << "Your choice : ";
+        cout << "\033[38;5;202mYour choice : ";
         cin >> choice;
     } while(choice > cards.size());
 
@@ -448,13 +448,13 @@ const Land* ConsoleInterface::pickALand(std::vector<const Land*> cards) const {
     size_t choice;
 
     do {
-        cout << "Pick a land among these (type the number) :\n";
+        cout << "\033[38;5;202mPick a land among these (type the number) :\n\033[38;5;181m";
         size_t k = 1;
         for(auto i = cards.begin(); i != cards.end(); i++) {
             cout << k << ". " << *i << endl;
             k++;
         }
-        cout << "Your choice : ";
+        cout << "\033[38;5;202mYour choice : ";
         cin >> choice;
     } while(choice == 0 || choice > cards.size());
 
@@ -467,14 +467,14 @@ const Land* ConsoleInterface::pickALand_option(std::vector<const Land*> cards) c
     size_t choice;
 
     do {
-        cout << "Pick a land among these (type the number) :\n";
+        cout << "\033[38;5;202mPick a land among these (type the number) :\n\033[38;5;181m";
         size_t k = 1;
         for(auto i = cards.begin(); i != cards.end(); i++) {
             cout << k << ". " << *i << endl;
             k++;
         }
         cout << "0. Don't pick any land" << endl << endl;
-        cout << "Your choice : ";
+        cout << "\033[38;5;202mYour choice : ";
         cin >> choice;
     } while(choice > cards.size());
 
@@ -490,7 +490,7 @@ const Land* ConsoleInterface::pickALand_option(std::vector<const Land*> cards) c
 bool ConsoleInterface::pickYesOrNo() const {
     bool answer;
     
-    cout << "\nYour answer (1 for yes, 0 for no) : ";
+    cout << "\n\033[38;5;202mYour answer (1 for yes, 0 for no) : ";
     cin >> answer;;
 
     return answer;
@@ -507,19 +507,21 @@ bool ConsoleInterface::pickYesOrNo() const {
 void ConsoleInterface::contenderGameVision(){
 
     cout << endl;
-    cout << "(==============================// BOARD (Perspective from " << i_duel->getCurrentContender() << ") \\\\==============================)" << endl;
-    cout << " In game cards from " << *i_duel->getOtherContender() << " : " << *i_duel->getOtherContender()->getOriginalInGameCards();
-    cout << " In game cards from " << *i_duel->getCurrentContender() << " : " << *i_duel->getCurrentContender()->getOriginalInGameCards();
-    cout << " Your hand : " << *i_duel->getCurrentContender()->getOriginalHand();
-    cout << "(============================================================================================)" << endl;
+    cout << "\033[38;5;39m(==============================// BOARD (Perspective from " << i_duel->getCurrentContender() << ") \\\\==============================)" << endl;
+    cout << "\033[38;5;63m---- In game cards from " << *i_duel->getOtherContender() << " : " << *i_duel->getOtherContender()->getOriginalInGameCards();
+    cout << "\033[38;5;63m---- In game cards from " << *i_duel->getCurrentContender() << " : " << *i_duel->getCurrentContender()->getOriginalInGameCards();
+    cout << "\033[38;5;39m(============================================================================================)" << endl;
+    cout << "---- Your hand : " << *i_duel->getCurrentContender()->getOriginalHand();
+    cout << "\033[38;5;39m(============================================================================================)" << endl;
 }
 
 
 void ConsoleInterface::contenderOposentGameVision(){
 
-    cout << "(==============================// BOARD (Perspective from " << i_duel->getOtherContender() << ") \\\\==============================)" << endl;
-    cout << " In game cards from " << *i_duel->getCurrentContender() << " : " << *i_duel->getCurrentContender()->getOriginalInGameCards();
-    cout << " In game cards from " << *i_duel->getOtherContender() << " : " << *i_duel->getOtherContender()->getOriginalInGameCards();
-    cout << " Your hand : " << *i_duel->getOtherContender()->getOriginalHand();
-    cout << "(============================================================================================)" << endl;
+    cout << "\033[38;5;39m(==============================// BOARD (Perspective from " << i_duel->getOtherContender() << ") \\\\==============================)" << endl;
+    cout << "\033[38;5;63m---- In game cards from " << *i_duel->getCurrentContender() << " : " << *i_duel->getCurrentContender()->getOriginalInGameCards();
+    cout << "\033[38;5;63m---- In game cards from " << *i_duel->getOtherContender() << " : " << *i_duel->getOtherContender()->getOriginalInGameCards();
+    cout << "\033[38;5;39m(============================================================================================)" << endl;
+    cout << "---- Your hand : " << *i_duel->getOtherContender()->getOriginalHand();
+    cout << "\033[38;5;39m(============================================================================================)" << endl;
 }

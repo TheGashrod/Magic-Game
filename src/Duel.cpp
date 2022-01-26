@@ -447,6 +447,8 @@ void Duel::ph6_end(std::vector<const Card*> discarded) {
 
 
 void Duel::gameOver(Contender* winner) { //! winner can be nullptr if the game failed to begin
+	cout << "\033[0;0m";
+
 	if(winner == nullptr) {
 		showTextInInterfaces("The game has been cancelled.");
 		return;
