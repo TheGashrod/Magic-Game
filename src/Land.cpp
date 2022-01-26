@@ -44,6 +44,12 @@ bool Land::isLand() const {
 	return true;
 }
 
+void Land::newTurnDisengage() {
+	disengage();
+}
+
+
+
 
 ostream& Land::print(ostream& os) const {
 	os << "[Land" << str_if(!isEngaged(),"*") << "] ";

@@ -38,6 +38,9 @@ void Card::disengage() { c_isEngaged = false; }
 bool Card::hasSameId(const Card *c) const {
     return c->c_id == this->c_id;
 }
+void Card::newTurnDisengage() { 
+    disengage();
+}
 
 
 // Print :

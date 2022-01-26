@@ -73,10 +73,11 @@ class Creature : public Card {
 
 	// Methods :
 	public:
+		virtual void newTurnDisengage();
 		int dealDamageTo(Creature* c);
 		int dealDamageTo(Contender* c) const;
 		int receiveDamageFrom(Creature* c);
-		bool isFittingCosts(const std::vector<const Land*> specificCost, const std::vector<const Land*> anyCost) const; 
+		bool isFittingCosts(const std::vector<const Land*> specificCost, const std::vector<const Land*> anyCost) const;
 
 	
 	// Print :

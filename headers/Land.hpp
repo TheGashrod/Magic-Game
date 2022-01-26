@@ -24,9 +24,13 @@ class Land : public Card {
 		Land cloneLand() const;
 
 
-	// Getters/setters
+	// Getters/setters :
 	public:
 		virtual bool isLand() const;
+
+	
+	// Methods :
+	virtual void newTurnDisengage();
 
 
 

@@ -51,6 +51,7 @@ using namespace std;
     // Methods
     public:
         bool hasSameId(const Card* c) const;
+        virtual void newTurnDisengage();
 
 
     // Print

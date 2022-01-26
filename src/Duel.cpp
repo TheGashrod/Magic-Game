@@ -168,9 +168,9 @@ void Duel::ph2Disengage_start() {
 	for(auto card=(*cards).begin(); card != (*cards).end(); card++) {
 		Card* c = *card;
 		if(c->isEngaged()) {
-			c->disengage();
 			disengaged.push_back( *card );
 		}
+		(*card)->newTurnDisengage();
 	}
 	
 	// Resetting right to set lands

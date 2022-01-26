@@ -149,6 +149,14 @@ bool Creature::isFittingCosts(const vector<const Land*> specificCost, const vect
 
 
 
+void Creature::newTurnDisengage() {
+	c_power = c_powerDef;
+	c_toughness = c_toughnessDef;
+	disengage();
+}
+
+
+
 
 // Print :
 ostream& Creature::print(ostream& os) const {
