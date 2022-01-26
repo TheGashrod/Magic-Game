@@ -154,6 +154,6 @@ ostream& Creature::print(ostream& os) const {
 	os << "[Creature] " << c_colors << " " << c_name << "#" << getId()
 			<< " | Power : " << (int)c_power<<"/"<<(int)c_powerDef
 			<< " | Toughness : "<<(int)c_toughness<<"/"<<(int)c_toughnessDef
-			<< " | Cost : "<<getColorCost();
+			<< " | FirstCost : "<<getColorCost() << " SecondCost : " << getAnyCost();
 	return os;
 }

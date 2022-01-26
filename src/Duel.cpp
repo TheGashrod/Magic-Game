@@ -59,6 +59,10 @@ void Duel::setRemainingTurns(unsigned char nb){
 	d_remainingTurns = nb;
 }
 
+unsigned char Duel::getRemainingLands(){
+	return d_remainingLands;
+}
+
 Contender* Duel::getCurrentContender(){ return d_currentContender;}
 
 Contender* Duel::getOtherContender() {

@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
 	vector<Card*> deck = vector<Card*>();
 
 	for (int i=0; i<21; i++){ deck.push_back(&creatureCards.creaturesList.at(i)); };
-	for (int i=0; i<10; i++){ deck.push_back(&landCards.landsList.at(i)); };
+	for (int i=0; i<20; i++){ deck.push_back(&landCards.landsList.at(i)); };
 
 
 	Player p1 = Player("SIMO", CardsSet(deck));
@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
 	
    Duel duel = Duel(p1, p2);
    ConsoleInterface interface = ConsoleInterface(&duel);
-   duel.addInterface(&interface);
+   
 
 
    duel.start();
