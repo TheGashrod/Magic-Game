@@ -36,7 +36,7 @@ vector<const Card*> CardsSet::getCardsSet() const {
 CardsSet CardsSet::getNotLands() const{
 	vector<Card*> NotLands = vector<Card*>();
 	for(auto c = c_cardsSet.begin(); c != c_cardsSet.end(); c++) {
-		if( !(!(*c)->isLand())) {
+		if( !(*c)->isLand() ) {
 			NotLands.push_back( (*c) );
 		}
 	}

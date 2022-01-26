@@ -54,6 +54,7 @@ const vector<const Contender*> Duel::getContenders() const {
 
 
 unsigned char Duel::getRemainingTurns() const{ return d_remainingTurns;}
+unsigned char Duel::getRemainingLands() const { return d_remainingLands; }
 
 void Duel::setRemainingTurns(unsigned char nb){
 	d_remainingTurns = nb;

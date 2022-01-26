@@ -66,6 +66,7 @@ class Duel : public Duel_interface {
     public:
         char getPhase() const;
         unsigned char getRemainingTurns() const;
+        unsigned char getRemainingLands() const;
         Contender* getCurrentContender();
         Contender* getOtherContender();
 

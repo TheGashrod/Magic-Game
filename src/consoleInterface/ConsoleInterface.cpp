@@ -41,17 +41,18 @@ void ConsoleInterface::showText(std::string t) {
 
 
 void ConsoleInterface::ph1DrawnCard(const Contender* con, const Card* card) {
-    cout << endl << con << " You draw a card : \n" << card << "\n";
+    cout << endl;
+    cout << "(======================================== DRAWING A CARD ========================================)" << endl;
+    cout << con << " You draw a card : \n" << card << "\n";
 }
 
 
 
 
 void ConsoleInterface::ph2Disengage(const Contender* con, const std::list<const Card*> c) {
-    // print  contender Game vision :
-    contenderGameVision();
-
-    cout << endl << con << " Your in-game cards have been disengaged :" << endl;
+    cout << endl;
+    cout << "(======================================= DISENGAGING CARDS =======================================)" << endl;
+    cout << con << " Your in-game cards have been disengaged :" << endl;
     if(c.size() == 0) {
         cout << "Aucune" << endl;
     }
@@ -66,11 +67,24 @@ void ConsoleInterface::ph2Disengage(const Contender* con, const std::list<const 
 
 
 void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
-    // cout << "ConsoleInterface::ph3PlayCards_wait 0" << endl;
+
+    // print contender Game vision :
+    contenderGameVision();
+
+    cout << "= INVOCATION PHASE ===/" << endl;
+
     cout << endl << con << " You can put cards from your hand into the game." << endl;
-    auto cardsTemp = con->getHand().getCardsSet();
-    // cout << "ConsoleInterface::ph3PlayCards_wait 0.1" << endl;
-    const Card* picked = pickACard_option( cardsTemp );
+    
+    std::vector<const Card*> pickableCards;
+    if(i_duel->getRemainingLands() > 0) {
+        pickableCards = con->getHand().getCardsSet();
+    }
+    else {
+        pickableCards = con->getHand().getNotLands().getCardsSet();
+    }
+    
+    
+    const Card* picked = pickACard_option( pickableCards );
     // cout << "ConsoleInterface::ph3PlayCards_wait 0.2" << endl;
     
     if(picked == nullptr) {
@@ -107,6 +121,7 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
                 cout << endl << con << " You must pick a " <<  *cost << " land, " << remainingColors << " other specific land(s) and " << c->getAnyCost() << " land(s) of any type to invoke " << c->getName() << "." << endl
                 << con << " You will now pick the first asked land." << endl;
                 const Land* land = pickALand_option( availableCol );
+                cout << "Size of availableCol : " << availableCol.size() << endl;
                 for(auto land2 = availableCol.begin(); land2 != availableCol.end(); land2++) { // Removing from the pickable list
                     if(land == (*land2)) {
                         availableCol.erase(land2);
@@ -158,6 +173,14 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
 
 void ConsoleInterface::ph4Fight_wait(const Contender* att, const Contender* def) {
     
+
+    // print  contender Game vision :
+    contenderGameVision();
+
+    cout << endl;
+    cout << "= FIGHT PHASE ===/" << endl;
+
+
     if( att->getInGameCards().getDisengaged().getCreatures().size() > 0 ) {
     
         cout << endl << att << " Do you want to attack " << def->getPlayer().getName() << " ?";
@@ -217,6 +240,13 @@ void ConsoleInterface::ph4Fight_wait(const Contender* att, const Contender* def)
 
 
 void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
+
+    // print  contender Game vision :
+    contenderGameVision();
+
+    cout << endl;
+    cout << "= INVOCATION PHASE 2 ===/" << endl;
+
     cout << endl << con << " You can put cards from your hand into the game again." << endl;
     const Card* picked = pickACard_option( con->getHand().getCardsSet() );
     
@@ -281,6 +311,11 @@ void ConsoleInterface::ph5PlayCards_wait(const Contender* con) {
 
 
 void ConsoleInterface::ph6Discard_wait(const Contender* con, size_t nbToDiscard) {
+
+    cout << endl;
+    cout << "(======================================= DISCARD PHASE =======================================)" << endl;
+
+
     // boucler sur nb to discard en demandant quelle carte envoyer au cimetière sur la hand du joueur
     std::vector<const Card*> discarded = {};
 
@@ -446,23 +481,30 @@ bool ConsoleInterface::pickYesOrNo() const {
     return answer;
 }
 
+
+
+/* --------------------------------------------------------------------------------------------------/
+                                         Print the board
+/ --------------------------------------------------------------------------------------------------*/
+
+
+
 void ConsoleInterface::contenderGameVision(){
 
-    cout << *i_duel->getOtherContender() << " In game's cards " << *i_duel->getOtherContender()->getOriginalInGameCards() << endl;
-
-    cout << *i_duel->getCurrentContender() << " In game's cards "<< *i_duel->getCurrentContender()->getOriginalInGameCards() << endl;
-
-    cout << *i_duel->getCurrentContender() <<" Hand's cards " << *i_duel->getCurrentContender()->getOriginalHand() << endl;
+    cout << endl;
+    cout << "(==============================// BOARD (Perspective from " << i_duel->getCurrentContender() << ") \\\\==============================)" << endl;
+    cout << " In game cards from " << *i_duel->getOtherContender() << " : " << *i_duel->getOtherContender()->getOriginalInGameCards();
+    cout << " In game cards from " << *i_duel->getCurrentContender() << " : " << *i_duel->getCurrentContender()->getOriginalInGameCards();
+    cout << " Your hand : " << *i_duel->getCurrentContender()->getOriginalHand();
+    cout << "(============================================================================================)" << endl;
 }
 
 
 void ConsoleInterface::contenderOposentGameVision(){
 
-    cout << *i_duel->getCurrentContender() << " In game's cards "<< *i_duel->getCurrentContender()->getOriginalInGameCards() << endl;
-    
-    cout << *i_duel->getOtherContender() << " In game's cards " << *i_duel->getOtherContender()->getOriginalInGameCards() << endl;
-
-    cout << *i_duel->getOtherContender() <<" Hand's cards " << *i_duel->getCurrentContender()->getOriginalHand() << endl;
-
-    
+    cout << "(==============================// BOARD (Perspective from " << i_duel->getOtherContender() << ") \\\\==============================)" << endl;
+    cout << " In game cards from " << *i_duel->getCurrentContender() << " : " << *i_duel->getCurrentContender()->getOriginalInGameCards();
+    cout << " In game cards from " << *i_duel->getOtherContender() << " : " << *i_duel->getOtherContender()->getOriginalInGameCards();
+    cout << " Your hand : " << *i_duel->getOtherContender()->getOriginalHand();
+    cout << "(============================================================================================)" << endl;
 }
