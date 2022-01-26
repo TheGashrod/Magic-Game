@@ -165,6 +165,11 @@ void ConsoleInterface::ph3PlayCards_wait(const Contender* con) {
             
             // cout << "ConsoleInterface::ph3PlayCards_wait 3";
 
+        }else{
+            if(i_duel->getRemainingLands() > 0){
+                ph3PlayCards_wait(con);
+                return;
+            }
         }
 
 
@@ -198,6 +203,7 @@ void ConsoleInterface::ph4Fight_wait(const Contender* att, const Contender* def)
             bool mustContinue = true;
             vector<const Creature*> defCandidates = def->getInGameCards().getDisengaged().getCreatures();
             do {
+                contenderOposentGameVision();
                 cout << endl << def << " Pick a defending creature. (you can pick multiple ones till you type 0)" << endl;
                 const Creature* c = pickACreature_option( defCandidates );
                 if(c == nullptr) {

@@ -69,6 +69,7 @@ class Duel : public Duel_interface {
         unsigned char getRemainingLands() const;
         Contender* getCurrentContender();
         Contender* getOtherContender();
+        unsigned char getRemainingLands();
 
         void setRemainingTurns(unsigned char nb);
         void addInterface(Interface_interface* i);
